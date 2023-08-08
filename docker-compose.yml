@@ -1,0 +1,12 @@
+version: '3'
+services:
+  web:
+    build:
+      context: ./frontend/
+      dockerfile: Dockerfile
+    ports:
+      - '5174:5174'
+      - '6006:6006'
+    volumes:
+      - ./frontend:/usr/src/app
+    command: sh -c "yarn dev --host"
