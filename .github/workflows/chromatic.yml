@@ -12,7 +12,7 @@ jobs:
       - working-directory: ./frontend/react-app
         run: yarn
       - uses: chromatic/cli-action@v1
-        working-directory: ./frontend/react-app
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           token: ${{ secrets.GITHUB_TOKEN }}
+        working-directory: ./frontend/react-app
