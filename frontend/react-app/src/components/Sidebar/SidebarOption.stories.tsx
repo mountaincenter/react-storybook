@@ -2,6 +2,8 @@ import type { Meta, StoryObj } from '@storybook/react';
 import SidebarOption from '.';
 import HomeIcon from '@mui/icons-material/Home';
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
+import { BrowserRouter } from 'react-router-dom';
+import { RecoilRoot } from 'recoil';
 
 const meta: Meta<typeof SidebarOption> = {
   component: SidebarOption,
@@ -13,11 +15,16 @@ export default meta;
 
 type Story = StoryObj<typeof SidebarOption>;
 
-export const Default: Story = {
-  args: {
-    text: 'Home',
-    link: '/',
-    Icon: HomeIcon,
-    OutlinedIcon: HomeOutlinedIcon,
-  },
+export const Default: Story = (args) => (
+  <RecoilRoot>
+    <BrowserRouter>
+      <SidebarOption {...args} />
+    </BrowserRouter>
+  </RecoilRoot>
+);
+Default.args = {
+  text: 'Home',
+  link: '/',
+  Icon: HomeIcon,
+  OutlinedIcon: HomeOutlinedIcon,
 };
