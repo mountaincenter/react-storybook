@@ -8,17 +8,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-
-      - name: directoies
-        run: ls -la
+        with:
+          fetch-depth: 0
 
       - name: Install dependencies
         working-directory: ./frontend/react-app
         run: yarn
-
-      - name: directories
-        working-directory: ./frontend/react-app
-        run: ls -la
 
       - name: Run Chromatic
         uses: chromaui/action@v1
