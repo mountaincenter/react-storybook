@@ -11,8 +11,8 @@ jobs:
           fetch-depth: 0
       - working-directory: ./frontend/react-app
         run: yarn
-      - working-directory: ./frontend/react-app
-        uses: chromatic/cli-action@v1
+      - uses: chromatic/cli-action@v1
+        working-directory: ./frontend/react-app
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           token: ${{ secrets.GITHUB_TOKEN }}
