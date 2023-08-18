@@ -1,6 +1,7 @@
 name: 'Chromatic Deployment'
 
-on: 'push'
+on:
+  push:
 
 jobs:
   test:
@@ -9,9 +10,13 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - working-directory: ./frontend/react-app
+
+      - name: Install dependencies
+        working-directory: ./frontend/react-app
         run: yarn
-      - uses: chromatic/cli-action@v1
+
+      - name: Run Chromatic
+        uses: chromatic/cli-action@v1
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           token: ${{ secrets.GITHUB_TOKEN }}
