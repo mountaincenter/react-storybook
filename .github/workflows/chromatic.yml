@@ -9,9 +9,16 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: directies
+      - name: directoies
         run: ls -la
 
+      - name: Install dependencies
+        working-directory: ./frontend/react-app
+        run: yarn
+
+      - name: directories
+        working-directory: ./frontend/react-app
+        run: ls -la
       # - name: Install dependencies
       #   working-directory: ./frontend/react-app
       #   run: yarn
