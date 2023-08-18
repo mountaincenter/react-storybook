@@ -1,12 +1,22 @@
 version: '3'
+x-common: &common
+  build:
+    context: ./frontend/
+    dockerfile: Dockerfile
+  volumes:
+    - ./frontend:/usr/src/app
+  environment:
+    - CHOKIDAR_USEPOLLING=true
+
 services:
   web:
-    build:
-      context: ./frontend/
-      dockerfile: Dockerfile
+    <<: *common
     ports:
       - '5174:5174'
-      - '6006:6006'
-    volumes:
-      - ./frontend:/usr/src/app
     command: sh -c "yarn dev --host"
+
+  storybook:
+    <<: *common
+    ports:
+      - '6006:6006'
+    command: sh -c "yarn storybook"

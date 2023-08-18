@@ -9,7 +9,8 @@
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build",
+    "build-storybook": "storybook build ",
+    "test-storybook": "test-storybook",
     "lint-staged": "lint-staged"
   },
   "dependencies": {
@@ -33,18 +34,24 @@
     "react-dom": "^18.2.0",
     "react-query": "^3.39.3",
     "react-router-dom": "^6.13.0",
-    "recoil": "^0.7.7"
+    "recoil": "^0.7.7",
+    "storybook-addon-react-router-v6": "^2.0.2"
   },
   "devDependencies": {
     "@commitlint/config-conventional": "^17.6.7",
-    "@storybook/addon-essentials": "^7.2.1",
-    "@storybook/addon-interactions": "^7.2.1",
-    "@storybook/addon-links": "^7.2.1",
+    "@storybook/addon-actions": "^7.2.3",
+    "@storybook/addon-docs": "^7.2.2",
+    "@storybook/addon-essentials": "^7.2.2",
+    "@storybook/addon-interactions": "^7.2.2",
+    "@storybook/addon-links": "^7.2.2",
+    "@storybook/addon-measure": "^7.2.2",
     "@storybook/addon-onboarding": "^1.0.8",
-    "@storybook/addon-styling": "^1.3.5",
-    "@storybook/blocks": "^7.2.1",
-    "@storybook/react": "^7.2.1",
-    "@storybook/react-vite": "^7.2.1",
+    "@storybook/addon-styling": "^1.3.6",
+    "@storybook/addon-viewport": "^7.2.3",
+    "@storybook/blocks": "^7.2.2",
+    "@storybook/react": "^7.2.2",
+    "@storybook/react-vite": "^7.2.2",
+    "@storybook/test-runner": "^0.13.0",
     "@storybook/testing-library": "^0.2.0",
     "@types/axios": "^0.14.0",
     "@types/react": "^18.0.37",
@@ -53,13 +60,16 @@
     "@typescript-eslint/eslint-plugin": "^6.3.0",
     "@typescript-eslint/parser": "^6.3.0",
     "@vitejs/plugin-react-swc": "^3.0.0",
+    "chromatic": "^6.22.0",
     "commitlint": "^17.6.7",
     "eslint": "^8.46.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.3.4",
     "eslint-plugin-storybook": "^0.6.13",
     "husky": "^8.0.3",
-    "storybook": "^7.2.1",
+    "msw": "^1.2.3",
+    "msw-storybook-addon": "^1.8.0",
+    "storybook": "^7.2.2",
     "typescript": "^5.0.2",
     "vite": "^4.3.9"
   },
@@ -73,5 +83,8 @@
       "eslint --fix",
       "prettier --write"
     ]
+  },
+  "msw": {
+    "workerDirectory": "public"
   }
 }

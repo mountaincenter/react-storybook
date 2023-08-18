@@ -5,17 +5,20 @@ import Next from './pages/Next';
 import ModalNext from './pages/ModalNext';
 import ModalTop from './pages/ModalTop';
 import Modal from './components/modal';
-import Login from './pages/Login';
+import LoginDialog from './components/Dialog/LoginDialog';
+import SignUpDialog from './components/Dialog/SignUpDialog';
 import CommonLayout from './CommonLayout';
 import { BackgroundLocation } from './hooks/useModalRoute';
 
-import { useMediaQuery, useTheme } from '@mui/material';
+import { useMediaQuery } from '@mui/material';
+import { customTheme } from './Theme';
 
 const CommonRoutes = () => {
   const location = useLocation();
   const background = (location.state as BackgroundLocation)?.background;
-  const theme = useTheme();
-  const matchesSMorBelow = useMediaQuery(theme.breakpoints.down('sm'));
+  const matchesSMorBelow = useMediaQuery(
+    customTheme.breakpoints.down('mobile')
+  );
 
   const getMainRoutes = () => {
     return [
@@ -28,7 +31,8 @@ const CommonRoutes = () => {
     return [
       { path: 'modalTop', element: <ModalTop /> },
       { path: 'modalNext', element: <ModalNext /> },
-      { path: 'login', element: <Login /> },
+      { path: 'login', element: <LoginDialog /> },
+      { path: 'signup', element: <SignUpDialog /> },
     ];
   };
 

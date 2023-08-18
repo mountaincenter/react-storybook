@@ -1,6 +1,8 @@
 import { Typography, Button } from '@mui/material';
 import { Link } from 'react-router-dom';
 
+import Footer from '../components/Footer/Footer';
+
 const Home = () => {
   return (
     <>
@@ -8,6 +10,7 @@ const Home = () => {
       <Button component={Link} to="/next" variant="contained">
         次へ
       </Button>
+      <Footer />
     </>
   );
 };
