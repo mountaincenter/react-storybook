@@ -8,16 +8,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
 
-      - name: Install dependencies
-        working-directory: ./frontend/react-app
-        run: yarn
+      - name: directies
+        run: ls -la
 
-      - name: Run Chromatic
-        uses: chromatic/cli-action@v1
-        working-directory: ./frontend/react-app
-        with:
-          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
-          token: ${{ secrets.GITHUB_TOKEN }}
+      # - name: Install dependencies
+      #   working-directory: ./frontend/react-app
+      #   run: yarn
+
+      # - name: Run Chromatic
+      #   uses: chromatic/cli-action@v1
+      #   with:
+      #     projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+      #     token: ${{ secrets.GITHUB_TOKEN }}
+      #     workingDir: ./frontend/react-app
