@@ -21,7 +21,7 @@ jobs:
         run: ls -la
 
       - name: Run Chromatic
-        uses: chromatic/cli-action@v1
+        uses: chromatic/action@v1
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           token: ${{ secrets.GITHUB_TOKEN }}
