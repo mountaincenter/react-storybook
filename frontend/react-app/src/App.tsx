@@ -1,19 +1,23 @@
 import { Suspense } from 'react';
+import { QueryClient, QueryClientProvider } from 'react-query';
 import { RecoilRoot } from 'recoil';
 import { BrowserRouter } from 'react-router-dom';
 
 import CommonRoutes from './Routes';
+const queryClient = new QueryClient();
 
 function App() {
   return (
     <>
-      <RecoilRoot>
-        <BrowserRouter>
-          <Suspense fallback={<div>Loading...</div>}>
-            <CommonRoutes />
-          </Suspense>
-        </BrowserRouter>
-      </RecoilRoot>
+      <QueryClientProvider client={queryClient}>
+        <RecoilRoot>
+          <BrowserRouter>
+            <Suspense fallback={<div>Loading...</div>}>
+              <CommonRoutes />
+            </Suspense>
+          </BrowserRouter>
+        </RecoilRoot>
+      </QueryClientProvider>
     </>
   );
 }

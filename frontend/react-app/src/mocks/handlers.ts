@@ -2,7 +2,7 @@ import { rest } from 'msw';
 import { users } from './userMock';
 
 export const handlers = [
-  rest.post('/login', async (req, res, ctx) => {
+  rest.post('http://localhost/auth/sign_in', async (req, res, ctx) => {
     const { email, password } = await req.json();
 
     const user = users.find(

@@ -13,6 +13,8 @@ const config: StorybookConfig = {
     '@storybook/addon-viewport',
     '@storybook/addon-actions',
     'msw-storybook-addon',
+    '@storybook/addon-a11y',
+    '@storybook/addon-coverage',
     {
       name: '@storybook/addon-styling',
       options: {},
@@ -25,6 +27,7 @@ const config: StorybookConfig = {
   docs: {
     autodocs: 'tag',
   },
+  staticDirs: ['../public'],
   typescript: {
     check: false,
     // checkOptions: {},

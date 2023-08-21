@@ -1,5 +1,14 @@
 import React from 'react';
+import { AxiosResponse } from 'axios';
 
+export interface SignInData {
+  email: string;
+  password: string;
+}
+
+export interface CurrentUserApiResponse extends AxiosResponse {
+  currentUser: User;
+}
 export interface Todo {
   userId: number;
   id: number;

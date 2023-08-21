@@ -2,7 +2,7 @@ import type { Preview } from '@storybook/react';
 
 import { ThemeProvider, CssBaseline } from '@mui/material';
 import { withThemeFromJSXProvider } from '@storybook/addon-styling';
-import { initialize, mswLoader } from 'msw-storybook-addon';
+import { initialize, mswDecorator } from 'msw-storybook-addon';
 
 import { lightTheme, darkTheme, customTheme } from '../src/Theme';
 
@@ -72,8 +72,8 @@ const preview: Preview = {
       },
       defaultTheme: 'light',
     }),
+    mswDecorator,
   ],
-  loaders: [mswLoader],
 };
 
 export default preview;
