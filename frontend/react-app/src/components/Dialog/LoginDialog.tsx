@@ -66,6 +66,7 @@ const LoginDialog = () => {
               onChange={(e) => setPassword(e.target.value)}
             />
             <Button
+              id="login-button"
               label="ログイン"
               type="submit"
               variant="contained"

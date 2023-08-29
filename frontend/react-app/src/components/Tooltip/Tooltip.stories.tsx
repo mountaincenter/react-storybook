@@ -4,7 +4,7 @@ import HomeIcon from '@mui/icons-material/Home';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 
-import Badge from '../Badge';
+import Badge from '../Badge/Badge';
 
 import { IconButton } from '@mui/material';
 

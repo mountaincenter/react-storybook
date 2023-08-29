@@ -30,28 +30,28 @@ const preview: Preview = {
           name: 'Mobile',
           styles: {
             width: '320px',
-            height: '568px',
+            height: '600px',
           },
         },
         tablet: {
           name: 'Tablet',
           styles: {
             width: '768px',
-            height: '1024px',
+            height: '600px',
           },
         },
         laptop: {
           name: 'Laptop',
           styles: {
             width: '1024px',
-            height: '768px',
+            height: '600px',
           },
         },
         desktop: {
           name: 'Desktop',
           styles: {
             width: '1280px',
-            height: '800px',
+            height: '600px',
           },
         },
       },

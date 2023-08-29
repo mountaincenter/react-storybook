@@ -12,6 +12,7 @@ type ButtonBaseProps = Pick<
 >;
 
 interface ButtonProps extends ButtonBaseProps {
+  id?: string;
   label: string;
   type?: 'button' | 'submit' | 'reset';
   isLoading?: boolean;

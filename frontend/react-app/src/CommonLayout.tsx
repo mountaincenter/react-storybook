@@ -1,5 +1,7 @@
 import React from 'react';
-import { Container, Grid } from '@mui/material';
+import { Box, Container, Grid, useMediaQuery } from '@mui/material';
+import Sidebar from './components/Sidebar/SidebarOption';
+import theme from 'Theme';
 
 interface CommonLayoutProps {
   children: React.ReactElement;

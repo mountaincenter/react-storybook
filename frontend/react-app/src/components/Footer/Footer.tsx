@@ -19,13 +19,15 @@ const Footer: React.FC = () => {
   const FooterButton: React.FC<{
     label: string;
     onClick: () => void;
-  }> = ({ label, onClick }) => (
+    dataCy?: string;
+  }> = ({ label, onClick, dataCy }) => (
     <Button
       label={label}
       variant="contained"
       color="primary"
       sx={commonButtonStyle}
       onClick={onClick}
+      data-cy={dataCy}
     />
   );
 
@@ -54,6 +56,7 @@ const Footer: React.FC = () => {
             <FooterButton
               label="ログイン"
               onClick={() => startModalPath('/login')}
+              dataCy="login"
             />
             <FooterButton
               label="アカウント作成"

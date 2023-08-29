@@ -1,5 +1,5 @@
 import React from 'react';
-import BadgeComponent from '../../Badge';
+import BadgeComponent from '../../Badge/Badge';
 
 export interface IconProps {
   Icon: React.ElementType;

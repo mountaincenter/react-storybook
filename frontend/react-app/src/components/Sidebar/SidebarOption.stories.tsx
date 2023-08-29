@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import SidebarOption from '.';
+import SidebarOption from './SidebarOption';
 import HomeIcon from '@mui/icons-material/Home';
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import { BrowserRouter } from 'react-router-dom';

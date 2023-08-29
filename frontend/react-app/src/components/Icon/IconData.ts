@@ -50,10 +50,6 @@ export const SidebarIconCombinations: SidebarIconsMappingType = {
   Notifications: {
     Icon: NotificationsIcon,
     OutlinedIcon: NotificationsOutlinedIcon,
-  },
-  NotificationsWithBadgeContent: {
-    Icon: NotificationsIcon,
-    OutlinedIcon: NotificationsOutlinedIcon,
     badgeContent: 3,
   },
   Messages: { Icon: MessageIcon, OutlinedIcon: MessageOutlinedIcon },

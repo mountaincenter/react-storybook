@@ -6,7 +6,6 @@ import { Switch, Box, Typography, useMediaQuery } from '@mui/material';
 import { customTheme } from '../../../Theme';
 
 export default {
-  title: 'IconWithText',
   component: IconWithText,
   tags: ['autodocs'],
   decorators: [withRouter],

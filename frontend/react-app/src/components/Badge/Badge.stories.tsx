@@ -1,6 +1,6 @@
-import Badge from '.';
+import Badge from './Badge';
 import NotificationsIcon from '@mui/icons-material/Notifications';
-import BadgeComponent from '.';
+import BadgeComponent from './Badge';
 import { Typography, Box } from '@mui/material';
 
 type BadgeComponentProps = React.ComponentProps<typeof BadgeComponent>;

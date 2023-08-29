@@ -3,6 +3,7 @@ import { Box, Typography } from '@mui/material';
 import Button from './Button';
 import { action } from '@storybook/addon-actions';
 import { MUIColor } from '../../interfaces';
+import { userEvent, within } from '@storybook/testing-library';
 
 const meta: Meta<typeof Button> = {
   component: Button,
@@ -147,13 +148,34 @@ export const Login: Story = {
   args: {
     label: 'ログイン',
     variant: 'outlined',
-    onClick: () => alert('ログインしました'),
   },
+};
+Login.play = async ({ canvasElement, step }) => {
+  await new Promise((resolve) => setTimeout(resolve, 1000));
+  const canvas = within(canvasElement);
+  await step('Click button', async () => {
+    await userEvent.click(canvas.getByRole('button', { name: 'ログイン' }));
+  });
 };
 
 export const Primary: Story = {
   args: {
     label: 'Primary',
     onClick: action('button-clicked'),
+  },
+};
+
+export const FollowedHover: Story = {
+  args: {
+    label: 'フォロー中',
+    variant: 'outlined',
+    onClick: action('button-clicked'),
+  },
+};
+
+export const LoadingButton: Story = {
+  args: {
+    label: 'Loading',
+    isLoading: true,
   },
 };

@@ -1,13 +1,14 @@
 import React from 'react';
-import BaseIcon from '../BaseIcon/BaseIcon';
-import BadgeComponent from '../../Badge';
+import IconWithBadge from './IconWithBadge';
 import Tooltip from '../../Tooltip';
 import { Link, useLocation } from 'react-router-dom';
 import {
   useMediaQuery,
   ListItemButton,
   ListItemText,
+  ListItem,
   IconButton,
+  Typography,
 } from '@mui/material';
 import { customTheme } from '../../../Theme';
 
@@ -40,14 +41,23 @@ const IconWithText: React.FC<IconWithTextProps> = ({
 
   const IconToRender = isActive && Icon ? Icon : OutlinedIcon;
 
+  const commonProps = {
+    component: Link,
+    to: link,
+    onClick: onClick,
+    sx: {
+      color: 'inherit',
+      textDecoration: 'none',
+    },
+  };
+
   return (
     <>
       {isDesktop && (
         <ListItemButton
-          component={Link}
-          to={link}
-          onClick={onClick}
+          {...commonProps}
           sx={{
+            ...commonProps.sx,
             color: 'inherit',
             textDecoration: 'none',
             fontWeight: isActive ? 'bold' : 'normal',
@@ -56,32 +66,38 @@ const IconWithText: React.FC<IconWithTextProps> = ({
             },
           }}
         >
-          <BadgeComponent
-            badgeContent={
-              text === 'NotificationsWithBadgeContent'
-                ? badgeContent
-                : undefined
+          <IconWithBadge
+            badgeContent={text === 'Notifications' ? badgeContent : undefined}
+            Icon={IconToRender}
+          />
+          <ListItemText
+            primary={
+              <Typography
+                variant="body1"
+                sx={{ fontWeight: isActive ? 'bold' : 'normal' }}
+              >
+                {text}
+              </Typography>
             }
-          >
-            <BaseIcon Icon={IconToRender} />
-          </BadgeComponent>
-          <ListItemText primary={text} sx={{ ml: 2 }} />
+            sx={{ ml: 2 }}
+          />
         </ListItemButton>
       )}
       {isTablet && (
-        <Tooltip title={text}>
-          <IconButton color="inherit">
-            <BadgeComponent
-              badgeContent={
-                text === 'NotificationsWithBadgeContent'
-                  ? badgeContent
-                  : undefined
-              }
-            >
-              <BaseIcon Icon={IconToRender} />
-            </BadgeComponent>
-          </IconButton>
-        </Tooltip>
+        <>
+          <Tooltip title={text}>
+            <ListItem {...commonProps}>
+              <IconButton color="inherit">
+                <IconWithBadge
+                  badgeContent={
+                    text === 'Notifications' ? badgeContent : undefined
+                  }
+                  Icon={IconToRender}
+                />
+              </IconButton>
+            </ListItem>
+          </Tooltip>
+        </>
       )}
     </>
   );
