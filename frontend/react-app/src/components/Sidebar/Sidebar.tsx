@@ -2,7 +2,7 @@ import { SwipeableDrawer, Box, List } from '@mui/material';
 import SidebarListItem from './SidebarListItem';
 import SidebarFooter from './SidebarFooter';
 import TweetButton from '../Button/TweetButton';
-import { useMobileView } from 'hooks/useMobileView';
+import { useMobileView } from '../../hooks/useMobileView';
 
 const styles = {
   box: {
