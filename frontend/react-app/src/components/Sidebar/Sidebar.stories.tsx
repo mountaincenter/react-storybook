@@ -10,7 +10,6 @@ const queryClient = new QueryClient();
 
 const meta: Meta = {
   component: Sidebar,
-  parameters: { layout: 'fullscreen' },
   tags: ['autodocs'],
   decorators: [
     (Story) => (
@@ -28,10 +27,7 @@ export default meta;
 type Story = StoryObj<typeof Sidebar>;
 
 export const Default: Story = () => {
-  <Sidebar
-    open={() => console.log('open')}
-    onClose={() => console.log('close')}
-  />;
+  <Sidebar />;
 };
 
 Default.parameters = {

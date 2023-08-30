@@ -1,4 +1,4 @@
-import { SwipeableDrawer, Box, List } from '@mui/material';
+import { Box, List } from '@mui/material';
 import SidebarListItem from './SidebarListItem';
 import SidebarFooter from './SidebarFooter';
 import TweetButton from '../Button/TweetButton';
@@ -30,13 +30,9 @@ const styles = {
   },
 };
 
-type SidebarProps = {
-  open: () => void;
-  onClose: () => void;
-};
-
-const Sidebar = ({ open, onClose }: SidebarProps) => {
+const Sidebar = () => {
   const isMobile = useMobileView();
+
   const content = (
     <Box sx={styles.box}>
       <List sx={styles.list}>
@@ -49,15 +45,7 @@ const Sidebar = ({ open, onClose }: SidebarProps) => {
       {!isMobile && <SidebarFooter />}
     </Box>
   );
-  if (isMobile) {
-    return (
-      <SwipeableDrawer anchor="left" onOpen={open} onClose={onClose}>
-        {content}
-      </SwipeableDrawer>
-    );
-  } else {
-    return content;
-  }
+  return content;
 };
 
 export default Sidebar;

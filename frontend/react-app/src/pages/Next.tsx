@@ -12,7 +12,7 @@ const Next = () => {
         <Button onClick={() => startModalPath('/modalTop')} variant="contained">
           モーダルダイアログ
         </Button>
-        <Button component={Link} to="/" variant="outlined">
+        <Button component={Link} to="/home" variant="outlined">
           戻る
         </Button>
       </Stack>

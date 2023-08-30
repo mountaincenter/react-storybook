@@ -22,7 +22,7 @@ const CommonRoutes = () => {
 
   const getMainRoutes = () => {
     return [
-      { path: '/', element: <Home /> },
+      { path: '/home', element: <Home /> },
       { path: '/next', element: <Next /> },
     ];
   };
