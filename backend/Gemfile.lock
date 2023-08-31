@@ -78,6 +78,7 @@ GEM
     bcrypt (3.1.19)
     bootsnap (1.16.0)
       msgpack (~> 1.2)
+    brakeman (6.0.1)
     builder (3.2.4)
     carrierwave (3.0.3)
       activemodel (>= 6.0.0)
@@ -152,6 +153,15 @@ GEM
     json (2.6.3)
     jsonapi-renderer (0.2.2)
     language_server-protocol (3.17.0.3)
+    launchy (2.5.2)
+      addressable (~> 2.8)
+    letter_opener (1.8.1)
+      launchy (>= 2.2, < 3)
+    letter_opener_web (2.0.0)
+      actionmailer (>= 5.2)
+      letter_opener (~> 1.7)
+      railties (>= 5.2)
+      rexml
     loofah (2.21.3)
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
@@ -284,6 +294,8 @@ GEM
       sprockets (> 3.0)
       sprockets-rails
       tilt
+    shoulda-matchers (5.3.0)
+      activesupport (>= 5.2.0)
     sprockets (4.2.0)
       concurrent-ruby (~> 1.0)
       rack (>= 2.2.4, < 4)
@@ -322,6 +334,7 @@ PLATFORMS
 DEPENDENCIES
   active_model_serializers
   bootsnap
+  brakeman
   carrierwave
   debug
   devise
@@ -330,6 +343,7 @@ DEPENDENCIES
   factory_bot_rails
   faker
   fog-aws
+  letter_opener_web
   mysql2 (~> 0.5)
   nokogiri
   prettier_print
@@ -339,6 +353,7 @@ DEPENDENCIES
   rspec-rails (~> 6.0, >= 6.0.3)
   rubocop-rails
   sass-rails
+  shoulda-matchers
   syntax_tree
   syntax_tree-haml
   syntax_tree-rbs
