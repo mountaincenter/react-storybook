@@ -18,35 +18,36 @@ jobs:
         ports:
           - 3306:3306
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
-      steps:
-        - uses: actions/checkout@v2
 
-        - name: Set up Ruby 3.2.2
-          uses: ruby/setup-ruby@v1
-          with:
-            ruby-version: 3.2.2
+    steps:
+      - uses: actions/checkout@v2
 
-        - name: Cache node modules
-          uses: actions/cache@v2
-          with:
-            path: vendor/bundle
-            key: ${{ runner.os }}-gem-${{ hashFiles('**/Gemfile.lock') }}
-            restore-keys: |
-              ${{ runner.os }}-gem-
+      - name: Set up Ruby 3.2.2
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.2.2
 
-        - name: Bundler and gem install
-          run: |
-            gem install bundler
-            bundle install --jobs 4 --retry 3
+      - name: Cache Ruby gems
+        uses: actions/cache@v2
+        with:
+          path: vendor/bundle
+          key: ${{ runner.os }}-gem-${{ hashFiles('**/Gemfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-gem-
 
-        - name: Yarn install
-          run: yarn install --check-files
+      - name: Bundler and gem install
+        run: |
+          gem install bundler
+          bundle install --jobs 4 --retry 3
 
-        - name: Database create and migrate
-          run: |
-            cp config/database.yml.ci config/database.yml
-            bundle exec rails db:create RAILS_ENV=test
-            bundle exec rails db:migrate RAILS_ENV=test
+      - name: Yarn install
+        run: yarn install --check-files
 
-        - name: Build and test with RSpec
-          run: bundle exec rspec
+      - name: Database create and migrate
+        run: |
+          cp config/database.yml.ci config/database.yml
+          bundle exec rails db:create RAILS_ENV=test
+          bundle exec rails db:migrate RAILS_ENV=test
+
+      - name: Build and test with RSpec
+        run: bundle exec rspec
