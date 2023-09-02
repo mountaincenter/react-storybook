@@ -1,0 +1,6 @@
+name: rails rspec
+
+on:
+  push:
+    branches:
+      - development/rails/**

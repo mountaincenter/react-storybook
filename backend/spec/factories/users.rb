@@ -10,5 +10,10 @@ FactoryBot.define do
     password { "password" }
     remember_created_at { nil }
     tokens { nil }
+    avatar { Rack::Test::UploadedFile.new(Rails.root.join("spec", "fixtures", "avatar_test.jpg"), "image/jpg") }
+
+    trait :unconfirmed do
+      confirmed_at { nil }
+    end
   end
 end

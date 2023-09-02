@@ -5,7 +5,7 @@ DeviseTokenAuth.setup do |config|
   # client is responsible for keeping track of the changing tokens. Change
   # this to false to prevent the Authorization header from changing after
   # each request.
-  config.change_headers_on_each_request = false
+  config.change_headers_on_each_request = true
 
   # By default, users will need to re-authenticate after 2 weeks. This setting
   # determines how long tokens will remain valid after they are issued.
@@ -63,5 +63,5 @@ DeviseTokenAuth.setup do |config|
   # devise confirmable module. If you want to use devise confirmable module and
   # send email, set it to true. (This is a setting for compatibility)
   config.send_confirmation_email = true
-  config.default_confirm_success_url = "http://localhost:5174"
+  config.default_confirm_success_url = Rails.env.production? ? "https://web.ymnk.fun/login" : "http://localhost:5174/login"
 end

@@ -8,8 +8,9 @@ module Api
       #
       class SessionsController < ApplicationController
         def index
-          if current_user
-            render json: { status: 200, current_user: }
+          user = current_api_v1_user
+          if user
+            render json: { status: 200, current_user: user }
           else
             render json: { status: 500, message: "ユーザーが存在しません" }
           end
@@ -22,7 +23,7 @@ module Api
           response.headers["client"] = tokens["client"]
           response.headers["uid"] = tokens["uid"]
 
-          render json: { status: 200, user: }
+          render json: { status: 200, user:, message: "ゲストユーザーでログインしました" }
         end
       end
     end
