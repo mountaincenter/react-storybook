@@ -38,6 +38,7 @@ jobs:
       - name: Bundler and gem install
         run: |
           gem install bundler
+          cd backend
           bundle install --jobs 4 --retry 3
 
       - name: Yarn install
