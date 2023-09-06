@@ -1,11 +1,11 @@
 import { Box } from '@mui/material';
+import Sidebar from '../Sidebar/Sidebar';
 
 interface SidebarWrapperProps {
-  children: React.ReactElement;
   isMobile: boolean;
 }
 
-const SidebarWrapper = ({ children, isMobile }: SidebarWrapperProps) => {
+const SidebarWrapper = ({ isMobile }: SidebarWrapperProps) => {
   return (
     !isMobile && (
       <Box
@@ -19,7 +19,7 @@ const SidebarWrapper = ({ children, isMobile }: SidebarWrapperProps) => {
           },
         }}
       >
-        {children}
+        <Sidebar />
       </Box>
     )
   );

@@ -9,8 +9,8 @@ export const client = applyCaseMiddleware(
   axios.create({
     baseURL:
       import.meta.env.MODE === 'development'
-        ? 'http://localhost'
-        : 'https://api.ymnk.fun',
+        ? 'http://localhost/api/v1'
+        : 'https://api.ymnk.fun/api/v1',
   }),
   options
 );

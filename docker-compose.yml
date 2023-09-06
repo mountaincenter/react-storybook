@@ -37,7 +37,7 @@ services:
     command: bundle exec puma -C config/puma.rb
     volumes:
       - ./backend:/sample
-      - public-data:/sample/public
+      # - public-data:/sample/public
       - tmp-data:/sample/tmp
       - log-data:/sample/log
     environment:
@@ -49,14 +49,14 @@ services:
       context: ./backend/nginx
       dockerfile: Dockerfile
     volumes:
-      - public-data:/sample/public
+      # - public-data:/sample/public
       - tmp-data:/sample/tmp
     ports:
       - 80:80
     depends_on:
       - api
 volumes:
-  public-data:
+  # public-data:
   tmp-data:
   log-data:
   db-data:

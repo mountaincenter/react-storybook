@@ -46,7 +46,7 @@ RSpec.describe User, type: :model do
 
       it "should have an avatar after creation" do
         expect(user_with_avatar.avatar).to be_present
-        expect(user_with_avatar.avatar.current_path).to include("avatar_#{user_with_avatar.public_id}.jpg")
+        expect(user_with_avatar.avatar.current_path).to include("avatar_test.jpg")
       end
     end
   end

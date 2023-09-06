@@ -3,7 +3,7 @@ import { useMutation, useQueryClient } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import { signIn } from '../../api/auth';
-import { type SignInData } from 'interfaces';
+import { type SignInData } from '../../interfaces';
 
 import { Grid, Card, CardHeader, CardContent, TextField } from '@mui/material';
 import Button from '../Button/Button';
