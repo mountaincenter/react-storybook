@@ -9,6 +9,10 @@ jobs:
   rspec:
     runs-on: ubuntu-latest
     timeout-minutes: 10
+
+    env:
+      DATABASE_URL: 'mysql2://root:password@mysql:3306/sample_test'
+
     services:
       mysql:
         image: mysql:8.0
@@ -41,9 +45,6 @@ jobs:
 
       - name: Yarn install
         run: yarn install --check-files
-
-      - name: Set DATABASE_URL for GitHub Actions
-        run: echo "DATABASE_URL=mysql2://root:password@mysql:3306/sample_test" >> $GITHUB_ENV
 
       - name: Database create and migrate
         run: |
