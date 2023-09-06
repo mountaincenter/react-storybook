@@ -10,10 +10,6 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
 
-    env:
-      DATABASE_URL: 'mysql2://root:password@localhost:3306/sample_test'
-      DB_HOST: 127.0.0.1
-
     services:
       mysql:
         image: mysql:8.0
@@ -52,13 +48,13 @@ jobs:
           cd backend
           ruby -e 'puts ENV["CI"]'
 
-      # - name: Database create and migrate
-      #   run: |
-      #     cd backend
-      #     bundle exec rails db:create RAILS_ENV=test
-      #     bundle exec rails db:migrate RAILS_ENV=test
+      - name: Database create and migrate
+        run: |
+          cd backend
+          bundle exec rails db:create RAILS_ENV=test
+          bundle exec rails db:migrate RAILS_ENV=test
 
-      # - name: Build and test with RSpec
-      #   run: |
-      #     cd backend
-      #     bundle exec rspec
+      - name: Build and test with RSpec
+        run: |
+          cd backend
+          bundle exec rspec
