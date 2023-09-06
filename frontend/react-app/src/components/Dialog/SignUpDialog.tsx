@@ -123,8 +123,14 @@ const SignUpDialog = () => {
               <Uploader
                 onUpload={(files) => {
                   const file = files[0];
-                  setSelectedAvatar(file);
-                  setForm({ ...form, avatar: { url: file.name } });
+                  const uniqueFilename = `${form.name}_${Date.now()}.${
+                    file.type.split('/')[1]
+                  }`;
+                  const renamedFile = new File([file], uniqueFilename, {
+                    type: file.type,
+                  });
+                  setSelectedAvatar(renamedFile);
+                  setForm({ ...form, avatar: { url: renamedFile.name } });
                 }}
                 allowMultiple={false}
                 label="アバターを選択"

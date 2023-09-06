@@ -47,6 +47,8 @@ class AvatarUploader < CarrierWave::Uploader::Base
   # Override the filename of the uploaded files:
   # Avoid using model.id or version_name here, see uploader/store.rb for details.
   def filename
-    "avatar_#{model.public_id}.#{file.extension}" if original_filename
+    if original_filename
+      model.avatar.file.filename
+    end
   end
 end

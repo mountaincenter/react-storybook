@@ -1,6 +1,6 @@
-FROM node:18.16.0
+FROM node:18.17.0
 
-RUN npm install -g npm@latest tree
+RUN npm install -g npm@latest
 
 RUN apt-get update && apt-get install -y \
   libgtk2.0-0 \
