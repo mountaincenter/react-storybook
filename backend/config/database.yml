@@ -20,6 +20,7 @@ default: &default
 development:
   <<: *default
   database: sample_development
+  url: <%= ENV['DATABASE_URL'] %>
   host: <%= ENV["DB_HOST"] || "db" %>
 
 # Warning: The database defined as "test" will be erased and
