@@ -16,7 +16,7 @@ jobs:
         env:
           MYSQL_ROOT_PASSWORD: password
           MYSQL_DATABASE: test
-          MYSQL_DB_HOST: 127.0.0.1
+          MYSQL_DB_HOST: db
         ports:
           - 3306:3306
     steps:
