@@ -10,9 +10,6 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
 
-    env:
-      DB_HOST: 127.0.0.1
-
     services:
       mysql:
         image: mysql:8.0
