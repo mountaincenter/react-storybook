@@ -16,13 +16,14 @@ interface ButtonProps extends ButtonBaseProps {
   label: string;
   type?: 'button' | 'submit' | 'reset';
   isLoading?: boolean;
-  variant: 'contained' | 'outlined' | 'text';
+  variant?: 'contained' | 'outlined' | 'text';
   hoverColor?: 'primary' | 'secondary' | 'error';
   onMouseEnter?: () => void;
   onMouseLeave?: () => void;
   onClick?: () => void;
   fullWidth?: boolean;
   sx?: SxProps<Theme>;
+  component?: React.ElementType;
 }
 const Button = ({
   label,
@@ -33,6 +34,7 @@ const Button = ({
   onMouseLeave,
   sx,
   onClick,
+  component = 'button',
   ...rest
 }: ButtonProps) => {
   const defaultStyles: SxProps<Theme> = {
@@ -50,6 +52,7 @@ const Button = ({
       sx={{ ...defaultStyles, ...sx }}
       onClick={onClick}
       disabled={isLoading || rest.disabled}
+      component={component}
       {...rest}
     >
       {isLoading ? <CircularProgress size={24} /> : label || rest.children}

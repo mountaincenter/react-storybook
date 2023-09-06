@@ -1,4 +1,4 @@
-import { Typography, Button } from '@mui/material';
+import { Typography, Button, Grid, Box } from '@mui/material';
 import { Link } from 'react-router-dom';
 
 import { useCurrentUser } from '../hooks/currentUser/useCurrentUser';
@@ -12,12 +12,20 @@ const Home = () => {
   console.log(currentUser);
   return (
     <>
-      <Typography>トップページ</Typography>
-      <Typography>{process.env.NODE_ENV}</Typography>
-      <Typography>{currentUser?.name}</Typography>
-      <Button component={Link} to="/next" variant="contained">
-        次へ
-      </Button>
+      <Grid container spacing={0}>
+        <Grid item mobile={12}>
+          <Grid item>
+            <Box>
+              <Typography>トップページ</Typography>
+              <Typography>{process.env.NODE_ENV}</Typography>
+              <Typography>{currentUser?.name}</Typography>
+              <Button component={Link} to="/next" variant="contained">
+                次へ
+              </Button>
+            </Box>
+          </Grid>
+        </Grid>
+      </Grid>
       <Footer />
     </>
   );

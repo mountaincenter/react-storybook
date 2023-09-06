@@ -6,6 +6,17 @@ export interface SignInData {
   password: string;
 }
 
+export interface SignUpData {
+  name: string;
+  email: string;
+  username?: string;
+  password: string;
+  passwordConfirmation: string;
+  avatar?: {
+    url: string;
+  };
+}
+
 export interface CurrentUserApiResponse extends AxiosResponse {
   currentUser: User;
 }
