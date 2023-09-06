@@ -11,8 +11,7 @@ jobs:
     timeout-minutes: 10
 
     env:
-      DATABASE_URL: 'mysql2://root:password@mysql:3306/sample_test'
-      DB_HOST: localhost
+      DB_HOST: 127.0.0.1
 
     services:
       mysql:
