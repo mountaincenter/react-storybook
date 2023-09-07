@@ -14,7 +14,7 @@ export default meta;
 
 type Story = StoryObj<typeof TweetButton>;
 
-export const Default: Story = (args) => (
+export const Default: Story = (args: any) => (
   <RecoilRoot>
     <BrowserRouter>
       <TweetButton {...args} />

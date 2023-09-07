@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   attr_accessor :avatar_name
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :confirmable
   include DeviseTokenAuth::Concerns::User
@@ -41,8 +42,8 @@ class User < ActiveRecord::Base
   end
 
   def set_avatar_filename
-    if avatar_name.present? && avatar.present?
-      avatar.file.instance_variable_set(:@original_filename, avatar_name)
-    end
+    return unless avatar_name.present? && avatar.present?
+
+    avatar.file.instance_variable_set(:@original_filename, avatar_name)
   end
 end

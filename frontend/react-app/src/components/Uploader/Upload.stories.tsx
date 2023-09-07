@@ -11,7 +11,7 @@ export default meta;
 
 type Story = StoryObj<typeof Uploader>;
 
-export const Default: Story = (args) => {
+export const Default: Story = (args: any) => {
   return <Uploader {...args} />;
 };
 
@@ -21,7 +21,7 @@ Default.args = {
   label: 'アップロード',
 };
 
-export const AvatarUploader: Story = (args) => {
+export const AvatarUploader: Story = (args: any) => {
   return <Uploader {...args} />;
 };
 

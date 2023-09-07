@@ -15,12 +15,12 @@ const CommonLayout = ({ children }: CommonLayoutProps): React.ReactElement => {
       <main>
         <Container maxWidth="desktop" sx={{ marginTop: '3rem' }}>
           <Grid container direction="row" justifyContent="center" spacing={0}>
-            <Grid item xs={12} sm={4}>
+            <Grid item mobile={12} laptop={4}>
               {' '}
               {/* 標準のブレークポイントを使用 */}
               <SidebarWrapper isMobile={isMobile} />
             </Grid>
-            <Grid item xs={12} sm={8}>
+            <Grid item mobile={12} laptop={8}>
               {' '}
               {/* 標準のブレークポイントを使用 */}
               <ContentWrapper isMobile={isMobile}>{children}</ContentWrapper>

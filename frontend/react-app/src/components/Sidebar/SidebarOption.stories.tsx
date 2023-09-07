@@ -15,7 +15,7 @@ export default meta;
 
 type Story = StoryObj<typeof SidebarOption>;
 
-export const Default: Story = (args) => (
+export const Default: Story = (args: any) => (
   <RecoilRoot>
     <BrowserRouter>
       <SidebarOption {...args} />

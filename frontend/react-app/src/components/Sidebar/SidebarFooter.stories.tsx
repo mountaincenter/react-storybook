@@ -26,7 +26,7 @@ export default meta;
 
 type Story = StoryObj<typeof SidebarFooter>;
 
-export const Default: Story = (args) => <SidebarFooter {...args} />;
+export const Default: Story = (args: any) => <SidebarFooter {...args} />;
 
 Default.parameters = {
   msw: [
@@ -42,7 +42,7 @@ Default.parameters = {
   ],
 };
 
-export const WithoutAvatar: Story = (args) => <SidebarFooter {...args} />;
+export const WithoutAvatar: Story = (args: any) => <SidebarFooter {...args} />;
 
 WithoutAvatar.parameters = {
   msw: [
@@ -58,7 +58,7 @@ WithoutAvatar.parameters = {
   ],
 };
 
-export const IsLoading: Story = (args) => {
+export const IsLoading: Story = (args: any) => {
   return <SidebarFooter {...args} />;
 };
 IsLoading.args = {

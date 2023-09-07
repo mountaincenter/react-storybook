@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from '@storybook/react';
+import { Meta } from '@storybook/react';
 import SidebarListItem from './SidebarListItem';
 import { BrowserRouter } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
@@ -22,6 +22,6 @@ const meta: Meta = {
 
 export default meta;
 
-type Story = StoryObj<typeof SidebarListItem>;
+// type Story = StoryObj<typeof SidebarListItem>;
 
-export const Default: Story = (args) => <SidebarListItem {...args} />;
+export const Default: any = (args: any) => <SidebarListItem {...args} />;
