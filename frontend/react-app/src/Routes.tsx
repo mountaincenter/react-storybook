@@ -1,6 +1,7 @@
 import { useLocation } from 'react-router-dom';
 import { useRoutes } from 'react-router-dom';
 import Home from './pages/Home';
+import Redirect from './pages/Redirect';
 import Next from './pages/Next';
 import ModalNext from './pages/ModalNext';
 import ModalTop from './pages/ModalTop';
@@ -26,6 +27,7 @@ const CommonRoutes = () => {
     return [
       { path: '/', element: <Home /> },
       { path: '/home', element: <Home /> },
+      { path: '/redirect', element: <Redirect /> },
       { path: '/next', element: <Next /> },
     ];
   };

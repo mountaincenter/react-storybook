@@ -9,11 +9,7 @@ import Uploader from '../Uploader/Uploader';
 
 import AlertMessage from '../AlertMessage/AlertMessage';
 
-import { useNavigate } from 'react-router-dom';
-
 const SignUpDialog = () => {
-  const [alertMessageOpen, setAlertMessageOpen] = useState<boolean>(false);
-  const [alertMessage, setAlertMessage] = useState<string>('');
   const [selectedAvatar, setSelectedAvatar] = useState<File | null>(null);
   const [form, setForm] = useState<SignUpData>({
     name: '',
@@ -24,20 +20,42 @@ const SignUpDialog = () => {
     avatar: { url: '' },
   });
 
-  const navigate = useNavigate();
+  const [alertConfig, setAlertConfig] = useState<{
+    open: boolean;
+    severity: 'error' | 'success' | 'info' | 'warning';
+    message: string;
+    redirectPath?: string;
+  }>({
+    open: false,
+    severity: 'error',
+    message: '',
+    redirectPath: undefined,
+  });
 
-  const signUpmutation = useMutation((data: FormData) => signUp(data), {
+  const signUpMutation = useMutation((data: FormData) => signUp(data), {
     onSuccess: () => {
-      setAlertMessage(
-        'アカウント作成しました。確認メールをチェックしてください。'
-      );
-      navigate('/');
+      setAlertConfig({
+        open: true,
+        severity: 'success',
+        message: 'アカウント作成しました。確認メールをチェックしてください。',
+        redirectPath: '/',
+      });
     },
-    onError: (error) => {
-      console.log(error);
-      const errorMessage = 'アカウント作成に失敗しました。';
-      setAlertMessage(errorMessage); // <-- Set the error message to the state
-      setAlertMessageOpen(true);
+    onError: (error: any) => {
+      let errorMessage = 'アカウント作成に失敗しました。';
+      if (
+        error &&
+        error.response &&
+        error.response.data &&
+        error.response.data.message
+      ) {
+        errorMessage = error.response.data.message;
+      }
+      setAlertConfig({
+        open: true,
+        severity: 'error',
+        message: errorMessage,
+      });
     },
   });
 
@@ -58,7 +76,7 @@ const SignUpDialog = () => {
       formData.append('avatar', selectedAvatar);
     }
 
-    signUpmutation.mutate(formData);
+    signUpMutation.mutate(formData);
   };
 
   return (
@@ -154,10 +172,13 @@ const SignUpDialog = () => {
           </Card>
         </form>
         <AlertMessage
-          open={alertMessageOpen}
-          setOpen={setAlertMessageOpen}
-          severity="error"
-          message={alertMessage}
+          open={alertConfig.open}
+          setOpen={(newOpen) =>
+            setAlertConfig((prev) => ({ ...prev, open: newOpen }))
+          }
+          severity={alertConfig.severity}
+          message={alertConfig.message}
+          redirectPath={alertConfig.redirectPath}
         />
       </Grid>
     </>

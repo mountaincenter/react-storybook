@@ -9,7 +9,6 @@ const styles = {
     display: 'flex',
     flexDirection: 'column',
     height: '100svh',
-    position: 'fixed',
     minWidth: {
       desktop: 259,
       laptop: 72,

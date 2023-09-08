@@ -32,7 +32,7 @@ export const Default: Story = () => {
 
 Default.parameters = {
   msw: [
-    rest.get('http://localhost/auth/sessions', (_, res, ctx) => {
+    rest.get('http://localhost/api/v1/auth/sessions', (_, res, ctx) => {
       return res(
         ctx.status(200),
         ctx.json({ currentUser: users[0] }),

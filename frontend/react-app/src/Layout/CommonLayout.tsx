@@ -1,8 +1,11 @@
 import React from 'react';
 import SidebarWrapper from '../components/Wrappers/SidebarWrapper';
 import ContentWrapper from '../components/Wrappers/ContentWrapper';
-import { Container, Grid } from '@mui/material';
+import Footer from '../components/Footer/Footer';
+import { Container, Grid, Box } from '@mui/material';
 import { useMobileView } from '../hooks/useMobileView';
+
+import { useCurrentUser } from '../hooks/currentUser/useCurrentUser';
 
 interface CommonLayoutProps {
   children: React.ReactElement;
@@ -10,24 +13,26 @@ interface CommonLayoutProps {
 
 const CommonLayout = ({ children }: CommonLayoutProps): React.ReactElement => {
   const isMobile = useMobileView();
+  const { currentUser } = useCurrentUser();
   return (
     <>
-      <main>
-        <Container maxWidth="desktop" sx={{ marginTop: '3rem' }}>
-          <Grid container direction="row" justifyContent="center" spacing={0}>
-            <Grid item mobile={12} laptop={4}>
-              {' '}
-              {/* 標準のブレークポイントを使用 */}
-              <SidebarWrapper isMobile={isMobile} />
-            </Grid>
-            <Grid item mobile={12} laptop={8}>
-              {' '}
-              {/* 標準のブレークポイントを使用 */}
-              <ContentWrapper isMobile={isMobile}>{children}</ContentWrapper>
-            </Grid>
+      <Box
+        display="flex"
+        flexDirection="column"
+        justifyContent="space-between"
+        height="100dvh"
+        sx={{
+          overflowY: 'hidden',
+        }}
+      >
+        <Container maxWidth="desktop" sx={{ m: 0, p: 0 }}>
+          <Grid container justifyContent="center">
+            <SidebarWrapper isMobile={isMobile} />
+            <ContentWrapper isMobile={isMobile}>{children}</ContentWrapper>
           </Grid>
         </Container>
-      </main>
+        {!currentUser && !isMobile && <Footer />}
+      </Box>
     </>
   );
 };
