@@ -1,10 +1,16 @@
 import { AppBar, Toolbar, Typography, Container } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Button from '../Button/Button';
 import useModalRoute from '../../hooks/useModalRoute';
+import { guestSignIn } from '../../api/auth';
+import { getCurrentUser } from '../../hooks/currentUser/getCurrentUser';
+import { useQueryClient } from 'react-query';
 
 const Footer: React.FC = () => {
   const { startModalPath } = useModalRoute();
+  const queryClient = useQueryClient();
+  const navigate = useNavigate();
+
   const commonButtonStyle = {
     border: '1px solid #e6ecf0',
     boxShadow: 'none',
@@ -31,8 +37,16 @@ const Footer: React.FC = () => {
     />
   );
 
-  const handleEasyLogin = () => {
-    console.log('簡単ログイン');
+  const handleEasyLogin = async () => {
+    try {
+      await guestSignIn();
+      const currentUser = await getCurrentUser();
+      queryClient.invalidateQueries('currentUser');
+      navigate('/');
+      console.log(currentUser);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
