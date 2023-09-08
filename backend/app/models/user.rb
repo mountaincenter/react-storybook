@@ -26,6 +26,19 @@ class User < ActiveRecord::Base
   validates :password, presence: true, length: { minimum: 8 }, on: :create
   validates :public_id, uniqueness: true
 
+  def self.guest
+    find_or_create_by!(
+      email: "guest@example.com",
+      uid: "guest@example.com",
+      provider: "email",
+      name: "ゲストユーザー",
+      profile: "ゲストユーザーです。よろしくお願いします。",
+      username: "guestuser"
+    ) do |user|
+      user.password = SecureRandom.urlsafe_base64
+    end
+  end
+
   private
 
   def generate_username
