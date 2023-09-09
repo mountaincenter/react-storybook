@@ -45,16 +45,33 @@ export const BaseIcons: BaseIconsMappingType = {
 };
 
 export const SidebarIconCombinations: SidebarIconsMappingType = {
-  Home: { Icon: HomeIcon, OutlinedIcon: HomeOutlinedIcon },
-  Profile: { Icon: PersonIcon, OutlinedIcon: PersonOutlinedIcon },
+  Home: { Icon: HomeIcon, OutlinedIcon: HomeOutlinedIcon, label: 'ホーム' },
+  Explore: { Icon: SearchIcon, OutlinedIcon: SearchIcon, label: '話題を検索' },
   Notifications: {
     Icon: NotificationsIcon,
     OutlinedIcon: NotificationsOutlinedIcon,
     badgeContent: 3,
+    label: '通知',
+    isCurrentUser: true,
   },
-  Messages: { Icon: MessageIcon, OutlinedIcon: MessageOutlinedIcon },
-  Bookmarks: { Icon: BookmarkIcon, OutlinedIcon: BookmarkBorderIcon },
-  Search: { Icon: SearchIcon, OutlinedIcon: SearchIcon },
+  Messages: {
+    Icon: MessageIcon,
+    OutlinedIcon: MessageOutlinedIcon,
+    label: 'メッセージ',
+    isCurrentUser: true,
+  },
+  Bookmarks: {
+    Icon: BookmarkIcon,
+    OutlinedIcon: BookmarkBorderIcon,
+    label: 'ブックマーク',
+    isCurrentUser: true,
+  },
+  Profile: {
+    Icon: PersonIcon,
+    OutlinedIcon: PersonOutlinedIcon,
+    label: 'プロフィール',
+    isCurrentUser: true,
+  },
 };
 
 export const InteractionIconCombinations: InteractionIconsMappingType = {

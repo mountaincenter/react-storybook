@@ -1,6 +1,7 @@
 import React from 'react';
 import SidebarWrapper from '../components/Wrappers/SidebarWrapper';
 import ContentWrapper from '../components/Wrappers/ContentWrapper';
+import WidgetWrapper from '../components/Wrappers/WidgetWrapper';
 import Footer from '../components/Footer/Footer';
 import { Container, Grid, Box } from '@mui/material';
 import { useMobileView } from '../hooks/useMobileView';
@@ -12,7 +13,7 @@ interface CommonLayoutProps {
 }
 
 const CommonLayout = ({ children }: CommonLayoutProps): React.ReactElement => {
-  const isMobile = useMobileView();
+  const { isMobile, isTablet } = useMobileView();
   const { currentUser } = useCurrentUser();
   return (
     <>
@@ -29,6 +30,7 @@ const CommonLayout = ({ children }: CommonLayoutProps): React.ReactElement => {
           <Grid container justifyContent="center">
             <SidebarWrapper isMobile={isMobile} />
             <ContentWrapper isMobile={isMobile}>{children}</ContentWrapper>
+            <WidgetWrapper isTablet={isTablet} />
           </Grid>
         </Container>
         {!currentUser && !isMobile && <Footer />}

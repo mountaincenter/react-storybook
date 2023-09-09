@@ -14,7 +14,7 @@ const Home = () => {
   console.log(currentUser);
   return (
     <>
-      <Grid container spacing={0}>
+      <Grid container maxWidth="desktop" spacing={0}>
         <Grid item mobile={12}>
           <Grid item>
             <Box>

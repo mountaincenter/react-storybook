@@ -1,7 +1,13 @@
 import { useLocation } from 'react-router-dom';
 import { useRoutes } from 'react-router-dom';
 import Home from './pages/Home';
+import Profile from './pages/Profile';
+import Search from './pages/Search';
 import Redirect from './pages/Redirect';
+import Explore from './pages/Explore';
+import Notifications from './pages/Notifications';
+import Bookmarks from './pages/Bookmarks';
+import Messages from './pages/Messages';
 import Next from './pages/Next';
 import ModalNext from './pages/ModalNext';
 import ModalTop from './pages/ModalTop';
@@ -27,8 +33,14 @@ const CommonRoutes = () => {
     return [
       { path: '/', element: <Home /> },
       { path: '/home', element: <Home /> },
+      { path: '/search', element: <Search /> },
+      { path: '/explore', element: <Explore /> },
+      { path: '/notifications', element: <Notifications /> },
+      { path: '/messages', element: <Messages /> },
+      { path: '/bookmarks', element: <Bookmarks /> },
       { path: '/redirect', element: <Redirect /> },
       { path: '/next', element: <Next /> },
+      { path: '/:username', element: <Profile /> },
     ];
   };
 
