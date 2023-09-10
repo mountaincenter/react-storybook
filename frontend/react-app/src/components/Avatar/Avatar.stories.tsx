@@ -3,6 +3,7 @@ import Avatar from './Avatar';
 import { users } from '../../mocks/userMock';
 import { BrowserRouter } from 'react-router-dom';
 import { Box } from '@mui/material';
+import { type AvatarProps } from './Avatar';
 
 const meta: Meta<typeof Avatar> = {
   component: Avatar,
@@ -20,44 +21,48 @@ const meta: Meta<typeof Avatar> = {
 export default meta;
 type Story = StoryObj<typeof Avatar>;
 
-const Default: Story = (args) => <Avatar {...args} />;
+export const Default: Story = (args: any) => <Avatar {...args} />;
 Default.args = {
-  name: users[0].name || 'Default Name',
+  name: users[0].name,
   avatar: users[0].avatar,
   customComponent: 'Link',
   to: users[0].username,
   isLoading: false,
-};
+} as AvatarProps;
 
-const AvatarWithoutUrl: Story = (args) => <Avatar {...args} />;
+export const AvatarWithoutUrl: Story = (args: any) => <Avatar {...args} />;
 AvatarWithoutUrl.args = {
   name: users[1].name,
   avatar: users[1].avatar,
   customComponent: 'Link',
   to: users[1].username,
   isLoading: false,
-};
+} as AvatarProps;
 
-const Skeleton: Story = (args) => <Avatar {...args} />;
+export const Skeleton: Story = (args: any) => <Avatar {...args} />;
 Skeleton.args = {
   ...Default.args,
   isLoading: true,
-};
+} as AvatarProps;
 
-export const AllAvatar = () => {
-  return (
-    <>
-      <Box display="flex" alignItems="center" gap={2}>
-        <Avatar {...Default.args} />
-        <Avatar {...AvatarWithoutUrl.args} />
-        <Avatar {...Skeleton.args} />
-      </Box>
-    </>
-  );
-};
+export const AvatarWithButton: Story = (args: any) => <Avatar {...args} />;
+AvatarWithButton.args = {
+  ...Default.args,
+  customComponent: 'button',
+  onClick: () => console.log('button clicked'),
+} as AvatarProps;
 
-export const DefaultAvatar = () => <Avatar {...Default.args} />;
-export const AvatarWithoutUrlAvatar = () => (
-  <Avatar {...AvatarWithoutUrl.args} />
+export const AvatarWithSx: Story = (args: any) => <Avatar {...args} />;
+AvatarWithSx.args = {
+  ...Default.args,
+  sx: { width: 60, height: 60 },
+} as AvatarProps;
+
+const AvatarWithSkeleton: Story = (args: any) => (
+  <Box sx={{ display: 'flex', gap: 2 }}>
+    <Avatar {...args} />
+  </Box>
 );
-export const SkeletonAvatar = () => <Avatar {...Skeleton.args} />;
+AvatarWithSkeleton.args = {
+  ...Skeleton.args,
+} as AvatarProps;

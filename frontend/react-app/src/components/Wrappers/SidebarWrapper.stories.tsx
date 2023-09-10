@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta } from '@storybook/react';
 import SidebarWrapper from './SidebarWrapper';
 import Sidebar from '../Sidebar/Sidebar';
 import { RecoilRoot } from 'recoil';
@@ -18,9 +18,9 @@ const meta: Meta = {
 
 export default meta;
 
-type Story = StoryObj<typeof SidebarWrapper>;
+// type Story = StoryObj<typeof SidebarWrapper>;
 
-export const Default: Story = (args) => (
+export const Default: any = (args: any) => (
   <QueryClientProvider client={queryClient}>
     <RecoilRoot>
       <BrowserRouter>

@@ -57,6 +57,8 @@ export interface SidebarIconType {
   Icon: React.ElementType;
   OutlinedIcon: React.ElementType;
   badgeContent?: number;
+  label: string;
+  isCurrentUser?: boolean;
 }
 
 export interface InteractionIconType {

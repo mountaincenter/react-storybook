@@ -4,6 +4,7 @@ import {
   SxProps,
   Theme,
   CircularProgress,
+  Typography,
 } from '@mui/material';
 
 type ButtonBaseProps = Pick<
@@ -55,7 +56,11 @@ const Button = ({
       component={component}
       {...rest}
     >
-      {isLoading ? <CircularProgress size={24} /> : label || rest.children}
+      {isLoading ? (
+        <CircularProgress size={24} />
+      ) : (
+        <Typography variant="button">{label || rest.children}</Typography>
+      )}
     </MuiButton>
   );
 };

@@ -35,7 +35,7 @@ const meta: Meta = {
 export default meta;
 
 export const Default = {
-  play: async ({ canvasElement, step }) => {
+  play: async ({ canvasElement, step }: any) => {
     await new Promise((resolve) => setTimeout(resolve, 1000));
     const canvas = within(canvasElement);
 

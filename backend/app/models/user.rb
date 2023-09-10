@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   attr_accessor :avatar_name
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :confirmable
   include DeviseTokenAuth::Concerns::User
@@ -25,6 +26,19 @@ class User < ActiveRecord::Base
   validates :password, presence: true, length: { minimum: 8 }, on: :create
   validates :public_id, uniqueness: true
 
+  def self.guest
+    find_or_create_by!(
+      email: "guest@example.com",
+      uid: "guest@example.com",
+      provider: "email",
+      name: "ゲストユーザー",
+      profile: "ゲストユーザーです。よろしくお願いします。",
+      username: "guestuser"
+    ) do |user|
+      user.password = SecureRandom.urlsafe_base64
+    end
+  end
+
   private
 
   def generate_username
@@ -41,8 +55,8 @@ class User < ActiveRecord::Base
   end
 
   def set_avatar_filename
-    if avatar_name.present? && avatar.present?
-      avatar.file.instance_variable_set(:@original_filename, avatar_name)
-    end
+    return unless avatar_name.present? && avatar.present?
+
+    avatar.file.instance_variable_set(:@original_filename, avatar_name)
   end
 end

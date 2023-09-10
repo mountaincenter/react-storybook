@@ -15,11 +15,11 @@ import { useCurrentUser } from '../../hooks/currentUser/useCurrentUser';
 
 import { customTheme } from '../../Theme';
 
+import useModalRoute from '../../hooks/useModalRoute';
+
 const SidebarFooter = () => {
-  const { currentUser, isLoading, error } = useCurrentUser();
-  console.log(currentUser);
-  console.log(error);
-  console.log(isLoading);
+  const { currentUser, isLoading } = useCurrentUser();
+  const { startModalPath } = useModalRoute();
 
   const isDesktop = useMediaQuery(customTheme.breakpoints.up('desktop'));
 
@@ -61,9 +61,7 @@ const SidebarFooter = () => {
               secondary={currentUser?.username}
             />
             <IconButton>
-              <MoreHorizIcon
-                onClick={() => console.log('logout button dialog')}
-              />
+              <MoreHorizIcon onClick={() => startModalPath('/logout')} />
             </IconButton>
           </>
         )}

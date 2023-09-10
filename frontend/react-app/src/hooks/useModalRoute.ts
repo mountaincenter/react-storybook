@@ -15,16 +15,21 @@ const useModalRoute = () => {
     BackgroundLocationState
   );
 
-  const startModalPath = (to: string) => {
+  const startModalPath = (to: string, state?: any) => {
     setBackgroundLocation({ background: location });
-    navigate(to, { state: { background: location } });
+    navigate(to, { state: { ...state, background: location } });
   };
 
   const endModalPath = () => {
-    const background = backgroundLocation.background;
-    navigate(
-      `${background?.pathname.replace(/\/+$/, '')}/${background?.search}`
-    );
+    if (location.state?.from === 'redirect') {
+      navigate('/');
+      return;
+    } else {
+      const background = backgroundLocation.background;
+      navigate(
+        `${background?.pathname.replace(/\/+$/, '')}/${background?.search}`
+      );
+    }
   };
 
   const goModalPath = (to: string) => {

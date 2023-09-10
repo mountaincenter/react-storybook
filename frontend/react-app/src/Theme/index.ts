@@ -26,7 +26,7 @@ declare module '@mui/material/styles' {
   }
 }
 
-const customTheme: Theme = createTheme({
+const baseTheme = createTheme({
   breakpoints: {
     values: {
       mobile: 0,
@@ -47,6 +47,16 @@ const customTheme: Theme = createTheme({
     },
     other: {
       main: '#1d9bf0',
+    },
+  },
+});
+
+const customTheme: Theme = createTheme(baseTheme, {
+  typography: {
+    button: {
+      [baseTheme.breakpoints.down('tablet')]: {
+        fontSize: '0.25rem',
+      },
     },
   },
 });

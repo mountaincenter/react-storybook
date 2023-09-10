@@ -16,7 +16,7 @@ module Api
         private
 
         def login_url
-          Rails.env.production? ? "https://web.ymnk.fun/login" : "http://localhost:5174/login"
+          Rails.env.production? ? "https://web.ymnk.fun/redirect" : "http://localhost:5174/redirect"
         end
       end
     end

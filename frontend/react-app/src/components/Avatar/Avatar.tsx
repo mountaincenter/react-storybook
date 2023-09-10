@@ -7,10 +7,10 @@ import { SxProps } from '@mui/system';
 import { Theme } from '@mui/material/styles';
 import { Link } from 'react-router-dom';
 
-interface AvatarProps extends MuiAvatarProps {
+export interface AvatarProps extends MuiAvatarProps {
   isLoading?: boolean;
   name: string;
-  avatar: {
+  avatar?: {
     url: string | null;
   };
   sx?: SxProps<Theme>;
@@ -22,7 +22,7 @@ interface AvatarProps extends MuiAvatarProps {
 const Avatar = ({
   isLoading,
   name = 'Default Name',
-  avatar,
+  avatar = { url: null },
   sx,
   onClick,
   customComponent,

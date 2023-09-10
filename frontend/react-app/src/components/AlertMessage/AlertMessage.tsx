@@ -16,6 +16,7 @@ interface AlertMessageProps {
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
   severity: 'error' | 'success' | 'info' | 'warning';
   message: string;
+  redirectPath?: string;
 }
 
 const AlertMessage = ({
@@ -23,15 +24,20 @@ const AlertMessage = ({
   setOpen,
   severity,
   message,
+  redirectPath,
 }: AlertMessageProps): JSX.Element => {
   const navigate = useNavigate();
-  const handleCloseAlertMessage = (reason: SnackbarCloseReason): void => {
+
+  const handleCloseAlertMessage = (
+    event: React.SyntheticEvent<Element, Event>,
+    reason: SnackbarCloseReason
+  ): void => {
     if (reason === 'clickaway') return;
 
     setOpen(false);
 
-    if (reason === 'timeout') {
-      navigate('/login');
+    if (reason === 'timeout' && redirectPath) {
+      navigate(redirectPath);
     }
   };
 
@@ -41,9 +47,9 @@ const AlertMessage = ({
         open={open}
         autoHideDuration={6000}
         anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
-        onClose={() => handleCloseAlertMessage}
+        onClose={handleCloseAlertMessage}
       >
-        <Alert onClose={() => handleCloseAlertMessage} severity={severity}>
+        <Alert onClose={handleCloseAlertMessage} severity={severity}>
           {message}
         </Alert>
       </Snackbar>
