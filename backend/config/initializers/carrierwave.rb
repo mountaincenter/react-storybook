@@ -17,10 +17,14 @@ CarrierWave.configure do |config|
       region: "ap-northeast-1",
       path_style: true
     }
+  elsif Rails.env.test?
+    config.storage = :file
+    config.cache_storage = :file
+    config.root = "#{Rails.root}/tmp/uploads"
+    config.enable_processing = false
   else
     config.asset_host = "http://localhost"
     config.storage :file
     config.cache_storage = :file
-    config.enable_processing = false if Rails.env.test?
   end
 end

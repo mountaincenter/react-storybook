@@ -4,9 +4,9 @@ RSpec.describe "Api::V1::Auth::Sessions", type: :request do
   describe "POST /auth/sessions/guest_sign_in" do
     context "when guest user does not exist" do
       it "creates a new guest user" do
-        expect {
+        expect do
           post api_v1_auth_guest_sign_in_path
-        }.to change(User, :count).by(1)
+        end.to change(User, :count).by(1)
       end
     end
 
@@ -16,9 +16,9 @@ RSpec.describe "Api::V1::Auth::Sessions", type: :request do
       end
 
       it "does not create a new guest user" do
-        expect {
+        expect do
           post api_v1_auth_guest_sign_in_path
-        }.not_to change(User, :count)
+        end.not_to change(User, :count)
       end
     end
 
