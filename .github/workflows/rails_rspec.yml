@@ -9,6 +9,9 @@ jobs:
   rspec:
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    env:
+      EMAIL_ADDRESS: ${{ secrets.EMAIL_ADDRESS }}
+      EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
 
     services:
       mysql:
