@@ -17,6 +17,16 @@ export interface SignUpData {
   };
 }
 
+export interface UserUpdateData {
+  name?: string;
+  username?: string;
+  email?: string;
+  avatar?: {
+    url: string;
+  };
+  profile?: string;
+}
+
 export interface CurrentUserApiResponse extends AxiosResponse {
   currentUser: User;
 }
@@ -35,7 +45,20 @@ export interface User {
   avatar: {
     url: string | null;
   };
+  image: {
+    url: string | null;
+  };
   password: string;
+  profile: string;
+  uid: string;
+  provider: string;
+  allowPasswordChange: boolean;
+  createdAt?: string;
+  updatedAt?: string;
+}
+
+export interface ApiResponse<T> extends AxiosResponse {
+  data: T;
 }
 
 export type CustomColor = 'like' | 'follow' | 'repost' | 'other';

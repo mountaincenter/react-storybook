@@ -1,17 +1,6 @@
-import { createTheme, Theme } from '@mui/material';
+import { createTheme } from '@mui/material';
 
 declare module '@mui/material/styles' {
-  interface BreakpointOverrides {
-    xs: false; // removes the `xs` breakpoint
-    sm: false;
-    md: false;
-    lg: false;
-    xl: false;
-    mobile: true; // adds the `mobile` breakpoint
-    tablet: true;
-    laptop: true;
-    desktop: true;
-  }
   interface Palette {
     like?: Palette['primary'];
     follow?: Palette['primary'];
@@ -26,15 +15,7 @@ declare module '@mui/material/styles' {
   }
 }
 
-const baseTheme = createTheme({
-  breakpoints: {
-    values: {
-      mobile: 0,
-      tablet: 640,
-      laptop: 1024,
-      desktop: 1280,
-    },
-  },
+const customTheme = createTheme({
   palette: {
     like: {
       main: '#f9187f',
@@ -47,16 +28,6 @@ const baseTheme = createTheme({
     },
     other: {
       main: '#1d9bf0',
-    },
-  },
-});
-
-const customTheme: Theme = createTheme(baseTheme, {
-  typography: {
-    button: {
-      [baseTheme.breakpoints.down('tablet')]: {
-        fontSize: '0.25rem',
-      },
     },
   },
 });

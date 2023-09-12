@@ -8,7 +8,18 @@ interface WidgetWrapperProps {
 const WidgetWrapper = ({ isTablet }: WidgetWrapperProps) => {
   return (
     !isTablet && (
-      <Grid item sx={{ overflowY: 'auto', maxHeight: '100dvh' }}>
+      <Grid
+        item
+        sx={{
+          overflowY: 'auto',
+          maxHeight: '100dvh',
+          width: {
+            xl: 259,
+            lg: 72,
+            md: 'none',
+          },
+        }}
+      >
         <Widget />
       </Grid>
     )

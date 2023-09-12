@@ -12,11 +12,6 @@ const SidebarWrapper = ({ isMobile }: SidebarWrapperProps) => {
         sx={{
           overflowY: 'auto',
           height: '100dvh',
-          width: {
-            desktop: 259,
-            laptop: 72,
-            tablet: 'none',
-          },
         }}
       >
         <Sidebar />

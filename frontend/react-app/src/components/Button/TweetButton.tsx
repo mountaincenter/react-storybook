@@ -1,11 +1,10 @@
-import { Button, Typography, IconButton } from '@mui/material';
-
-import { useMediaQuery, ListItem } from '@mui/material';
-import { customTheme } from '../../Theme';
+import { Button, Typography, IconButton, ListItem } from '@mui/material';
 
 import Tooltip from '../Tooltip';
 import BaseIcon from '../Icon/BaseIcon/BaseIcon';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
+
+import { useMobileView } from '../../hooks/useMobileView';
 
 interface TweetButtonProps {
   text: string;
@@ -13,10 +12,8 @@ interface TweetButtonProps {
 }
 
 const TweetButton = ({ text, onClick }: TweetButtonProps) => {
-  const isDesktop = useMediaQuery(customTheme.breakpoints.up('desktop'));
-  const isTablet = useMediaQuery(
-    customTheme.breakpoints.between('tablet', 'desktop')
-  );
+  const { isDesktop, isTablet } = useMobileView();
+
   return (
     <>
       {isDesktop && (

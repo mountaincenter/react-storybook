@@ -3,15 +3,13 @@ import IconWithBadge from './IconWithBadge';
 import Tooltip from '../../Tooltip';
 import { Link, useLocation } from 'react-router-dom';
 import {
-  useMediaQuery,
   ListItemButton,
   ListItemText,
   ListItem,
   IconButton,
   Typography,
 } from '@mui/material';
-import { customTheme } from '../../../Theme';
-
+import { useMobileView } from '../../../hooks/useMobileView';
 interface IconWithTextProps {
   link: string;
   text: string;
@@ -32,10 +30,8 @@ const IconWithText: React.FC<IconWithTextProps> = ({
   isActive: activeProp,
 }) => {
   const location = useLocation();
-  const isDesktop = useMediaQuery(customTheme.breakpoints.up('desktop'));
-  const isTablet = useMediaQuery(
-    customTheme.breakpoints.between('tablet', 'desktop')
-  );
+  const { isDesktop, isTablet } = useMobileView();
+
   const isActive =
     activeProp !== undefined ? activeProp : location.pathname === link;
 
