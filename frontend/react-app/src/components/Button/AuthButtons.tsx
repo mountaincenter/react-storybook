@@ -1,38 +1,10 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import Button from '../Button/Button';
 import useModalRoute from '../../hooks/useModalRoute';
 import { guestSignIn } from '../../api/auth';
 import { getCurrentUser } from '../../hooks/currentUser/getCurrentUser';
 import { useQueryClient } from 'react-query';
-
-const commonButtonStyle = {
-  border: '1px solid #e6ecf0',
-  boxShadow: 'none',
-  '&:hover': {
-    backgroundColor: '#71c2f8',
-    boxShadow: 'none',
-  },
-  fontWeight: 'bold',
-  mx: 1,
-};
-
-const AuthButton: React.FC<{
-  label: string;
-  onClick: () => void;
-  dataCy?: string;
-}> = ({ label, onClick, dataCy }) => (
-  <Button
-    label={label}
-    variant="contained"
-    color="primary"
-    sx={{
-      ...commonButtonStyle,
-    }}
-    onClick={onClick}
-    data-cy={dataCy}
-  />
-);
+import AuthButton from './AuthButton';
 
 const AuthButtons: React.FC = () => {
   const { startModalPath } = useModalRoute();
