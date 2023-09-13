@@ -7,11 +7,13 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   attr_accessor :avatar_name
+  attr_accessor :image_name
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :confirmable
   include DeviseTokenAuth::Concerns::User
   mount_uploader :avatar, AvatarUploader
+  mount_uploader :image, ImageUploader
   before_validation :generate_username, on: :create
   before_create :set_public_id
   before_create :set_avatar_filename
@@ -25,6 +27,12 @@ class User < ActiveRecord::Base
   validates :email, presence: true, length: { maximum: 100 }
   validates :password, presence: true, length: { minimum: 8 }, on: :create
   validates :public_id, uniqueness: true
+
+  has_many :follower_relationships, class_name: "Follow", foreign_key: "following_id", dependent: :destroy
+  has_many :followers, through: :follower_relationships, source: :follower
+
+  has_many :following_relationships, class_name: "Follow", foreign_key: "follower_id", dependent: :destroy
+  has_many :following, through: :following_relationships, source: :following
 
   def self.guest
     find_or_create_by!(
@@ -58,5 +66,11 @@ class User < ActiveRecord::Base
     return unless avatar_name.present? && avatar.present?
 
     avatar.file.instance_variable_set(:@original_filename, avatar_name)
+  end
+
+  def set_image_filename
+    return unless image_name.present? && image.present?
+
+    image.file.instance_variable_set(:@original_filename, image_name)
   end
 end
