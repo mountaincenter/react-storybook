@@ -1,9 +1,7 @@
 import Button from './Button';
 
 import { useUser } from '../../hooks/User/useUser';
-import { useCurrentUser } from '../../hooks/currentUser/useCurrentUser';
 import { useParams } from 'react-router-dom';
-
 import useModalRoute from '../../hooks/useModalRoute';
 
 const ProfileEditButton = () => {

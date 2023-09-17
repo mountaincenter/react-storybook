@@ -49,5 +49,14 @@ RSpec.describe User, type: :model do
         expect(user_with_avatar.avatar.current_path).to include("avatar_test.jpg")
       end
     end
+
+    describe "image" do
+      let(:user_with_image) { create(:user) }
+
+      it "should have an image after creation" do
+        expect(user_with_image.image).to be_present
+        expect(user_with_image.image.current_path).to include("image_test.jpeg")
+      end
+    end
   end
 end
