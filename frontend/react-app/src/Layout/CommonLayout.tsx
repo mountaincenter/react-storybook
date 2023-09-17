@@ -26,7 +26,7 @@ const CommonLayout = ({ children }: CommonLayoutProps): React.ReactElement => {
           overflowY: 'hidden',
         }}
       >
-        <Container maxWidth="desktop" sx={{ m: 0, p: 0 }}>
+        <Container maxWidth="xl" sx={{ m: 0, p: 0 }}>
           <Grid container justifyContent="center">
             <SidebarWrapper isMobile={isMobile} />
             <ContentWrapper isMobile={isMobile}>{children}</ContentWrapper>

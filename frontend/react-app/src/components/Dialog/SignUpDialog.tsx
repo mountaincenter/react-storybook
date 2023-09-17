@@ -9,7 +9,10 @@ import Uploader from '../Uploader/Uploader';
 
 import AlertMessage from '../AlertMessage/AlertMessage';
 
+import { useNavigate } from 'react-router-dom';
+
 const SignUpDialog = () => {
+  const navigate = useNavigate();
   const [selectedAvatar, setSelectedAvatar] = useState<File | null>(null);
   const [form, setForm] = useState<SignUpData>({
     name: '',
@@ -38,8 +41,10 @@ const SignUpDialog = () => {
         open: true,
         severity: 'success',
         message: 'アカウント作成しました。確認メールをチェックしてください。',
-        redirectPath: '/',
       });
+      setTimeout(() => {
+        navigate('/');
+      }, 3000);
     },
     onError: (error: any) => {
       let errorMessage = 'アカウント作成に失敗しました。';
@@ -81,7 +86,7 @@ const SignUpDialog = () => {
 
   return (
     <>
-      <Grid item mobile={12} sx={{ mt: 3 }}>
+      <Grid item xs={12} sx={{ mt: 3 }}>
         <CloseableDialogTitle />
         <form noValidate autoComplete="off" onSubmit={handleSubmit}>
           <Card sx={{ padding: 2, maxWidth: 400 }}>

@@ -73,8 +73,6 @@ RSpec.configure do |config|
 
   config.include Devise::Test::IntegrationHelpers, type: :request
   config.after(:all) do
-    if Rails.env.test?
-      FileUtils.rm_rf(Dir["#{Rails.root}/tmp/uploads"])
-    end
+    FileUtils.rm_rf(Dir["#{Rails.root}/tmp/uploads"]) if Rails.env.test?
   end
 end

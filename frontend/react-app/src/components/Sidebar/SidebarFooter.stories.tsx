@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import SidebarFooter from './SidebarFooter';
 import { BrowserRouter } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
+import { RecoilRoot } from 'recoil';
 
 import { rest } from 'msw';
 import { users } from '../../mocks/userMock';
@@ -13,11 +14,13 @@ const meta: Meta<typeof SidebarFooter> = {
   tags: ['autodocs'],
   decorators: [
     (Story) => (
-      <QueryClientProvider client={queryClient}>
-        <BrowserRouter>
-          <Story />
-        </BrowserRouter>
-      </QueryClientProvider>
+      <RecoilRoot>
+        <QueryClientProvider client={queryClient}>
+          <BrowserRouter>
+            <Story />
+          </BrowserRouter>
+        </QueryClientProvider>
+      </RecoilRoot>
     ),
   ],
 };

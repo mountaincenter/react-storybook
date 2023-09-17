@@ -7,19 +7,21 @@ import Footer from '../components/Footer/Footer';
 
 import Avatar from '../components/Avatar/Avatar';
 
-console.log(process.env.NODE_ENV);
+import HomeHeader from '../components/Header/HomeHeader';
 
 const Home = () => {
   const { currentUser } = useCurrentUser();
   console.log(currentUser);
   return (
     <>
-      <Grid container maxWidth="desktop" spacing={0}>
-        <Grid item mobile={12}>
+      <Grid container spacing={0}>
+        <Grid item xs={12}>
+          <Grid item>
+            <HomeHeader label="ホーム" />
+          </Grid>
           <Grid item>
             <Box>
               <Typography>トップページ</Typography>
-              <Typography>{process.env.NODE_ENV}</Typography>
               {currentUser?.name ? (
                 <>
                   <Typography>ログイン中</Typography>

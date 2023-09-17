@@ -3,7 +3,6 @@ import {
   ListItemAvatar,
   ListItemText,
   IconButton,
-  useMediaQuery,
   Skeleton,
   Box,
 } from '@mui/material';
@@ -12,16 +11,13 @@ import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import Avatar from '../Avatar/Avatar';
 
 import { useCurrentUser } from '../../hooks/currentUser/useCurrentUser';
-
-import { customTheme } from '../../Theme';
-
 import useModalRoute from '../../hooks/useModalRoute';
+import { useMobileView } from '../../hooks/useMobileView';
 
 const SidebarFooter = () => {
   const { currentUser, isLoading } = useCurrentUser();
   const { startModalPath } = useModalRoute();
-
-  const isDesktop = useMediaQuery(customTheme.breakpoints.up('desktop'));
+  const { isDesktop } = useMobileView();
 
   const LoadingState = () => {
     return (

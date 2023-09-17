@@ -26,31 +26,31 @@ const preview: Preview = {
     },
     viewport: {
       viewports: {
-        mobile: {
-          name: 'Mobile',
+        sm: {
+          name: 'Small',
           styles: {
-            width: '320px',
+            width: '600px',
             height: '600px',
           },
         },
-        tablet: {
-          name: 'Tablet',
+        md: {
+          name: 'Medium',
           styles: {
-            width: '768px',
+            width: '960px',
             height: '600px',
           },
         },
-        laptop: {
-          name: 'Laptop',
-          styles: {
-            width: '1024px',
-            height: '600px',
-          },
-        },
-        desktop: {
-          name: 'Desktop',
+        lg: {
+          name: 'Large',
           styles: {
             width: '1280px',
+            height: '600px',
+          },
+        },
+        xl: {
+          name: 'Extra Large',
+          styles: {
+            width: '1920px',
             height: '600px',
           },
         },

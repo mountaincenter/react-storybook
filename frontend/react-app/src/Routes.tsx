@@ -15,19 +15,18 @@ import Modal from './components/modal';
 import LoginDialog from './components/Dialog/LoginDialog';
 import LogoutDialog from './components/Dialog/LogoutDialog';
 import SignUpDialog from './components/Dialog/SignUpDialog';
+import UserEditDialog from './components/Dialog/UserEditDialog';
+import ImageDialog from './components/Dialog/ImageDialog';
 import CommonLayout from './Layout/CommonLayout';
 import ModalDialogLayout from './Layout/ModalDialogLayout';
 import { BackgroundLocation } from './hooks/useModalRoute';
 
-import { useMediaQuery } from '@mui/material';
-import { customTheme } from './Theme';
+import { useMobileView } from './hooks/useMobileView';
 
 const CommonRoutes = () => {
+  const { isMobile } = useMobileView();
   const location = useLocation();
   const background = (location.state as BackgroundLocation)?.background;
-  const matchesSMorBelow = useMediaQuery(
-    customTheme.breakpoints.down('mobile')
-  );
 
   const getMainRoutes = () => {
     return [
@@ -51,6 +50,8 @@ const CommonRoutes = () => {
       { path: 'login', element: <LoginDialog /> },
       { path: 'signup', element: <SignUpDialog /> },
       { path: 'logout', element: <LogoutDialog /> },
+      { path: ':username/edit', element: <UserEditDialog /> },
+      { path: ':username/:type', element: <ImageDialog /> },
     ];
   };
 
@@ -67,7 +68,7 @@ const CommonRoutes = () => {
   const mobileRoutes = useRoutes([...getMainRoutes(), ...getModalRoutes()]);
 
   const renderRoutesWithLayout = () => {
-    if (matchesSMorBelow && mobileRoutes) {
+    if (isMobile && mobileRoutes) {
       return <CommonLayout>{mobileRoutes}</CommonLayout>;
     } else if (background && modalRoutes) {
       return <ModalDialogLayout>{modalRoutes}</ModalDialogLayout>;

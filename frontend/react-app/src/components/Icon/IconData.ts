@@ -16,6 +16,7 @@ import ModeCommentOutlinedIcon from '@mui/icons-material/ModeCommentOutlined';
 import AddIcon from '@mui/icons-material/Add';
 import CancelIcon from '@mui/icons-material/Cancel';
 import InsertPhotoOutlinedIcon from '@mui/icons-material/InsertPhotoOutlined';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 import {
   BaseIconsMappingType,
@@ -42,6 +43,7 @@ export const BaseIcons: BaseIconsMappingType = {
   AddIcon,
   CancelIcon,
   InsertPhotoOutlinedIcon,
+  ArrowBackIcon,
 };
 
 export const SidebarIconCombinations: SidebarIconsMappingType = {

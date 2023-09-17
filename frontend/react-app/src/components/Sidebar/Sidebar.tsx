@@ -9,23 +9,12 @@ const styles = {
     display: 'flex',
     flexDirection: 'column',
     height: '100svh',
-    minWidth: {
-      desktop: 259,
-      laptop: 72,
-      tablet: 'none',
-    },
     overflow: 'hidden',
     px: 2,
   },
   list: {
     flexGrow: 1,
     pt: 2,
-    minWidth: {
-      desktop: 259,
-      laptop: 72,
-      tablet: 'none',
-      mobile: 259,
-    },
   },
 };
 
