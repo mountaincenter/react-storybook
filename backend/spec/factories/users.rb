@@ -11,9 +11,14 @@ FactoryBot.define do
     remember_created_at { nil }
     tokens { nil }
     avatar { Rack::Test::UploadedFile.new(Rails.root.join("spec", "fixtures", "avatar_test.jpg"), "image/jpg") }
+    image { Rack::Test::UploadedFile.new(Rails.root.join("spec", "fixtures", "image_test.jpeg"), "image/jpeg") }
 
     trait :unconfirmed do
       confirmed_at { nil }
+    end
+
+    trait :confirmed do
+      confirmed_at { Time.current }
     end
   end
 end

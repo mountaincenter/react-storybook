@@ -48,4 +48,34 @@ RSpec.describe "Api::V1::Users", type: :request do
       expect(user.reload.name).not_to eq("")
     end
   end
+
+  describe "GET /:id/following" do
+    let!(:other_user1) { create(:user) }
+    let!(:other_user2) { create(:user) }
+    let!(:follow1) { create(:follow, follower: user, following: other_user1) }
+    let!(:follow2) { create(:follow, follower: user, following: other_user2) }
+
+    it "returns a list of users that the user is following" do
+      get(following_api_v1_user_path(user.username), headers:)
+
+      expect(response).to have_http_status(200)
+      expect(response.content_type).to eq("application/json; charset=utf-8")
+      expect(JSON.parse(response.body).size).to eq(2)
+    end
+  end
+
+  describe "GET /:id/followers" do
+    let!(:other_user1) { create(:user) }
+    let!(:other_user2) { create(:user) }
+    let!(:follow1) { create(:follow, follower: other_user1, following: user) }
+    let!(:follow2) { create(:follow, follower: other_user2, following: user) }
+
+    it "returns a list of users that are following the user" do
+      get(followers_api_v1_user_path(user.username), headers:)
+
+      expect(response).to have_http_status(200)
+      expect(response.content_type).to eq("application/json; charset=utf-8")
+      expect(JSON.parse(response.body).size).to eq(2)
+    end
+  end
 end

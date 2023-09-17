@@ -14,7 +14,18 @@ Rails.application.routes.draw do
         post "guest_sign_in", to: "sessions#guest_sign_in"
       end
 
-      resources :users, only: %i[index show update]
+      resources :notifications, only: %i[index update] do
+        collection do
+          put :mark_all_as_read
+        end
+      end
+
+      resources :users, only: %i[index show update] do
+        resource :follows, only: %i[create destroy]
+        member do
+          get :following, :followers
+        end
+      end
     end
   end
 end

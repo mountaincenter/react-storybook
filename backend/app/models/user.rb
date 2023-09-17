@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 #
-# ユーザー
+# user model
 #
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
@@ -33,6 +33,12 @@ class User < ActiveRecord::Base
 
   has_many :following_relationships, class_name: "Follow", foreign_key: "follower_id", dependent: :destroy
   has_many :following, through: :following_relationships, source: :following
+
+  has_many :notifications, dependent: :destroy
+
+  def following?(other_user)
+    following.include?(other_user)
+  end
 
   def self.guest
     find_or_create_by!(
