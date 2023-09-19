@@ -19,6 +19,8 @@ const SidebarFooter = () => {
   const { startModalPath } = useModalRoute();
   const { isDesktop } = useMobileView();
 
+  // console.log(isLoading);
+
   const LoadingState = () => {
     return (
       <>

@@ -21,6 +21,7 @@ const SidebarOption: React.FC<SidebarOptionProps> = ({
 }) => {
   const location = useLocation();
   const isActive = location.pathname === link;
+  // console.log('badgeContent', badgeContent);
 
   return (
     <IconWithText

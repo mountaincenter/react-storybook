@@ -36,7 +36,7 @@ const LoginDialog = () => {
   };
 
   return (
-    <Grid item mobile={12} sx={{ mt: 3 }}>
+    <Grid item xs={12} sx={{ mt: 3 }}>
       {' '}
       {/* ← mobile を xs に変更 */}
       <CloseableDialogTitle />

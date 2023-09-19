@@ -11,7 +11,7 @@ export const useUser = (
   });
 
   const user = data?.data;
-  console.log(user);
+  // console.log(user);
 
   return { user, isLoading, error };
 };

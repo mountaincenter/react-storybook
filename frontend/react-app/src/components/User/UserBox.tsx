@@ -1,14 +1,17 @@
 import { Box, Grid, Typography } from '@mui/material';
 import { useParams } from 'react-router-dom';
-import { useUser } from '../../hooks/User/useUser';
+import { useUser } from '../../hooks/user/useUser';
 import Avatar from '../Avatar/Avatar';
+import FollowCount from '../Follow/FollowCount';
 import ProfileButton from '../Button/ProfileButton';
 import useModalRoute from '../../hooks/useModalRoute';
+import HoverCard from './UserCard';
 
 const UserBox = () => {
   const { startModalPath } = useModalRoute();
   const { username } = useParams();
   const { user } = useUser(username ? username : '');
+
   console.log(user);
 
   if (user) {
@@ -57,6 +60,17 @@ const UserBox = () => {
               <Typography variant="body1" color="gray">
                 @{user.username}
               </Typography>
+            </Box>
+            <Box sx={{ pt: 1 }}>
+              <Typography variant="body1">{user.profile}</Typography>
+            </Box>
+            <Box sx={{ pt: 1 }}>
+              <FollowCount />
+            </Box>
+            <Box>
+              <HoverCard>
+                <Typography>popover test text</Typography>
+              </HoverCard>
             </Box>
           </Box>
         </Grid>

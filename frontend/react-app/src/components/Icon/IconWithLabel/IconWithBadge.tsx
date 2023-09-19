@@ -11,6 +11,7 @@ const IconWithBadge: React.FC<IconWithBadgeProps> = ({
   badgeContent,
   Icon,
 }) => {
+  // console.log('badgeContent', badgeContent);
   return (
     <Badge badgeContent={badgeContent}>
       <BaseIcon Icon={Icon} />

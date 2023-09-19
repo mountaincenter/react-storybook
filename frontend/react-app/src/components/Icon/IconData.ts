@@ -52,7 +52,6 @@ export const SidebarIconCombinations: SidebarIconsMappingType = {
   Notifications: {
     Icon: NotificationsIcon,
     OutlinedIcon: NotificationsOutlinedIcon,
-    badgeContent: 3,
     label: '通知',
     isCurrentUser: true,
   },

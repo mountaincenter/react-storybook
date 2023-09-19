@@ -31,6 +31,8 @@ const IconWithText: React.FC<IconWithTextProps> = ({
 }) => {
   const location = useLocation();
   const { isDesktop, isTablet } = useMobileView();
+  // console.log('badgeContent', badgeContent);
+  // console.log('text', text);
 
   const isActive =
     activeProp !== undefined ? activeProp : location.pathname === link;
@@ -63,7 +65,7 @@ const IconWithText: React.FC<IconWithTextProps> = ({
           }}
         >
           <IconWithBadge
-            badgeContent={text === 'Notifications' ? badgeContent : undefined}
+            badgeContent={text === '通知' ? badgeContent : undefined}
             Icon={IconToRender}
           />
           <ListItemText

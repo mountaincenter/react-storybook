@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-import { useUser } from '../../hooks/User/useUser';
+import { useUser } from '../../hooks/user/useUser';
 
 const ImageDialog = () => {
   const { username, type } = useParams();

@@ -1,28 +1,40 @@
 import SidebarOption from './SidebarOption';
 import { SidebarIconCombinations } from '../Icon/IconData';
 import { useCurrentUser } from '../../hooks/currentUser/useCurrentUser';
+import { useNotificationsCount } from '../../hooks/notification/useNotificationsCount';
 
 const SidebarListItem = () => {
   const { currentUser } = useCurrentUser();
+  const notificationsCount = useNotificationsCount();
+
+  const dynamicSidebarIconCombinations = {
+    ...SidebarIconCombinations,
+    Notifications: {
+      ...SidebarIconCombinations.Notifications,
+      badgeContent: notificationsCount,
+    },
+  };
 
   return (
     <>
-      {Object.entries(SidebarIconCombinations).map(([key, icons]) => {
+      {Object.entries(dynamicSidebarIconCombinations).map(([key, icons]) => {
         if (icons.isCurrentUser && !currentUser) {
           return null;
         }
 
         return (
-          <SidebarOption
-            key={key}
-            link={
-              key === 'Profile' && currentUser
-                ? `/${currentUser.username}`
-                : `/${key.toLowerCase()}`
-            }
-            text={icons.label}
-            {...icons}
-          />
+          <>
+            <SidebarOption
+              key={key}
+              link={
+                key === 'Profile' && currentUser
+                  ? `/${currentUser.username}`
+                  : `/${key.toLowerCase()}`
+              }
+              text={icons.label}
+              {...icons}
+            />
+          </>
         );
       })}
     </>

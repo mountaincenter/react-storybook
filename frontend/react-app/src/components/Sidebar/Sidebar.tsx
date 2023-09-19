@@ -2,7 +2,6 @@ import { Box, List } from '@mui/material';
 import SidebarListItem from './SidebarListItem';
 import SidebarFooter from './SidebarFooter';
 import TweetButton from '../Button/TweetButton';
-import { useMobileView } from '../../hooks/useMobileView';
 
 const styles = {
   box: {
@@ -19,8 +18,6 @@ const styles = {
 };
 
 const Sidebar = () => {
-  const isMobile = useMobileView();
-
   const content = (
     <Box sx={styles.box}>
       <List sx={styles.list}>
@@ -30,7 +27,7 @@ const Sidebar = () => {
           onClick={() => console.log('ツイートする')}
         />
       </List>
-      {!isMobile && <SidebarFooter />}
+      <SidebarFooter />
     </Box>
   );
   return content;

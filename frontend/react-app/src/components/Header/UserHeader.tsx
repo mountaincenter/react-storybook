@@ -1,6 +1,6 @@
 import Header from './Header';
 import { Grid, Box, Typography, IconButton } from '@mui/material';
-import { useUser } from '../../hooks/User/useUser';
+import { useUser } from '../../hooks/user/useUser';
 import { useParams, useNavigate } from 'react-router-dom';
 import ArrowBackIcons from '@mui/icons-material/ArrowBack';
 import Tooltip from '../Tooltip';
@@ -26,9 +26,9 @@ const UserHeader = () => {
                 </IconButton>
               </Tooltip>
               <Box sx={{ ml: 2 }}>
-                <Typography variant="h6">{user?.username}</Typography>
+                <Typography variant="h6">{user?.name}</Typography>
                 <Typography variant="body2" sx={{ color: 'gray' }}>
-                  {user?.name}
+                  {user?.username}
                 </Typography>
               </Box>
             </Box>

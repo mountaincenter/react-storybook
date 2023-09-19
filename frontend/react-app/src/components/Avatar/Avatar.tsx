@@ -40,9 +40,9 @@ const Avatar = ({
       sx={sx}
       onClick={customComponent === 'button' ? onClick : undefined}
       {...rest}
-    >
-      {avatar.url ? null : name[0]}
-    </MuiAvatar>
+    />
+    //   {avatar.url ? null : name[0]}
+    // </MuiAvatar>
   );
 
   if (customComponent === 'Link') {

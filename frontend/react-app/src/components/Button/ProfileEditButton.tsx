@@ -1,6 +1,6 @@
 import Button from './Button';
 
-import { useUser } from '../../hooks/User/useUser';
+import { useUser } from '../../hooks/user/useUser';
 import { useParams } from 'react-router-dom';
 import useModalRoute from '../../hooks/useModalRoute';
 

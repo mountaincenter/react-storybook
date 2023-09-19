@@ -9,6 +9,7 @@ import Notifications from './pages/Notifications';
 import Bookmarks from './pages/Bookmarks';
 import Messages from './pages/Messages';
 import Next from './pages/Next';
+import UserFollow from './pages/UserFollow';
 import ModalNext from './pages/ModalNext';
 import ModalTop from './pages/ModalTop';
 import Modal from './components/modal';
@@ -40,6 +41,7 @@ const CommonRoutes = () => {
       { path: '/redirect', element: <Redirect /> },
       { path: '/next', element: <Next /> },
       { path: '/:username', element: <Profile /> },
+      { path: '/:username/:type', element: <UserFollow /> },
     ];
   };
 

@@ -42,6 +42,8 @@ export interface User {
   name: string;
   username: string;
   email: string;
+  followed: boolean;
+  following: boolean;
   avatar: {
     url: string | null;
   };
@@ -57,6 +59,23 @@ export interface User {
   updatedAt?: string;
 }
 
+export interface Notification {
+  id: number;
+  userId: number;
+  message: {
+    avatar: {
+      url: string;
+    };
+    title: string;
+    body?: string;
+  };
+  notificationType: string;
+  notificationId: number;
+  notifiableType: string;
+  read: boolean;
+  createdAt: Date;
+  updatedAt: Date;
+}
 export interface ApiResponse<T> extends AxiosResponse {
   data: T;
 }
