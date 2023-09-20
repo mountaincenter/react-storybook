@@ -13,6 +13,8 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import RepeatIcon from '@mui/icons-material/Repeat';
 import ModeCommentOutlinedIcon from '@mui/icons-material/ModeCommentOutlined';
+import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
+import ReplyIcon from '@mui/icons-material/Reply';
 import AddIcon from '@mui/icons-material/Add';
 import CancelIcon from '@mui/icons-material/Cancel';
 import InsertPhotoOutlinedIcon from '@mui/icons-material/InsertPhotoOutlined';
@@ -22,6 +24,7 @@ import {
   BaseIconsMappingType,
   SidebarIconsMappingType,
   InteractionIconsMappingType,
+  NotificationIconsMappingType,
 } from '../../interfaces';
 
 export const BaseIcons: BaseIconsMappingType = {
@@ -88,4 +91,13 @@ export const InteractionIconCombinations: InteractionIconsMappingType = {
     OutlinedIcon: BookmarkBorderIcon,
     color: 'other',
   },
+};
+
+export const NotificationIconCombinations: NotificationIconsMappingType = {
+  Message: { Icon: MessageIcon, color: 'other' },
+  Follow: { Icon: PersonIcon, color: 'info' },
+  Like: { Icon: FavoriteIcon, color: 'like' },
+  Mention: { Icon: AlternateEmailIcon, color: 'other' },
+  Replay: { Icon: ReplyIcon, color: 'other' },
+  Repost: { Icon: RepeatIcon, color: 'repost' },
 };

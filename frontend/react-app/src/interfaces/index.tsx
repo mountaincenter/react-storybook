@@ -101,11 +101,17 @@ export interface SidebarIconType {
   badgeContent?: number;
   label: string;
   isCurrentUser?: boolean;
+  onClick?: () => void;
 }
 
 export interface InteractionIconType {
   Icon: React.ElementType;
   OutlinedIcon: React.ElementType;
+  color: MUIColor | CustomColor;
+}
+
+export interface NotificationIconType {
+  Icon: React.ElementType;
   color: MUIColor | CustomColor;
 }
 
@@ -122,4 +128,8 @@ export type SidebarIconsMappingType = {
 // InteractionIconTypeのマッピングを定義
 export type InteractionIconsMappingType = {
   [key: string]: InteractionIconType;
+};
+
+export type NotificationIconsMappingType = {
+  [key: string]: NotificationIconType;
 };

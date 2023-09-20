@@ -1,5 +1,13 @@
+import NotificationsList from '../components/Notification/NotificationsList';
+import NotificationHeader from '../components/Header/NotificationHeader';
+
 const Notifications = () => {
-  return <div>Notifications</div>;
+  return (
+    <>
+      <NotificationHeader />
+      <NotificationsList />
+    </>
+  );
 };
 
 export default Notifications;
