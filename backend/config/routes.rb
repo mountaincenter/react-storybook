@@ -26,6 +26,10 @@ Rails.application.routes.draw do
           get :following, :followers
         end
       end
+
+      resources :messages, only: %i[index create] do
+        get :conversations, on: :member
+      end
     end
   end
 end

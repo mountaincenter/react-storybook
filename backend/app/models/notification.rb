@@ -8,7 +8,7 @@ class Notification < ApplicationRecord
   belongs_to :user
   belongs_to :notifiable, polymorphic: true
 
-  VALID_NOTIFICATION_TYPES = %w[follow].freeze
+  VALID_NOTIFICATION_TYPES = %w[follow message].freeze
   validates :notification_type, inclusion: { in: VALID_NOTIFICATION_TYPES }
 
   def message
@@ -22,13 +22,19 @@ class Notification < ApplicationRecord
     build_message(follower, "#{follower.name}さんからフォローされました")
   end
 
+  def message_for_message
+    message = notifiable
+    sender = User.find_by(id: message.sender_id)
+    build_message(sender, "#{sender.name}さんからメッセージが届いています", message.body)
+  end
+
   private
 
-  def build_message(user, title, _boby = nil)
+  def build_message(user, title, body = nil)
     {
       avatar: user.avatar,
       title:,
-      body: nil
+      body:
     }
   end
 end

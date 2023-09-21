@@ -34,6 +34,9 @@ class User < ActiveRecord::Base
   has_many :following_relationships, class_name: "Follow", foreign_key: "follower_id", dependent: :destroy
   has_many :following, through: :following_relationships, source: :following
 
+  has_many :sent_messages, class_name: "Message", foreign_key: "sender_id", dependent: :destroy
+  has_many :received_messages, class_name: "Message", foreign_key: "recipient_id", dependent: :destroy
+
   has_many :notifications, dependent: :destroy
 
   def following?(other_user)

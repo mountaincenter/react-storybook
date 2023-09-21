@@ -8,7 +8,7 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 
-seed_models = %i[user]
+seed_models = %i[user message]
 
 all_process_time = Benchmark.realtime do
   seed_models.each do |model|

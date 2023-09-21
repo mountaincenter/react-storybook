@@ -29,6 +29,22 @@ RSpec.describe Notification, type: :model do
         expect(actual_message).to eq expected_message
       end
     end
+    context "when notification_type is 'message'" do
+      let(:sender) { create(:user) }
+      let(:message) { create(:message, sender:) }
+      let(:notification) { create(:notification, notifiable: message, notification_type: "message") }
+
+      it "returns the correct message" do
+        expected_message = {
+          avatar: sender.avatar.file.filename,
+          title: "#{sender.name}さんからメッセージが届いています",
+          body: message.body
+        }
+        actual_message = notification.message
+        actual_message[:avatar] = actual_message[:avatar].file.filename
+        expect(actual_message).to eq expected_message
+      end
+    end
   end
 
   describe "factories" do

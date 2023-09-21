@@ -75,4 +75,8 @@ RSpec.configure do |config|
   config.after(:all) do
     FileUtils.rm_rf(Dir["#{Rails.root}/tmp/uploads"]) if Rails.env.test?
   end
+
+  def json_response
+    JSON.parse(response.body, symbolize_names: true)
+  end
 end
