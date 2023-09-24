@@ -6,6 +6,7 @@ import {
   CircularProgress,
   Typography,
 } from '@mui/material';
+import React from 'react';
 
 type ButtonBaseProps = Pick<
   MuiButtonProps,
@@ -14,7 +15,7 @@ type ButtonBaseProps = Pick<
 
 interface ButtonProps extends ButtonBaseProps {
   id?: string;
-  label: string;
+  label: string | React.ReactNode;
   type?: 'button' | 'submit' | 'reset';
   isLoading?: boolean;
   variant?: 'contained' | 'outlined' | 'text';
@@ -25,6 +26,7 @@ interface ButtonProps extends ButtonBaseProps {
   fullWidth?: boolean;
   sx?: SxProps<Theme>;
   component?: React.ElementType;
+  overrideDefaultStyles?: boolean;
 }
 const Button = ({
   label,
@@ -36,15 +38,18 @@ const Button = ({
   sx,
   onClick,
   component = 'button',
+  overrideDefaultStyles = false,
   ...rest
 }: ButtonProps) => {
-  const defaultStyles: SxProps<Theme> = {
-    borderRadius: '9999px',
-    '&:hover': {
-      backgroundColor: hoverColor ? hoverColor : undefined,
-      boxShadow: 'none',
-    },
-  };
+  const defaultStyles: SxProps<Theme> = overrideDefaultStyles
+    ? {}
+    : {
+        borderRadius: '9999px',
+        '&:hover': {
+          backgroundColor: hoverColor ? hoverColor : undefined,
+          boxShadow: 'none',
+        },
+      };
   return (
     <MuiButton
       variant={variant}
@@ -54,6 +59,7 @@ const Button = ({
       onClick={onClick}
       disabled={isLoading || rest.disabled}
       component={component}
+      overrideDefaultStyles={overrideDefaultStyles}
       {...rest}
     >
       {isLoading ? (

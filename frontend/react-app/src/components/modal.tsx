@@ -11,7 +11,7 @@ import { Outlet } from 'react-router-dom';
 const Modal = () => {
   const { endModalPath, isModalOpened } = useModalRoute();
   const theme = useTheme();
-  const matchesSMorBelow = useMediaQuery(theme.breakpoints.down('tablet'));
+  const matchesSMorBelow = useMediaQuery(theme.breakpoints.down('sm'));
 
   const closeModal = () => {
     endModalPath();

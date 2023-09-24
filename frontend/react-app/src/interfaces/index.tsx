@@ -52,6 +52,7 @@ export interface User {
   };
   password: string;
   profile: string;
+  publicId: string;
   uid: string;
   provider: string;
   allowPasswordChange: boolean;
@@ -75,6 +76,32 @@ export interface Notification {
   read: boolean;
   createdAt: Date;
   updatedAt: Date;
+}
+
+export interface Message {
+  id: number;
+  body: string;
+  recipient: {
+    id: number;
+    name: string;
+    username: string;
+    avatar: {
+      url: string | null;
+    };
+    publicId: string;
+    profile: string;
+  };
+  sender: {
+    id: number;
+    name: string;
+    username: string;
+    avatar: {
+      url: string | null;
+    };
+    publicId: string;
+    profile: string;
+  };
+  createdAt: Date;
 }
 export interface ApiResponse<T> extends AxiosResponse {
   data: T;

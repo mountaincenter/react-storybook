@@ -19,6 +19,7 @@ import SignUpDialog from './components/Dialog/SignUpDialog';
 import UserEditDialog from './components/Dialog/UserEditDialog';
 import ImageDialog from './components/Dialog/ImageDialog';
 import CommonLayout from './Layout/CommonLayout';
+import SimpleLayout from './Layout/SimpleLayout';
 import ModalDialogLayout from './Layout/ModalDialogLayout';
 import { BackgroundLocation } from './hooks/useModalRoute';
 
@@ -45,6 +46,12 @@ const CommonRoutes = () => {
     ];
   };
 
+  const getSimpleRoutes = () => {
+    return [
+      { path: 'messages', element: <Messages /> },
+      { path: '/messages/:publicId', element: <Messages /> },
+    ];
+  };
   const getModalRoutes = () => {
     return [
       { path: 'modalTop', element: <ModalTop /> },
@@ -58,6 +65,7 @@ const CommonRoutes = () => {
   };
 
   const mainRoutes = useRoutes(getMainRoutes(), background || location);
+  const simpleRoutes = useRoutes(getSimpleRoutes(), background || location);
 
   const modalRoutes = useRoutes([
     {
@@ -74,11 +82,15 @@ const CommonRoutes = () => {
       return <CommonLayout>{mobileRoutes}</CommonLayout>;
     } else if (background && modalRoutes) {
       return <ModalDialogLayout>{modalRoutes}</ModalDialogLayout>;
+    } else if (simpleRoutes) {
+      // SimpleRoutes用の条件を追加
+      return <SimpleLayout>{simpleRoutes}</SimpleLayout>;
     } else if (mainRoutes) {
       return <CommonLayout>{mainRoutes}</CommonLayout>;
     }
     return null;
   };
+
   return <>{renderRoutesWithLayout()}</>;
 };
 
