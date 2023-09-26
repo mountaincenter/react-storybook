@@ -15,8 +15,13 @@ class User < ActiveRecord::Base
   mount_uploader :avatar, AvatarUploader
   mount_uploader :image, ImageUploader
   before_validation :generate_username, on: :create
+  has_many :posts, dependent: :destroy
+  has_many :likes, dependent: :destroy
+  has_many :bookmarks, dependent: :destroy
+  has_many :bookmarked_posts, through: :bookmarks, source: :post
   before_create :set_public_id
   before_create :set_avatar_filename
+  before_create :set_image_filename
   validates :username, presence: true,
                        uniqueness: { case_sensitive: false },
                        length: { in: 6..16 },

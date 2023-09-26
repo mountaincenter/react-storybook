@@ -25,10 +25,25 @@ Rails.application.routes.draw do
         member do
           get :following, :followers
         end
+        collection do
+          get :bookmarking
+        end
       end
 
       resources :messages, only: %i[index create] do
         get :conversations, on: :member
+      end
+
+      resources :posts, only: %i[index create destroy show] do
+        resource :bookmarks, only: %i[create destroy]
+        resource :likes, only: %i[create destroy]
+        post :reply, on: :member
+      end
+
+      resources :hashtags, only: [] do
+        member do
+          get "posts", to: "hashtags#posts", as: "posts"
+        end
       end
     end
   end

@@ -31,7 +31,7 @@ RSpec.describe "Api::V1::Messages", type: :request do
       let(:params) { { public_id: other_confirmed_user.public_id, body: "Hello!" } }
 
       it "creates a new message" do
-        expect { post api_v1_messages_path, params: params }.to change(Message, :count).by(1)
+        expect { post api_v1_messages_path, params: }.to change(Message, :count).by(1)
         expect(response).to have_http_status(:created)
         expect(json_response[:body]).to eq("Hello!")
       end
@@ -41,7 +41,7 @@ RSpec.describe "Api::V1::Messages", type: :request do
       let(:params) { { public_id: "non-existent-public-id", body: "Hello!" } }
 
       it "returns an error" do
-        post api_v1_messages_path, params: params
+        post(api_v1_messages_path, params:)
         expect(response).to have_http_status(:not_found)
       end
     end

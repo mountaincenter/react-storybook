@@ -29,6 +29,7 @@ module Api
         messages = Message.between_users(current_api_v1_user, @recipient).order(created_at: :asc)
         render json: messages, each_serializer: MessageSerializer, status: :ok
       end
+
       private
 
       def message_params

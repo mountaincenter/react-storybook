@@ -19,7 +19,7 @@ module MessageServices
 
       if message.save
         create_notification(recipient, message)
-        { message: message, status: :created } # ここで:messageの後ろに値が欠けていたので、messageを追加しました。
+        { message:, status: :created } # ここで:messageの後ろに値が欠けていたので、messageを追加しました。
       else
         { error: message.errors.full_messages, status: :unprocessable_entity }
       end
