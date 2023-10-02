@@ -1,10 +1,10 @@
 import NotificationsList from '../components/Notification/NotificationsList';
-import NotificationHeader from '../components/Header/NotificationHeader';
+import CommonHeader from '../components/Header/CommonHeader';
 
 const Notifications = () => {
   return (
     <>
-      <NotificationHeader />
+      <CommonHeader title={'通知'} />
       <NotificationsList />
     </>
   );

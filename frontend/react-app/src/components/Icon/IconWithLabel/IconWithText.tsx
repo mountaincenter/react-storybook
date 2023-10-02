@@ -1,6 +1,6 @@
 import React from 'react';
 import IconWithBadge from './IconWithBadge';
-import Tooltip from '../../Tooltip';
+import Tooltip from '../../Tooltip/Tooltip';
 import { Link, useLocation } from 'react-router-dom';
 import {
   ListItemButton,

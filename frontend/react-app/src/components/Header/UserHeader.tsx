@@ -3,7 +3,7 @@ import { Grid, Box, Typography, IconButton } from '@mui/material';
 import { useUser } from '../../hooks/user/useUser';
 import { useParams, useNavigate } from 'react-router-dom';
 import ArrowBackIcons from '@mui/icons-material/ArrowBack';
-import Tooltip from '../Tooltip';
+import Tooltip from '../Tooltip/Tooltip';
 
 const UserHeader = () => {
   const { username } = useParams();

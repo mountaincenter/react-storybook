@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import Tooltip from '.';
+import Tooltip from './Tooltip';
 import HomeIcon from '@mui/icons-material/Home';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import FavoriteIcon from '@mui/icons-material/Favorite';

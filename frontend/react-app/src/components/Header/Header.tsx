@@ -14,6 +14,10 @@ const Header = ({ children }: HeaderProps) => {
           height: '50px',
           display: 'flex',
           alignItems: 'center',
+          position: 'sticky',
+          top: 0,
+          zIndex: 1,
+          backgroundColor: 'background.default',
         }}
       >
         {children}

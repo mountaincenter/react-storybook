@@ -44,13 +44,23 @@ module Api
 
       def select_service
         service_args = [current_api_v1_user, post_params]
-        service_args << post_based_on_type if %w[reply repost quote_repost].include?(params[:post_type])
-        Posts::PostService.new(*service_args)
+        service_class = service_mapping[params[:post_type]] || PostServices::PostService
+        service_class.new(*service_args)
+      end
+
+      def service_class
+        {
+          "reply" => PostServices::ReplyService,
+          "repost" => PostServices::RepostService,
+          "quote_repost" => PostServices::QuoteRepostService
+        }
       end
 
       def post_based_on_type
         case params[:post_type]
-        when "reply", "repost", "quote_repost"
+        when "reply"
+          params[:parent_id]
+        when "repost", "quote_repost"
           params[:original_id]
         else
           raise "存在しない投稿タイプが指定されました: #{params[:post_type]}"

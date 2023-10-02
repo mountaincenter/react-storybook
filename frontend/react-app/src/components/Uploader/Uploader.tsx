@@ -3,11 +3,12 @@ import Button from '../Button/Button';
 import BaseIcon from '../Icon/BaseIcon/BaseIcon';
 import { IconButton } from '@mui/material';
 import CancelIcon from '@mui/icons-material/Cancel';
+import ImageIcon from '@mui/icons-material/Image';
 
 interface ImageUploaderProps {
   onUpload: (images: File[]) => void;
   allowMultiple?: boolean;
-  label: string;
+  label?: string;
 }
 
 const Uploader: React.FC<ImageUploaderProps> = ({
@@ -46,9 +47,14 @@ const Uploader: React.FC<ImageUploaderProps> = ({
         multiple={allowMultiple}
       />
       <label htmlFor="image-upload">
-        <Button component="span" label={label} />
+        {label ? (
+          <Button component="span" label={label} />
+        ) : (
+          <IconButton component="span">
+            <BaseIcon Icon={ImageIcon} />
+          </IconButton>
+        )}
       </label>
-
       <div>
         {previewImages.map((src, index) => (
           <div

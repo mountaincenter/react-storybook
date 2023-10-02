@@ -5,7 +5,7 @@ import { useCurrentUser } from '../hooks/currentUser/useCurrentUser';
 
 import Footer from '../components/Footer/Footer';
 
-import Avatar from '../components/Avatar/Avatar';
+import PostList from '../components/Post/PostList';
 
 import HomeHeader from '../components/Header/HomeHeader';
 
@@ -21,18 +21,9 @@ const Home = () => {
           </Grid>
           <Grid item>
             <Box>
-              <Typography>トップページ</Typography>
               {currentUser?.name ? (
                 <>
-                  <Typography>ログイン中</Typography>
-                  <Typography>ユーザー名：{currentUser?.name}</Typography>
-                  <Typography>アバター：{currentUser?.avatar.url}</Typography>
-                  <Avatar
-                    to={currentUser?.username || ''}
-                    name={currentUser?.name || ''}
-                    avatar={currentUser?.avatar || { url: '' }}
-                    customComponent="Link"
-                  />
+                  <PostList />
                 </>
               ) : (
                 <>

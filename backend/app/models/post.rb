@@ -15,6 +15,7 @@ class Post < ApplicationRecord
   mount_uploaders :images, ImagesUploader
   validates :content, length: { maximum: 140 }
   validates :content, presence: true, if: :content_required?
+  validates :content, absence: true, unless: :content_required?
   validates :public_id, uniqueness: { case_sensitive: true }
   validates :post_type, inclusion: { in: %w[original reply repost quote_repost] }
   validate :images_count_with_limit

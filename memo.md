@@ -21,3 +21,13 @@ Login
 | End-to-end test    |  ◯  |    ◯    |     ◎     |   ◯   |    ◎    |      |           cypress, storybook + msw, storybook + backend, local + backend            | 2 〜　 10  |
 | Unit test          |  -  |    -    |     ◎     |       |         |  ◎   |           jest for testing individual units (functions, components etc.)            | 2 〜 10    |
 | Integration test   |  ◯  |    ◯    |     ◎     |       |    ◎    |  ◯   |           Testing combination of units, cypress for UI integration tests            | 2 〜 10    |
+
+## post method
+
+### 基本的な流れ
+
+#### post_type: 　 console に戻って nil 　渡し type → original
+
+#### postComposer：　 home から投稿 postdedatil から投稿
+
+#### replay から投稿　 quote_repost から投稿

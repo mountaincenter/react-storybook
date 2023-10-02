@@ -28,5 +28,21 @@ FactoryBot.define do
         ]
       end
     end
+
+    trait :reply do
+      post_type { "reply" }
+      association :parent, factory: :post
+    end
+
+    trait :repost do
+      post_type { "repost" }
+      content { nil }
+      association :original, factory: :post
+    end
+
+    trait :quote_repost do
+      post_type { "quote_repost" }
+      association :original, factory: :post
+    end
   end
 end

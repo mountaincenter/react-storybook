@@ -30,12 +30,6 @@ export interface UserUpdateData {
 export interface CurrentUserApiResponse extends AxiosResponse {
   currentUser: User;
 }
-export interface Todo {
-  userId: number;
-  id: number;
-  title: string;
-  completed: boolean;
-}
 
 export interface User {
   id: number;
@@ -103,6 +97,52 @@ export interface Message {
   };
   createdAt: Date;
 }
+
+export interface Post {
+  id: number;
+  content: string;
+  images: Image[];
+  user: User;
+  likes: likesProps[];
+  liked: boolean;
+  postType: string;
+  reposted: boolean;
+  bookmarked: boolean;
+  bookmarksCount: number;
+  publicId: string;
+  parent: Post;
+  original: Post;
+  replies: Post[];
+  reposts: Post[];
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+export interface PostData {
+  content: string;
+  images: File[];
+  parentId?: number;
+}
+export interface PostFormData extends FormData {
+  append: (
+    name: keyof PostData,
+    value: string | number | Blob,
+    fileName?: string
+  ) => void;
+}
+
+export interface likesProps {
+  id: number;
+  user: User;
+  post: Post;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+export interface Image {
+  url: string;
+}
+
 export interface ApiResponse<T> extends AxiosResponse {
   data: T;
 }

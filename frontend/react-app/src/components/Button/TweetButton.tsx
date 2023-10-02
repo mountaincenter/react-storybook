@@ -1,6 +1,6 @@
 import { Button, Typography, IconButton, ListItem } from '@mui/material';
 
-import Tooltip from '../Tooltip';
+import Tooltip from '../Tooltip/Tooltip';
 import BaseIcon from '../Icon/BaseIcon/BaseIcon';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 

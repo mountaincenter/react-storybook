@@ -2,9 +2,13 @@ import Header from './Header';
 import { useNavigate } from 'react-router-dom';
 import { Typography, Grid, Box } from '@mui/material';
 import ArrowBackIcons from '@mui/icons-material/ArrowBack';
-import Tooltip from '../Tooltip';
+import Tooltip from '../Tooltip/Tooltip';
 
-const NotificationHeader = () => {
+interface CommonHeaderProps {
+  title: string;
+}
+
+const CommonHeader = ({ title }: CommonHeaderProps) => {
   const navigate = useNavigate();
 
   const goBack = () => {
@@ -20,7 +24,7 @@ const NotificationHeader = () => {
               <ArrowBackIcons onClick={goBack} sx={{ color: 'inherit' }} />
             </Tooltip>
             <Box sx={{ ml: 2 }}>
-              <Typography variant="h6">通知</Typography>
+              <Typography variant="h6">{title}</Typography>
             </Box>
           </Box>
         </Box>
@@ -29,4 +33,4 @@ const NotificationHeader = () => {
   );
 };
 
-export default NotificationHeader;
+export default CommonHeader;
