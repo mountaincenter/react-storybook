@@ -19,6 +19,8 @@ class Post < ApplicationRecord
   validates :public_id, uniqueness: { case_sensitive: true }
   validates :post_type, inclusion: { in: %w[original reply repost quote_repost] }
   validate :images_count_with_limit
+  validates_uniqueness_of :user_id, scope: %i[original_id post_type], if: :repost_or_quote_repost?, message: "は同じ投稿に対してリツイートまたは引用リツイートを複数回することはできません"
+
   has_many :likes, dependent: :destroy
   has_many :post_hashtags
   has_many :hashtags, through: :post_hashtags
@@ -60,5 +62,9 @@ class Post < ApplicationRecord
     return unless images.count > 4
 
     errors.add(:images, "画像は4枚までです")
+  end
+
+  def repost_or_quote_repost?
+    %w[repost quote_repost].include?(post_type)
   end
 end

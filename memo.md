@@ -26,8 +26,9 @@ Login
 
 ### 基本的な流れ
 
-#### post_type: 　 console に戻って nil 　渡し type → original
+#### post_type
 
-#### postComposer：　 home から投稿 postdedatil から投稿
-
-#### replay から投稿　 quote_repost から投稿
+original text="いまどうしてる？"
+reply && post.user.id === currentUser text="別のポストを追加"
+reply && post.user.id !== currentUser text="返信をポスト"
+quote_repost text="コメン追加"

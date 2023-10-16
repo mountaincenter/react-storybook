@@ -1,4 +1,3 @@
-import React from 'react';
 import Avatar from '../Avatar/Avatar';
 import PostMeta from './PostMeta';
 import PostBody from './PostBody';
@@ -11,12 +10,7 @@ interface QuotePostProps {
 const QuotePost = ({ post }: QuotePostProps) => {
   return (
     <>
-      <Avatar
-        name={post.user.name}
-        avatar={post.user.avatar}
-        customComponent="Link"
-        to={post.user.username}
-      />
+      <Avatar name={post.user.name} avatar={post.user.avatar} />
       <PostMeta user={post.user} createdAt={post.createdAt} />
       <PostBody content={post.content} />
     </>

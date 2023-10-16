@@ -1,17 +1,24 @@
 import { Typography } from '@mui/material';
 
 interface PostBodyProps {
-  content: string;
+  content: string | null;
 }
 
 const PostBody = ({ content }: PostBodyProps) => {
   return (
-    <Typography variant="body2" color="textSecondary" component="span">
+    <>
       {content &&
-        content.split('\n').map((content: string, index: number) => {
-          return <p key={index}>{content}</p>;
-        })}
-    </Typography>
+        content.split('\n').map((line, index) => (
+          <Typography
+            key={index}
+            variant="body2"
+            color="textSecondary"
+            sx={{ whiteSpace: 'pre-wrap', wordWrap: 'break-word' }}
+          >
+            {line}
+          </Typography>
+        ))}
+    </>
   );
 };
 

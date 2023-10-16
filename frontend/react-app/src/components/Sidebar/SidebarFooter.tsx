@@ -58,8 +58,8 @@ const SidebarFooter = () => {
               primary={currentUser?.name}
               secondary={currentUser?.username}
             />
-            <IconButton>
-              <MoreHorizIcon onClick={() => startModalPath('/logout')} />
+            <IconButton onClick={() => startModalPath('/logout')}>
+              <MoreHorizIcon />
             </IconButton>
           </>
         )}

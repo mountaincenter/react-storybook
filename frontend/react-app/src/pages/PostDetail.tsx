@@ -6,14 +6,20 @@ import CommonHeader from '../components/Header/CommonHeader';
 
 const PostDetail = () => {
   const { publicId } = useParams<{ publicId: string }>();
-  const { post } = usePost(publicId ? publicId : '');
+  const { post } = usePost(publicId || '');
+
+  const displayPost = publicId ? post : undefined;
   return (
     <>
-      {post && (
+      {displayPost && (
         <>
           <CommonHeader title={'ポストする'} />
-          <PostContent post={post}>
-            <PostComposer text={'返信をポスト'} />
+          <PostContent post={displayPost}>
+            <PostComposer
+              text={'返信をポスト'}
+              postType="reply"
+              post={displayPost}
+            />
           </PostContent>
         </>
       )}

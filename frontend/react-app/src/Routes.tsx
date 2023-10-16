@@ -16,6 +16,7 @@ import ModalTop from './pages/ModalTop';
 import Modal from './components/modal';
 import LoginDialog from './components/Dialog/LoginDialog';
 import LogoutDialog from './components/Dialog/LogoutDialog';
+import PostDialog from './components/Dialog/PostDialog';
 import SignUpDialog from './components/Dialog/SignUpDialog';
 import UserEditDialog from './components/Dialog/UserEditDialog';
 import ImageDialog from './components/Dialog/ImageDialog';
@@ -61,6 +62,7 @@ const CommonRoutes = () => {
       { path: 'login', element: <LoginDialog /> },
       { path: 'signup', element: <SignUpDialog /> },
       { path: 'logout', element: <LogoutDialog /> },
+      { path: 'post/:type/:associatedId', element: <PostDialog /> },
       { path: ':username/edit', element: <UserEditDialog /> },
       { path: ':username/:type', element: <ImageDialog /> },
     ];

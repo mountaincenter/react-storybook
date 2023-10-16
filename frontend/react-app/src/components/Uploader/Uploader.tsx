@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Button from '../Button/Button';
 import BaseIcon from '../Icon/BaseIcon/BaseIcon';
 import { IconButton } from '@mui/material';
@@ -9,12 +9,14 @@ interface ImageUploaderProps {
   onUpload: (images: File[]) => void;
   allowMultiple?: boolean;
   label?: string;
+  resetKey?: number;
 }
 
 const Uploader: React.FC<ImageUploaderProps> = ({
   onUpload,
   allowMultiple,
   label,
+  resetKey = 0,
 }) => {
   const [previewImages, setPreviewImages] = useState<string[]>([]);
 
@@ -35,6 +37,10 @@ const Uploader: React.FC<ImageUploaderProps> = ({
       prevImages.filter((_, index) => index !== indexexToRemove)
     );
   };
+
+  useEffect(() => {
+    setPreviewImages([]);
+  }, [resetKey]);
 
   return (
     <div>

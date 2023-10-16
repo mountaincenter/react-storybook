@@ -13,7 +13,7 @@ const InteractionList = ({ publicId, showCountType }: InteractionListProps) => {
     <>
       <Box display="flex">
         <Like publicId={publicId} showCountType={showCountType} />
-        <Repost />
+        <Repost publicId={publicId} showCountType={showCountType} />
       </Box>
     </>
   );

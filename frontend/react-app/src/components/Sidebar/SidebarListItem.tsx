@@ -26,18 +26,16 @@ const SidebarListItem = () => {
         }
 
         return (
-          <>
-            <SidebarOption
-              key={key}
-              link={
-                key === 'Profile' && currentUser
-                  ? `/${currentUser.username}`
-                  : `/${key.toLowerCase()}`
-              }
-              text={icons.label}
-              {...icons}
-            />
-          </>
+          <SidebarOption
+            key={key}
+            link={
+              key === 'Profile' && currentUser
+                ? `/${currentUser.username}`
+                : `/${key.toLowerCase()}`
+            }
+            text={icons.label}
+            {...icons}
+          />
         );
       })}
     </>

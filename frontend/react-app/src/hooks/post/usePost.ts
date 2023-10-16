@@ -8,6 +8,7 @@ export const usePost = (
   const { data, isLoading, error } = useQuery<ApiResponse<Post>, Error>({
     queryKey: ['post', publicId],
     queryFn: () => getPost(publicId),
+    enabled: !!publicId,
   });
 
   const post = data?.data;

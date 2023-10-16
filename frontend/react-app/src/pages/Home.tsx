@@ -1,17 +1,18 @@
 import { Typography, Button, Grid, Box } from '@mui/material';
 import { Link } from 'react-router-dom';
 
+import { usePosts } from '../hooks/post/usePosts';
+
 import { useCurrentUser } from '../hooks/currentUser/useCurrentUser';
-
 import Footer from '../components/Footer/Footer';
-
 import PostList from '../components/Post/PostList';
-
+import PostComposer from '../components/Post/PostComposer';
 import HomeHeader from '../components/Header/HomeHeader';
 
 const Home = () => {
   const { currentUser } = useCurrentUser();
-  console.log(currentUser);
+  const { posts } = usePosts();
+  // console.log(currentUser);
   return (
     <>
       <Grid container spacing={0}>
@@ -21,9 +22,10 @@ const Home = () => {
           </Grid>
           <Grid item>
             <Box>
-              {currentUser?.name ? (
+              {currentUser?.name && posts ? (
                 <>
-                  <PostList />
+                  <PostComposer />
+                  <PostList posts={posts} />
                 </>
               ) : (
                 <>

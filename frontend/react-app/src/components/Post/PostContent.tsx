@@ -1,60 +1,100 @@
-import { Grid, Card } from '@mui/material';
+import { useState } from 'react';
+import { Grid, Card, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
-import { type Post } from '../../interfaces';
-import Avatar from '../Avatar/Avatar';
+import { type Post, type User } from '../../interfaces';
 import QuotePost from './QuotePost';
 import PostMeta from './PostMeta';
 import PostBody from './PostBody';
 import ReplyTo from './ReplyTo';
 import PostImages from './PostImages';
+import UserPopover from '../Popover/UserPopover';
 import InteractionList from '../Interaction/InteractionList';
+
+import PostComposerWrapper from '../Wrappers/PostComposerWrapper';
 
 interface PostContentProps {
   post: Post;
+  user?: User;
   children?: React.ReactNode;
 }
 
-const PostContent = ({ post, children }: PostContentProps) => {
-  console.log(post);
+const PostContent = ({ post, user, children }: PostContentProps) => {
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+
+  const handleMouseEnter = (e: React.MouseEvent<HTMLDivElement>) => {
+    setAnchorEl(e.currentTarget);
+  };
+
+  const handleMouseLeave = () => {
+    setAnchorEl(null);
+  };
+
+  const postUser = post.user || user;
+
+  if (post.postType === 'repost') {
+    return null;
+  }
+
   return (
     <>
-      <Grid container>
-        <Grid item xs="auto">
-          <Avatar
-            name={post.user.name}
-            avatar={post.user.avatar}
-            customComponent="Link"
-            to={post.user.username}
-          />
-        </Grid>
-        <Grid
-          item
-          xs="auto"
-          sx={{ pl: 1, display: 'flex', flexDirection: 'column' }}
+      <Grid container direction="column">
+        {post.reposts && post.reposts.length > 0 && (
+          <Grid item xs="auto">
+            <span
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
+            >
+              <Link
+                to={`/${post.reposts[0]}`}
+                style={{
+                  textDecoration: 'none',
+                  color: 'inherit',
+                }}
+              >
+                <Typography variant="caption" component="span">
+                  {post.reposts[0].user.name}さんがリポストしました
+                </Typography>
+              </Link>
+              <UserPopover
+                anchorEl={anchorEl}
+                user={post.reposts[0].user}
+              ></UserPopover>
+            </span>
+          </Grid>
+        )}
+        <PostComposerWrapper
+          avatar={{ name: postUser.name, url: postUser.avatar.url }}
+          to={`/${postUser.username}`}
         >
-          <Link
-            to={`/${post.user.username}/status/${post.publicId}`}
-            style={{ textDecoration: 'none', color: 'inherit' }}
-          >
-            <PostMeta user={post.user} createdAt={post.createdAt} />
-            <ReplyTo parent={post.parent && post.parent.user.username} />
-            <PostBody content={post.content} />
-            <PostImages images={post.images} />
-            {post.original && (
-              <Card>
-                <QuotePost post={post.original} />
-              </Card>
-            )}
-          </Link>
-          <InteractionList publicId={post.publicId} />
           <Grid
             item
             xs="auto"
-            sx={{ display: 'flex', flexDirection: 'column' }}
+            sx={{ pl: 1, display: 'flex', flexDirection: 'column' }}
           >
-            {children}
+            <Link
+              to={`/${postUser.username}/status/${post.publicId}`}
+              style={{ textDecoration: 'none', color: 'inherit' }}
+            >
+              <PostMeta user={postUser} createdAt={post.createdAt} />
+              <ReplyTo parent={post.parent && post.parent.user.username} />
+              <PostBody content={post.content} />
+              <PostImages images={post.images} />
+              {post.original && (
+                <Card>
+                  <QuotePost post={post.original} />
+                </Card>
+              )}
+            </Link>
+            <InteractionList publicId={post.publicId} />
+            <Grid
+              item
+              xs="auto"
+              sx={{ display: 'flex', flexDirection: 'column' }}
+            >
+              {children}
+            </Grid>
           </Grid>
-        </Grid>
+        </PostComposerWrapper>
       </Grid>
     </>
   );

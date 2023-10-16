@@ -1,17 +1,18 @@
 import { Typography } from '@mui/material';
-import { Link } from 'react-router-dom'; // <- Corrected this import
+import { useNavigate } from 'react-router-dom';
 
 interface ReplyToProps {
-  parent: string;
+  parent: string | null;
 }
 
 const ReplyTo = ({ parent }: ReplyToProps) => {
+  const navigate = useNavigate();
   return (
     <>
       {parent && (
         <Typography variant="body2" color="textSecondary" component="span">
           返信先
-          <Link to={`/${parent}`}>@{parent}</Link>
+          <span onClick={() => navigate(`/${parent}`)}>@{parent}</span>
           さん
         </Typography>
       )}

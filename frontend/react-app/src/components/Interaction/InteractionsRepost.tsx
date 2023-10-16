@@ -3,7 +3,7 @@ import TooltipWithIconButton from '../Tooltip/TooltipWithIconButton';
 
 interface InteractionsRepostProps {
   isActive: boolean;
-  onClick: () => void;
+  onClick: (e: React.MouseEvent<HTMLButtonElement>) => void | (() => void);
 }
 
 const InteractionsRepost = ({ isActive, onClick }: InteractionsRepostProps) => {

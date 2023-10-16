@@ -34,7 +34,7 @@ const LogoutDialog = () => {
   };
   return (
     <>
-      <Grid item mobile={12} sx={{ mt: 3 }}>
+      <Grid item xs={12} sx={{ mt: 3 }}>
         <CloseableDialogTitle />
         <Card sx={{ padding: 2, maxWidth: '400px', boxSadow: 'none' }}>
           <CardHeader

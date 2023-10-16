@@ -1,21 +1,27 @@
 import PostContent from './PostContent';
 import PostListWrapper from '../Wrappers/PostListWrapper';
 
-import { usePosts } from '../../hooks/post/usePosts';
-import { type Post } from 'interfaces';
+import { type Post, type User } from 'interfaces';
 
-const PostList = () => {
-  const { posts } = usePosts();
-  // console.log(posts);
+interface PostListProps {
+  posts: Post[];
+  user?: User;
+}
+
+const PostList = ({ posts, user }: PostListProps) => {
+  console.log(posts);
   return (
     <>
       {posts &&
         posts.map((post: Post) => {
+          const key = `${post?.id}-${post.postType}`;
           const targetPost = post.postType === 'repost' ? post.original : post;
           return (
-            <PostListWrapper key={targetPost.id}>
-              <PostContent post={targetPost}></PostContent>
-            </PostListWrapper>
+            targetPost && (
+              <PostListWrapper key={key}>
+                <PostContent post={targetPost} user={user} />
+              </PostListWrapper>
+            )
           );
         })}
     </>

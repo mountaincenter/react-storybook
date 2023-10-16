@@ -22,7 +22,9 @@ interface ButtonProps extends ButtonBaseProps {
   hoverColor?: 'primary' | 'secondary' | 'error';
   onMouseEnter?: () => void;
   onMouseLeave?: () => void;
-  onClick?: () => void;
+  onClick?:
+    | ((e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void)
+    | (() => void);
   fullWidth?: boolean;
   sx?: SxProps<Theme>;
   component?: React.ElementType;
@@ -59,7 +61,6 @@ const Button = ({
       onClick={onClick}
       disabled={isLoading || rest.disabled}
       component={component}
-      overrideDefaultStyles={overrideDefaultStyles}
       {...rest}
     >
       {isLoading ? (

@@ -4,7 +4,7 @@ import Tooltip from './Tooltip';
 
 interface TooltipWithIconButtonProps {
   title: '返信' | 'リツイート' | 'いいね' | 'ブックマーク';
-  onClick: () => void;
+  onClick: (e: React.MouseEvent<HTMLButtonElement>) => void | (() => void);
   isActive: boolean;
   color: string;
   ActiveIcon: React.ElementType;

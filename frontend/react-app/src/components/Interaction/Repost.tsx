@@ -19,9 +19,9 @@ const Repost = ({ publicId, showCountType }: RepostProps) => {
   }
   return (
     <div>
-      {showCountType !== 'onlyIcon' && (
+      {showCountType !== 'onlyIcon' && post && (
         <RepostButtonWithCount
-          publicId={publicId}
+          publicId={post.publicId}
           isActive={isReposted}
           toggleRepost={() => setIsReposted(!isReposted)}
         />

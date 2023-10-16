@@ -98,20 +98,21 @@ export interface Message {
   createdAt: Date;
 }
 
+type PostType = 'original' | 'repost' | 'reply' | 'quote_repost';
 export interface Post {
   id: number;
-  content: string;
+  content: string | null;
   images: Image[];
   user: User;
   likes: likesProps[];
   liked: boolean;
-  postType: string;
+  postType: PostType;
   reposted: boolean;
   bookmarked: boolean;
   bookmarksCount: number;
   publicId: string;
-  parent: Post;
-  original: Post;
+  parent: Post | null;
+  original: Post | null;
   replies: Post[];
   reposts: Post[];
   createdAt: Date;
@@ -122,6 +123,8 @@ export interface PostData {
   content: string;
   images: File[];
   parentId?: number;
+  originalId?: number;
+  postType?: PostType;
 }
 export interface PostFormData extends FormData {
   append: (
