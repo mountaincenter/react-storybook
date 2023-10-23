@@ -32,3 +32,11 @@ original text="いまどうしてる？"
 reply && post.user.id === currentUser text="別のポストを追加"
 reply && post.user.id !== currentUser text="返信をポスト"
 quote_repost text="コメン追加"
+
+| コンポーネント名       |   postType   |     post      |
+| ---------------------- | :----------: | :-----------: |
+| PostComposer.tsx       |   original   |   undefined   |
+| 同上                   |    reply     |  post.parent  |
+| DialogPostComposer.tsx |   original   |   undefined   |
+| 同上                   |    reply     |  post.parent  |
+| 同上                   | quote_repost | post.original |

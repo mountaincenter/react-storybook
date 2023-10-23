@@ -4,8 +4,8 @@ import { useCreatePost } from './useCreatePost';
 import { useCurrentUser } from '../currentUser/useCurrentUser';
 import { type Post } from '../../interfaces';
 
-import { usePost } from './usePost';
-
+import { useRecoilValue } from 'recoil';
+import { postByIdSelector } from '../../selectors/postByIdSelector';
 interface usePostComposerLogicProps {
   postType: 'original' | 'repost' | 'reply' | 'quote_repost';
   post?: Post;
@@ -14,19 +14,17 @@ interface usePostComposerLogicProps {
 
 export const usePostComposerLogic = ({
   postType,
-  // post,
   associatedId,
 }: usePostComposerLogicProps) => {
   const navigate = useNavigate();
   const { currentUser } = useCurrentUser();
-  const { post } = usePost(associatedId as string);
+  const post = useRecoilValue(postByIdSelector(associatedId as string));
   const { mutate } = useCreatePost().postMutation;
   const [content, setContent] = useState('');
   const [selectedImages, setSelectedImages] = useState<File[]>([]);
   const [resetUploaderKey, setResetUploaderKey] = useState<number>(0);
 
-  console.log('associatedId', associatedId);
-  console.log('associatedIdType', typeof associatedId);
+  // console.log('usePostComposerLogic', post);
 
   const handlePost = () => {
     const formData = new FormData();
@@ -39,7 +37,8 @@ export const usePostComposerLogic = ({
     }
     if (post) {
       const idName = postType === 'reply' ? 'parentId' : 'originalId';
-      formData.append(idName, post.id.toString());
+      const id = post.id.toString();
+      formData.append(idName, id);
     }
 
     mutate(formData);

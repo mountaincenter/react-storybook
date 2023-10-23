@@ -7,9 +7,10 @@ module PostServices
   # post service
   #
   class PostService
-    def initialize(user, post_params)
+    def initialize(user, post_params, post_type = nil)
       @user = user
       @post_params = post_params
+      @post_type = post_type
     end
 
     def create_post

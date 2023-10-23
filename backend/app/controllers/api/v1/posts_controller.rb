@@ -44,6 +44,7 @@ module Api
 
       def select_service
         service_args = [current_api_v1_user, post_params, post_based_on_type]
+        service_args << post_based_on_type unless params[:post_type] == "original"
         service_class = service_mapping[params[:post_type]] || PostServices::PostService
         service_class.new(*service_args)
       end
@@ -58,6 +59,8 @@ module Api
 
       def post_based_on_type
         case params[:post_type]
+        when "original"
+          nil
         when "reply"
           params[:parent_id]
         when "repost", "quote_repost"

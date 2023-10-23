@@ -6,13 +6,19 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 
 import { useMobileView } from '../../hooks/useMobileView';
 
+import useModalRoute from '../../hooks/useModalRoute';
+
 interface TweetButtonProps {
   text: string;
-  onClick: () => void;
 }
 
-const TweetButton = ({ text, onClick }: TweetButtonProps) => {
+const TweetButton = ({ text }: TweetButtonProps) => {
+  const { startModalPath } = useModalRoute();
   const { isDesktop, isTablet } = useMobileView();
+
+  const handlePost = () => {
+    startModalPath(`/post/original`);
+  };
 
   return (
     <>
@@ -22,7 +28,7 @@ const TweetButton = ({ text, onClick }: TweetButtonProps) => {
           size="large"
           fullWidth
           sx={{ borderRadius: '9999px', mt: 2 }}
-          onClick={onClick}
+          onClick={handlePost}
         >
           <Typography>{text}</Typography>
         </Button>

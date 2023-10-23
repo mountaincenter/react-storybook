@@ -3,7 +3,9 @@ import { client } from './client';
 import { getAuth } from './auth';
 
 export const getPosts = async (): Promise<AxiosResponse> => {
-  return await client.get('/posts', getAuth());
+  const response = await client.get('/posts', getAuth());
+  // console.log('API response: ', response);
+  return response;
 };
 
 export const getPost = async (publicId: string): Promise<AxiosResponse> => {

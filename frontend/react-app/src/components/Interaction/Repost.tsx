@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import { usePost } from '../../hooks/post/usePost';
 import RepostButtonWithCount from './RepostButtonWithCount';
+import { useRecoilValue } from 'recoil';
+import { postByIdSelector } from '../../selectors/postByIdSelector';
 
 interface RepostProps {
   publicId: string;
@@ -8,7 +9,7 @@ interface RepostProps {
 }
 
 const Repost = ({ publicId, showCountType }: RepostProps) => {
-  const { post } = usePost(publicId);
+  const post = useRecoilValue(postByIdSelector(publicId));
   const [isReposted, setIsReposted] = useState<boolean>(
     post?.reposted ? post.reposted : false
   );

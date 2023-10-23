@@ -1,5 +1,7 @@
-import { usePost } from '../../hooks/post/usePost';
 import InteractionsLike from './InteractionsLike';
+
+import { useRecoilValue } from 'recoil';
+import { postByIdSelector } from '../../selectors/postByIdSelector';
 
 import CountText from './CountText';
 
@@ -13,7 +15,7 @@ const LikeButtonWithCount = ({
   isActive,
   toggleLike,
 }: LikeButtonWithCountProps) => {
-  const { post } = usePost(publicId);
+  const post = useRecoilValue(postByIdSelector(publicId));
   const likesCount = post?.likes.length || 0;
 
   return (

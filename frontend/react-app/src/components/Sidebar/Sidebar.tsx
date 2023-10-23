@@ -22,10 +22,7 @@ const Sidebar = () => {
     <Box sx={styles.box}>
       <List sx={styles.list}>
         <SidebarListItem />
-        <TweetButton
-          text="ツイートする"
-          onClick={() => console.log('ツイートする')}
-        />
+        <TweetButton text="ツイートする" />
       </List>
       <SidebarFooter />
     </Box>

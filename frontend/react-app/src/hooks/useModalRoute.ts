@@ -14,6 +14,7 @@ const useModalRoute = () => {
   const [backgroundLocation, setBackgroundLocation] = useRecoilState(
     BackgroundLocationState
   );
+  // console.log('backgroundLocation', backgroundLocation);
 
   const startModalPath = (to: string, state?: any) => {
     setBackgroundLocation({ background: location });

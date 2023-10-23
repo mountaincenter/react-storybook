@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import { usePost } from '../../hooks/post/usePost';
 import InteractionsRepost from './InteractionsRepost';
 import CountText from './CountText';
 import RepostPopover from '../Popover/RepostPopover';
-
+import { useRecoilValue } from 'recoil';
+import { postByIdSelector } from '../../selectors/postByIdSelector';
 interface RepostProps {
   publicId: string;
   isActive: boolean;
@@ -11,7 +11,7 @@ interface RepostProps {
 }
 
 const RepostButtonWithCount = ({ publicId, isActive }: RepostProps) => {
-  const { post } = usePost(publicId);
+  const post = useRecoilValue(postByIdSelector(publicId));
   const repostCount = post?.reposts.length || 0;
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
 

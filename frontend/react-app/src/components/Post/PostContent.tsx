@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Grid, Card, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
-import { type Post, type User } from '../../interfaces';
+import { type User } from '../../interfaces';
 import QuotePost from './QuotePost';
 import PostMeta from './PostMeta';
 import PostBody from './PostBody';
@@ -9,16 +9,18 @@ import ReplyTo from './ReplyTo';
 import PostImages from './PostImages';
 import UserPopover from '../Popover/UserPopover';
 import InteractionList from '../Interaction/InteractionList';
-
 import PostComposerWrapper from '../Wrappers/PostComposerWrapper';
+import { useRecoilValue } from 'recoil';
+import { postByIdSelector } from '../../selectors/postByIdSelector';
 
 interface PostContentProps {
-  post: Post;
+  publicId: string;
   user?: User;
   children?: React.ReactNode;
 }
 
-const PostContent = ({ post, user, children }: PostContentProps) => {
+const PostContent = ({ publicId, user, children }: PostContentProps) => {
+  const post = useRecoilValue(postByIdSelector(publicId));
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
   const handleMouseEnter = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -29,11 +31,17 @@ const PostContent = ({ post, user, children }: PostContentProps) => {
     setAnchorEl(null);
   };
 
+  if (!post) {
+    return null;
+  }
+
   const postUser = post.user || user;
 
   if (post.postType === 'repost') {
     return null;
   }
+
+  // console.log(post);
 
   return (
     <>
@@ -55,10 +63,7 @@ const PostContent = ({ post, user, children }: PostContentProps) => {
                   {post.reposts[0].user.name}さんがリポストしました
                 </Typography>
               </Link>
-              <UserPopover
-                anchorEl={anchorEl}
-                user={post.reposts[0].user}
-              ></UserPopover>
+              <UserPopover anchorEl={anchorEl} user={post.reposts[0].user} />
             </span>
           </Grid>
         )}

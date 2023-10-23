@@ -3,7 +3,8 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import { RecoilRoot } from 'recoil';
 import { BrowserRouter } from 'react-router-dom';
 
-import CommonRoutes from './Routes';
+// import CommonRoutes from './routes/CommonRoutes';
+import CommonRoutes from './routes/Routes';
 const queryClient = new QueryClient();
 
 function App() {

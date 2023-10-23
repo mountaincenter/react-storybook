@@ -14,7 +14,7 @@ const RepostPopover = ({
   onClose,
   anchorEl,
 }: RepostDialogProps) => {
-  console.log(originalId);
+  // console.log(originalId);
   const { startModalPath } = useModalRoute();
   const { postMutation } = useCreatePost();
 

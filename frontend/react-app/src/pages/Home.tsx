@@ -1,4 +1,4 @@
-import { Typography, Button, Grid, Box } from '@mui/material';
+import { Typography, Button, Grid, Box, CircularProgress } from '@mui/material';
 import { Link } from 'react-router-dom';
 
 import { usePosts } from '../hooks/post/usePosts';
@@ -11,8 +11,21 @@ import HomeHeader from '../components/Header/HomeHeader';
 
 const Home = () => {
   const { currentUser } = useCurrentUser();
-  const { posts } = usePosts();
-  // console.log(currentUser);
+  const { posts, isLoading } = usePosts();
+  // console.log('Home', posts);
+
+  if (isLoading) {
+    return (
+      <Box
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        height="100vh"
+      >
+        <CircularProgress />
+      </Box>
+    );
+  }
   return (
     <>
       <Grid container spacing={0}>
@@ -25,7 +38,7 @@ const Home = () => {
               {currentUser?.name && posts ? (
                 <>
                   <PostComposer />
-                  <PostList posts={posts} />
+                  <PostList />
                 </>
               ) : (
                 <>

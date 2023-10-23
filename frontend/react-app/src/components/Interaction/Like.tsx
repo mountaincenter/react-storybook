@@ -1,14 +1,14 @@
-import { usePost } from '../../hooks/post/usePost';
 import useLikeMutation from '../../hooks/post/useLikeMutation';
 import LikeButtonWithCount from './LikeButtonWithCount';
-
+import { useRecoilValue } from 'recoil';
+import { postByIdSelector } from '../../selectors/postByIdSelector';
 interface LikeProps {
   publicId: string;
   showCountType?: 'onlyCount' | 'onlyIcon';
 }
 
 const Like = ({ publicId, showCountType }: LikeProps) => {
-  const { post } = usePost(publicId);
+  const post = useRecoilValue(postByIdSelector(publicId));
   const { isLike, toggleLike } = useLikeMutation(
     publicId,
     post?.liked || false
