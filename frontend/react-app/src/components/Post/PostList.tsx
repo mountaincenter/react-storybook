@@ -9,25 +9,27 @@ import { type Post, type User } from 'interfaces';
 import { postsByUsernameSelector } from '../../selectors/postsByUsernameSelector';
 
 interface PostListProps {
+  posts?: Post[];
   user?: User;
 }
 
-const PostList = ({ user }: PostListProps) => {
-  const Posts = useRecoilValue(postsAtom);
+const PostList = ({ posts, user }: PostListProps) => {
+  const allPostsFromAtom = useRecoilValue(postsAtom);
   const userPosts = useRecoilValue(
     postsByUsernameSelector(user?.username || '')
   );
-  const posts = user ? userPosts : Posts;
+
+  const displayPosts = posts || (user ? userPosts : allPostsFromAtom);
   // console.log('Posts', Posts);
   // console.log('PostListUser', user);
   // console.log('userPosts', userPosts);
   // console.log('PostList', posts);
-  if (!posts) {
+  if (!displayPosts) {
     return <Typography>投稿がありません</Typography>;
   }
   return (
     <>
-      {posts.map((post: Post) => {
+      {displayPosts.map((post: Post) => {
         const key = `${post?.id}-${post.postType}`;
         const targetPost = post.postType === 'repost' ? post.original : post;
         return (

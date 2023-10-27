@@ -19,8 +19,15 @@ const TooltipWithIconButton: React.FC<TooltipWithIconButtonProps> = ({
   ActiveIcon,
   InactiveIcon,
 }: TooltipWithIconButtonProps) => {
+  const getTooltipTitle = () => {
+    if (isActive) {
+      return `${title}を取り消す`;
+    }
+    return title;
+  };
+
   return (
-    <Tooltip title={title}>
+    <Tooltip title={getTooltipTitle()}>
       <IconButton
         sx={{
           color: isActive ? color : 'textSecondary',

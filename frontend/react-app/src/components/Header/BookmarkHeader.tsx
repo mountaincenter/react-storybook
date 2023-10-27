@@ -1,20 +1,19 @@
 import Header from './Header';
 import { Grid, Box, Typography, IconButton } from '@mui/material';
-import { useUser } from '../../hooks/user/useUser';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useCurrentUser } from '../../hooks/currentUser/useCurrentUser';
 import ArrowBackIcons from '@mui/icons-material/ArrowBack';
+import { useNavigate } from 'react-router-dom';
 import Tooltip from '../Tooltip/Tooltip';
 
-const UserHeader = () => {
-  const { username } = useParams();
-  const { user } = useUser(username ? username : '');
+const BookmarkHeader = () => {
+  const { currentUser } = useCurrentUser();
   const navigate = useNavigate();
 
   const goBack = () => {
     navigate(-1);
   };
 
-  if (!user) return null;
+  if (!currentUser) return null;
 
   return (
     <Header>
@@ -27,9 +26,9 @@ const UserHeader = () => {
               </IconButton>
             </Tooltip>
             <Box sx={{ ml: 2 }}>
-              <Typography variant="h6">{user?.name}</Typography>
+              <Typography variant="h6">ブックマーク</Typography>
               <Typography variant="body2" sx={{ color: 'gray' }}>
-                {user.username}
+                @{currentUser.username}
               </Typography>
             </Box>
           </Box>
@@ -39,4 +38,4 @@ const UserHeader = () => {
   );
 };
 
-export default UserHeader;
+export default BookmarkHeader;
