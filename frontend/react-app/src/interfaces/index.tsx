@@ -105,6 +105,7 @@ export interface Post {
   images: Image[];
   user: User;
   likes: likesProps[];
+  likesCount: number;
   liked: boolean;
   postType: PostType;
   reposted: boolean;
