@@ -5,7 +5,7 @@
 #
 class Like < ApplicationRecord
   belongs_to :user
-  belongs_to :post
+  belongs_to :post, counter_cache: true
   has_many :notifications, as: :notifiable, dependent: :destroy
   after_create :create_notification
 

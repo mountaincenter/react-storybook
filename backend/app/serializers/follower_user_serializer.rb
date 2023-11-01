@@ -4,7 +4,7 @@
 # follower user serializer
 #
 class FollowerUserSerializer < ActiveModel::Serializer
-  attributes :id, :name, :username, :profile, :avatar, :followed?, :following?
+  attributes :id, :name, :username, :profile, :avatar, :followed?, :following?, :followers_count, :following_count
 
   def followed?
     scope&.following?(object)
@@ -12,5 +12,13 @@ class FollowerUserSerializer < ActiveModel::Serializer
 
   def following?
     object.following.include?(scope)
+  end
+
+  def followers_count
+    object.followers_count
+  end
+
+  def following_count
+    object.following_count
   end
 end

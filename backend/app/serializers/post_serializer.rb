@@ -4,7 +4,8 @@
 # post serializer
 #
 class PostSerializer < ActiveModel::Serializer
-  attributes :id, :content, :images, :post_type, :reply_count, :liked?, :likes_count, :reposted?, :repost_count, :quote_repost_count, :total_reposts_count, :bookmarked?, :bookmarks_count, :public_id, :created_at, :updated_at
+  attributes :id, :content, :images, :post_type, :replies_count, :liked?, :likes_count, :reposted?, :reposts_count, :quote_reposts_count, :total_reposts_count,
+             :bookmarked?, :bookmarks_count, :public_id, :created_at, :updated_at
   belongs_to :user
   belongs_to :parent, class_name: "Post", serializer: ParentSerializer
   belongs_to :original, class_name: "Post", serializer: OriginalSerializer
@@ -12,12 +13,17 @@ class PostSerializer < ActiveModel::Serializer
   has_many :replies, serializer: ReplySerializer
   has_many :reposts, serializer: RepostSerializer
 
-  def reply_count
+  def reposts
+    object.reposts.where(post_type: "repost")
+  end
+
+  def replies_count
     object.replies.count
   end
 
   def liked?
     return unless scope.present?
+
     object.likes.where(user_id: scope.id).exists?
   end
 
@@ -27,6 +33,7 @@ class PostSerializer < ActiveModel::Serializer
 
   def reposted?
     return unless scope.present?
+
     object.reposts.where(user_id: scope.id, post_type: "repost").exists?
   end
 
@@ -39,7 +46,7 @@ class PostSerializer < ActiveModel::Serializer
   end
 
   def total_reposts_count
-    reposts_count + quote_reposts_count
+    object.total_reposts_count
   end
 
   def bookmarked?

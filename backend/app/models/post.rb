@@ -29,7 +29,15 @@ class Post < ApplicationRecord
 
   before_create :set_public_id
   before_create :set_images_filename
+
   after_save :create_hashtags
+
+  after_create :increment_counts
+  after_destroy :decrement_counts
+
+  def total_reposts_count
+    reposts_count + quote_reposts_count
+  end
 
   private
 
@@ -62,6 +70,32 @@ class Post < ApplicationRecord
     return unless images.count > 4
 
     errors.add(:images, "画像は4枚までです")
+  end
+
+  def increment_counts
+    change_counts(:increment)
+  end
+
+  def decrement_counts
+    change_counts(:decrement)
+  end
+
+  def change_counts(method)
+    column = select_count_column
+    return unless column
+
+    original.class.transaction do
+      original.send("#{method}!", column)
+      total_reposts_count if repost_or_quote_repost?
+    end
+  end
+
+  def select_count_column
+    {
+      "repost" => :reposts_count,
+      "quote_repost" => :quote_reposts_count,
+      "reply" => :replies_count
+    }[post_type]
   end
 
   def repost_or_quote_repost?

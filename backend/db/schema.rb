@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_24_160127) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_31_044644) do
   create_table "bookmarks", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "post_id", null: false
@@ -88,6 +88,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_24_160127) do
     t.integer "original_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "likes_count", default: 0
+    t.integer "reposts_count", default: 0
+    t.integer "quote_reposts_count", default: 0
+    t.integer "bookmarks_count", default: 0
+    t.integer "replies_count", default: 0
     t.index ["original_id"], name: "index_posts_on_original_id"
     t.index ["parent_id"], name: "fk_rails_3eb11ec3aa"
     t.index ["public_id"], name: "index_posts_on_public_id", unique: true
@@ -117,6 +122,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_24_160127) do
     t.text "tokens"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "followers_count", default: 0
+    t.integer "following_count", default: 0
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["public_id"], name: "index_users_on_public_id", unique: true
