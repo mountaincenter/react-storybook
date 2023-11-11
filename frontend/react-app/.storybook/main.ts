@@ -15,6 +15,7 @@ const config: StorybookConfig = {
     'msw-storybook-addon',
     '@storybook/addon-a11y',
     '@storybook/addon-coverage',
+    'storybook-addon-recoil-flow',
     {
       name: '@storybook/addon-styling',
       options: {},

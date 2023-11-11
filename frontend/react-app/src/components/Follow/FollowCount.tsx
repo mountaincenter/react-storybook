@@ -1,6 +1,4 @@
 import { Grid, Typography } from '@mui/material';
-import { useFollowersCount } from '../../hooks/follow/useFollowersCount';
-import { useFollowingCount } from '../../hooks/follow/useFollowingCount';
 import { useUser } from '../../hooks/user/useUser';
 
 import { Link, useParams } from 'react-router-dom';
@@ -8,9 +6,8 @@ import { Link, useParams } from 'react-router-dom';
 const FollowCount = () => {
   const { username } = useParams();
   const { user } = useUser(username ? username : '');
-  const followersCount = useFollowersCount(username ? username : '');
-  const followingCount = useFollowingCount(username ? username : '');
 
+  if (!user) return <></>;
   return (
     <Grid container>
       <Grid item xs={2}>
@@ -24,7 +21,7 @@ const FollowCount = () => {
             '&:hover': { textDecoration: 'underline' },
           }}
         >
-          {followersCount}フォロワー
+          {user.followersCount}フォロワー
         </Typography>
       </Grid>
       <Grid item xs={2}>
@@ -38,7 +35,7 @@ const FollowCount = () => {
             '&:hover': { textDecoration: 'underline' },
           }}
         >
-          {followingCount}フォロー中
+          {user.followingCount}フォロー中
         </Typography>
       </Grid>
     </Grid>

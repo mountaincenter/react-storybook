@@ -1,4 +1,4 @@
-import { useState } from 'react';
+// import { useState } from 'react';
 import { Grid, Card, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { type User } from '../../interfaces';
@@ -7,7 +7,7 @@ import PostMeta from './PostMeta';
 import PostBody from './PostBody';
 import ReplyTo from './ReplyTo';
 import PostImages from './PostImages';
-import UserPopover from '../Popover/UserPopover';
+// import UserPopover from '../Popover/UserPopover';
 import InteractionList from '../Interaction/InteractionList';
 import PostComposerWrapper from '../Wrappers/PostComposerWrapper';
 import { useRecoilValue } from 'recoil';
@@ -21,15 +21,16 @@ interface PostContentProps {
 
 const PostContent = ({ publicId, user, children }: PostContentProps) => {
   const post = useRecoilValue(postByIdSelector(publicId));
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  // const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
-  const handleMouseEnter = (e: React.MouseEvent<HTMLDivElement>) => {
-    setAnchorEl(e.currentTarget);
-  };
+  // const handleMouseEnter = (e: React.MouseEvent<HTMLDivElement>) => {
+  //   setAnchorEl(e.currentTarget);
 
-  const handleMouseLeave = () => {
-    setAnchorEl(null);
-  };
+  // };
+
+  // const handleMouseLeave = () => {
+  //   setAnchorEl(null);
+  // };
 
   if (!post) {
     return null;
@@ -49,8 +50,8 @@ const PostContent = ({ publicId, user, children }: PostContentProps) => {
         {post.reposts && post.reposts.length > 0 && (
           <Grid item xs="auto">
             <span
-              onMouseEnter={handleMouseEnter}
-              onMouseLeave={handleMouseLeave}
+            // onMouseEnter={handleMouseEnter}
+            // onMouseLeave={handleMouseLeave}
             >
               <Link
                 to={`/${post.reposts[0]}`}
@@ -63,7 +64,7 @@ const PostContent = ({ publicId, user, children }: PostContentProps) => {
                   {post.reposts[0].user.name}さんがリポストしました
                 </Typography>
               </Link>
-              <UserPopover anchorEl={anchorEl} user={post.reposts[0].user} />
+              {/* <UserPopover anchorEl={anchorEl} user={post.reposts[0].user} /> */}
             </span>
           </Grid>
         )}

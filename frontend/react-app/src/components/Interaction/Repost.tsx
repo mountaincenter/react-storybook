@@ -1,33 +1,57 @@
-import { useState } from 'react';
-import RepostButtonWithCount from './RepostButtonWithCount';
+import React, { useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import { postByIdSelector } from '../../selectors/postByIdSelector';
+import RepostPopover from '../Popover/RepostPopover';
+import InteractionButton from '../Button/InteractionButton';
+import RepeatIcon from '@mui/icons-material/Repeat';
+import RepeatOutlinedIcon from '@mui/icons-material/RepeatOutlined';
 
 interface RepostProps {
   publicId: string;
+  isActive: boolean;
   showCountType?: 'onlyIcon' | 'onlyCount';
 }
 
-const Repost = ({ publicId, showCountType }: RepostProps) => {
+const Repost: React.FC<RepostProps> = ({
+  publicId,
+  isActive,
+  showCountType,
+}) => {
   const post = useRecoilValue(postByIdSelector(publicId));
-  const [isReposted, setIsReposted] = useState<boolean>(
-    post?.reposted ? post.reposted : false
-  );
-  const totalRepostCount = post?.reposts.length || 0;
+  const repostCount = post?.reposts.length || 0;
+  const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
 
-  if (showCountType === 'onlyIcon' && totalRepostCount === 0) {
+  const showRepostPopover = (e: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(e.currentTarget);
+  };
+
+  const closeRepostPopover = () => {
+    setAnchorEl(null);
+  };
+
+  if (!post) return null;
+
+  if (showCountType === 'onlyIcon' && repostCount === 0) {
     return null;
   }
+
   return (
-    <div>
-      {showCountType !== 'onlyIcon' && post && (
-        <RepostButtonWithCount
-          publicId={post.publicId}
-          isActive={isReposted}
-          toggleRepost={() => setIsReposted(!isReposted)}
-        />
-      )}
-    </div>
+    <>
+      <InteractionButton
+        isActive={isActive}
+        count={repostCount}
+        onInteractionClick={showRepostPopover}
+        title="リツイート"
+        ActiveIcon={RepeatIcon}
+        InactiveIcon={RepeatOutlinedIcon}
+        hoverColor="green"
+      />
+      <RepostPopover
+        originalId={post.id}
+        onClose={closeRepostPopover}
+        anchorEl={anchorEl}
+      />
+    </>
   );
 };
 

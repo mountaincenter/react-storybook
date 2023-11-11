@@ -5,6 +5,9 @@ import Cookies from 'js-cookie';
 import { signIn } from '../../api/auth';
 import { type SignInData } from '../../interfaces';
 
+import { useSetRecoilState } from 'recoil';
+import { alertState } from '../../atoms/alertAtom';
+
 import { Grid, Card, CardHeader, CardContent, TextField } from '@mui/material';
 import Button from '../Button/Button';
 import CloseableDialogTitle from './CloseableDialogTitle';
@@ -12,6 +15,7 @@ import CloseableDialogTitle from './CloseableDialogTitle';
 const LoginDialog = () => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+  const setAlertConfig = useSetRecoilState(alertState);
   const navigate = useNavigate();
   const queryClient = useQueryClient();
 
@@ -22,10 +26,21 @@ const LoginDialog = () => {
         Cookies.set('_client', data.headers['client'] || '');
         Cookies.set('_uid', data.headers['uid'] || '');
         queryClient.invalidateQueries('currentUser');
+        setAlertConfig({
+          open: true,
+          message: 'ログインが成功しました',
+          type: 'success',
+        });
         navigate('/');
       }
     },
     onError: (error) => {
+      setAlertConfig({
+        open: true,
+        message:
+          'ログインできません。メールアドレスとパスワードをご確認ください',
+        type: 'error',
+      });
       console.log(error);
     },
   });

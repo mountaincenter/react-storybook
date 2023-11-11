@@ -7,12 +7,14 @@ import Button from '../Button/Button';
 import CloseableDialogTitle from './CloseableDialogTitle';
 import Uploader from '../Uploader/Uploader';
 
-import AlertMessage from '../AlertMessage/AlertMessage';
+import { useSetRecoilState } from 'recoil';
+import { alertState } from '../../atoms/alertAtom';
 
 import { useNavigate } from 'react-router-dom';
 
 const SignUpDialog = () => {
   const navigate = useNavigate();
+  const setAlertConfig = useSetRecoilState(alertState);
   const [selectedAvatar, setSelectedAvatar] = useState<File | null>(null);
   const [form, setForm] = useState<SignUpData>({
     name: '',
@@ -23,24 +25,13 @@ const SignUpDialog = () => {
     avatar: { url: '' },
   });
 
-  const [alertConfig, setAlertConfig] = useState<{
-    open: boolean;
-    severity: 'error' | 'success' | 'info' | 'warning';
-    message: string;
-    redirectPath?: string;
-  }>({
-    open: false,
-    severity: 'error',
-    message: '',
-    redirectPath: undefined,
-  });
-
   const signUpMutation = useMutation((data: FormData) => signUp(data), {
     onSuccess: () => {
       setAlertConfig({
         open: true,
-        severity: 'success',
-        message: 'アカウント作成しました。確認メールをチェックしてください。',
+        message:
+          'アカウント作成しました。確認メールをよりログインしてください。',
+        type: 'success',
       });
       setTimeout(() => {
         navigate('/');
@@ -58,8 +49,8 @@ const SignUpDialog = () => {
       }
       setAlertConfig({
         open: true,
-        severity: 'error',
         message: errorMessage,
+        type: 'error',
       });
     },
   });
@@ -176,15 +167,6 @@ const SignUpDialog = () => {
             </CardContent>
           </Card>
         </form>
-        <AlertMessage
-          open={alertConfig.open}
-          setOpen={(newOpen) =>
-            setAlertConfig((prev) => ({ ...prev, open: newOpen }))
-          }
-          severity={alertConfig.severity}
-          message={alertConfig.message}
-          redirectPath={alertConfig.redirectPath}
-        />
       </Grid>
     </>
   );

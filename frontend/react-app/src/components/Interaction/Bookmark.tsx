@@ -1,34 +1,43 @@
-import { useBookmark } from '../../hooks/bookmark/useBookmark';
-import BookmarkButtonWithCount from './BookmarkButtonWithCount';
 import { useRecoilValue } from 'recoil';
 import { postByIdSelector } from '../../selectors/postByIdSelector';
+import InteractionButton from '../Button/InteractionButton';
+import BookmarkIcon from '@mui/icons-material/Bookmark';
+import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
+import { useBookmark } from '../../hooks/bookmark/useBookmark';
 
 interface BookmarkProps {
   publicId: string;
   showCountType?: 'onlyCount' | 'onlyIcon';
 }
 
-const Bookmark = ({ publicId, showCountType }: BookmarkProps) => {
+const Bookmark: React.FC<BookmarkProps> = ({ publicId, showCountType }) => {
   const bookmark = useRecoilValue(postByIdSelector(publicId));
   const { isBookmark, toggleBookmark } = useBookmark(
     bookmark?.id || 0,
     publicId,
     bookmark?.bookmarked || false
   );
-  const bookmarkCount = bookmark?.bookmarksCount || 0;
-  if (showCountType === 'onlyIcon' && bookmarkCount === 0) {
+
+  // Early returns
+  if (!bookmark) return null;
+  if (showCountType === 'onlyIcon' && bookmark.bookmarksCount === 0)
     return null;
+
+  if (showCountType !== 'onlyIcon') {
+    return (
+      <InteractionButton
+        isActive={isBookmark}
+        count={bookmark.bookmarksCount}
+        onInteractionClick={toggleBookmark}
+        title="ブックマーク"
+        ActiveIcon={BookmarkIcon}
+        InactiveIcon={BookmarkBorderIcon}
+        hoverColor="blue"
+      />
+    );
   }
-  return (
-    <div>
-      {showCountType !== 'onlyIcon' && (
-        <BookmarkButtonWithCount
-          publicId={publicId}
-          isActive={isBookmark}
-          toggleBookmark={toggleBookmark}
-        />
-      )}
-    </div>
-  );
+
+  return null;
 };
+
 export default Bookmark;

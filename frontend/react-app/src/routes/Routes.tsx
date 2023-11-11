@@ -5,6 +5,7 @@ import CommonLayout from '../Layout/CommonLayout';
 import SimpleLayout from '../Layout/SimpleLayout';
 import ModalDialogLayout from '../Layout/ModalDialogLayout';
 import { BackgroundLocation } from '../hooks/useModalRoute';
+import AlertMessage from '../components/AlertMessage/AlertMessage';
 
 import {
   getMainRoutes,
@@ -46,7 +47,12 @@ const CommonRoutes = () => {
     return null;
   };
 
-  return <>{renderRoutesWithLayout()}</>;
+  return (
+    <>
+      {renderRoutesWithLayout()}
+      <AlertMessage />
+    </>
+  );
 };
 
 export default CommonRoutes;

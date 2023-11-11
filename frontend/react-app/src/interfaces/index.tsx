@@ -37,7 +37,9 @@ export interface User {
   username: string;
   email: string;
   followed: boolean;
+  followersCount: number;
   following: boolean;
+  followingCount: number;
   avatar: {
     url: string | null;
   };
@@ -111,11 +113,13 @@ export interface Post {
   reposted: boolean;
   bookmarked: boolean;
   bookmarksCount: number;
+  repliesCount: number;
   publicId: string;
   parent: Post | null;
   original: Post | null;
   replies: Post[];
   reposts: Post[];
+  repostsCount: number;
   createdAt: Date;
   updatedAt: Date;
 }
