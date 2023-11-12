@@ -48,6 +48,13 @@ class User < ActiveRecord::Base
     following.include?(other_user)
   end
 
+  def self.search_with_posts(query)
+    users = includes(:posts).where("username LIKE ? OR name LIKE ?", "%#{query}%", "%#{query}%")
+    user_post_ids = users.flat_map { |user| user.posts.map(&:id) }
+    posts = Post.where("content LIKE ?", "%#{query}%").where.not(id: user_post_ids).includes(:user)
+    [users, posts]
+  end
+
   def self.guest
     find_or_create_by!(
       email: "guest@example.com",

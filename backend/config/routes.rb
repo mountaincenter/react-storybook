@@ -45,6 +45,8 @@ Rails.application.routes.draw do
           get "posts", to: "hashtags#posts", as: "posts"
         end
       end
+
+      get "searches", to: "searches#index"
     end
   end
 end

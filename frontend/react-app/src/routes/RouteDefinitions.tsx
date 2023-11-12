@@ -1,6 +1,6 @@
 import Home from '../pages/Home';
 import Profile from '../pages/Profile';
-import Search from '../pages/Search';
+import Searches from '../pages/Searches';
 import Redirect from '../pages/Redirect';
 import Explore from '../pages/Explore';
 import Notifications from '../pages/Notifications';
@@ -22,7 +22,7 @@ export const getMainRoutes = () => {
   return [
     { path: '/', element: <Home /> },
     { path: '/home', element: <Home /> },
-    { path: '/search', element: <Search /> },
+    { path: '/searches/:query', element: <Searches /> },
     { path: '/explore', element: <Explore /> },
     { path: '/notifications', element: <Notifications /> },
     { path: '/messages', element: <Messages /> },

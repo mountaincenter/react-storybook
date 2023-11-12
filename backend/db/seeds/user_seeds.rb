@@ -25,14 +25,14 @@ unless User.exists?
     avatar = avatars[i % avatars.size]
     image = images[i % images.size]
     User.create!(
-      email: email,
+      email:,
       password: "password",
       uid: email,
       provider: "email",
-      name: name,
+      name:,
       username: "testuser#{i + 1}",
-      avatar:avatar,
-      image:image,
+      avatar:,
+      image:,
       profile: Faker::Lorem.paragraph_by_chars(number: 160, supplemental: false),
       confirmed_at: Time.zone.now
     )
