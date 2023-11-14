@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useParams, useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { Grid } from '@mui/material';
 import SearchHeader from '../components/Header/SearchHeader';
 import SearchList from '../components/Search/SearchList';
@@ -12,7 +12,7 @@ const Searches = () => {
   const [searchQuery, setSearchQuery] = useState<string>(
     urlQuery ? decodeURIComponent(urlQuery) : ''
   );
-  const location = useLocation();
+  // const location = useLocation();
 
   const { users, posts } = useSearches(searchQuery);
 
@@ -26,7 +26,7 @@ const Searches = () => {
 
   return (
     <>
-      <SearchHeader initialValue={searchQuery} onSearch={setSearchQuery} />
+      <SearchHeader />
       <Grid
         container
         direction="column"

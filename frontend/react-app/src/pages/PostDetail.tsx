@@ -14,7 +14,7 @@ const PostDetail = () => {
       {displayPost && (
         <>
           <CommonHeader title={'ポストする'} />
-          <PostContent post={displayPost}>
+          <PostContent publicId={displayPost.publicId}>
             <PostComposer
               text={'返信をポスト'}
               postType="reply"

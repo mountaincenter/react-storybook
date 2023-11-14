@@ -1,7 +1,12 @@
-import React from 'react';
+import SearchBox from '../Search/SearchBox';
 
 const Widget = () => {
-  return <div>Widget</div>;
+  return (
+    <>
+      <SearchBox />
+      <div>Widget</div>
+    </>
+  );
 };
 
 export default Widget;

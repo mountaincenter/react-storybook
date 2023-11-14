@@ -1,7 +1,7 @@
 // import { useState } from 'react';
 import { Grid, Card, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
-import { type User } from '../../interfaces';
+import type { User } from '../../interfaces';
 import QuotePost from './QuotePost';
 import PostMeta from './PostMeta';
 import PostBody from './PostBody';
