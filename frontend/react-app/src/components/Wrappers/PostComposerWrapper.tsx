@@ -15,6 +15,7 @@ const PostComposerWrapper = ({
   avatar,
   to,
 }: PostComposerWrapperProps) => {
+  console.log('PostComposerWrapper', to);
   return (
     <Grid container>
       <Grid item xs="auto">

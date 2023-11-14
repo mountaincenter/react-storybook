@@ -16,7 +16,7 @@ export const useUser = (username: string) => {
   });
 
   const user = users?.[username];
-  console.log('useUser', user, 'isLoading:', isLoading, 'error:', error);
+  // console.log('useUser', user, 'isLoading:', isLoading, 'error:', error);
 
   return { user, isLoading, error };
 };

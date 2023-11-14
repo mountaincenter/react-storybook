@@ -2,17 +2,18 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import SearchIcon from '@mui/icons-material/Search';
 import CancelIcon from '@mui/icons-material/Cancel';
+import ArrowBackIcons from '@mui/icons-material/ArrowBack';
 import Header from './Header';
 import { Paper, Box, InputBase, IconButton } from '@mui/material';
 
 import { client } from '../../api/client';
 
-interface ExploreHeaderProps {
+interface SearchHeaderProps {
   initialValue?: string;
   onSearch?: (query: string) => void;
 }
 
-const ExploreHeader = ({ initialValue = '', onSearch }: ExploreHeaderProps) => {
+const SearchHeader = ({ initialValue = '', onSearch }: SearchHeaderProps) => {
   const [inputValue, setInputValue] = useState<string>(initialValue);
   const [, setOptions] = useState([]);
   const navigate = useNavigate();
@@ -54,10 +55,17 @@ const ExploreHeader = ({ initialValue = '', onSearch }: ExploreHeaderProps) => {
     setInputValue('');
   };
 
+  const goBack = () => {
+    navigate(-1);
+  };
+
   return (
     <Header>
       <>
-        <Box sx={{ mr: 6, width: '100%' }}>
+        <Box sx={{ mr: 5, width: '100%' }} display="flex">
+          <IconButton onClick={goBack} sx={{ color: 'inherit' }}>
+            <ArrowBackIcons />
+          </IconButton>
           <Paper
             component="form"
             variant="outlined"
@@ -92,4 +100,4 @@ const ExploreHeader = ({ initialValue = '', onSearch }: ExploreHeaderProps) => {
   );
 };
 
-export default ExploreHeader;
+export default SearchHeader;

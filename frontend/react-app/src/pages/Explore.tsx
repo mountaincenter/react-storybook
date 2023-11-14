@@ -1,10 +1,10 @@
-import ExploreHeader from '../components/Header/ExploreHeader';
+import SearchHeader from '../components/Header/SearchHeader';
 import { Grid, Divider } from '@mui/material';
 
 const Explore = () => {
   return (
     <>
-      <ExploreHeader />
+      <SearchHeader />
       <Grid
         container
         alignItems="center"

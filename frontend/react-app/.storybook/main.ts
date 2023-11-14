@@ -16,6 +16,8 @@ const config: StorybookConfig = {
     '@storybook/addon-a11y',
     '@storybook/addon-coverage',
     'storybook-addon-recoil-flow',
+    'storybook-addon-mock',
+    'storybook-addon-module-mock/register',
     {
       name: '@storybook/addon-styling',
       options: {},

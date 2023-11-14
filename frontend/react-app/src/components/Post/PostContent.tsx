@@ -43,6 +43,7 @@ const PostContent = ({ publicId, user, children }: PostContentProps) => {
   }
 
   // console.log(post);
+  console.log('PostUser', postUser.username);
 
   return (
     <>
@@ -70,7 +71,7 @@ const PostContent = ({ publicId, user, children }: PostContentProps) => {
         )}
         <PostComposerWrapper
           avatar={{ name: postUser.name, url: postUser.avatar.url }}
-          to={`/${postUser.username}`}
+          to={`${postUser.username}`}
         >
           <Grid
             item

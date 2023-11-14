@@ -41,19 +41,20 @@ const Avatar = ({
       onClick={customComponent === 'button' ? onClick : undefined}
       {...rest}
     />
-    //   {avatar.url ? null : name[0]}
-    // </MuiAvatar>
   );
+
+  if (!to) {
+    return avatarElement;
+  }
 
   if (customComponent === 'Link') {
     return (
-      <Link to={to ? `/${to}` : ''} style={{ textDecoration: 'none' }}>
+      <Link to={`/${to}`} style={{ textDecoration: 'none' }}>
         {avatarElement}
       </Link>
     );
   }
 
-  // ここでデフォルトの avatarElement を返すように変更
   return avatarElement;
 };
 

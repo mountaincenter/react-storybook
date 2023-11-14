@@ -20,10 +20,6 @@ const PostList = ({ posts, user }: PostListProps) => {
   );
 
   const displayPosts = posts || (user ? userPosts : allPostsFromAtom);
-  // console.log('Posts', Posts);
-  // console.log('PostListUser', user);
-  // console.log('userPosts', userPosts);
-  // console.log('PostList', posts);
   if (!displayPosts) {
     return <Typography>投稿がありません</Typography>;
   }
