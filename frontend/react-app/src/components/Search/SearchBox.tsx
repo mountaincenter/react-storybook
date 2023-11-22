@@ -5,7 +5,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import CancelIcon from '@mui/icons-material/Cancel';
 import { client } from '../../api/client';
 
-const SerachBox: React.FC = () => {
+const SearchBox: React.FC = () => {
   const { query } = useParams<{ query: string }>();
   const [inputValue, setInputValue] = useState<string>(query || '');
   const navigate = useNavigate();
@@ -78,4 +78,4 @@ const SerachBox: React.FC = () => {
   );
 };
 
-export default SerachBox;
+export default SearchBox;

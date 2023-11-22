@@ -43,7 +43,7 @@ const PostContent = ({ publicId, user, children }: PostContentProps) => {
   }
 
   // console.log(post);
-  console.log('PostUser', postUser.username);
+  // console.log('PostUser', postUser.username);
 
   return (
     <>

@@ -38,6 +38,11 @@ Rails.application.routes.draw do
         resource :bookmarks, only: %i[create destroy]
         resource :likes, only: %i[create destroy]
         post :reply, on: :member
+        member do
+          get :likes
+          get :reposts
+          get :quote_reposts
+        end
       end
 
       resources :hashtags, only: [] do

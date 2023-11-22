@@ -13,6 +13,24 @@ module Api
         render json: posts, each_serializer: PostSerializer, scope: current_api_v1_user
       end
 
+      def likes
+        post = Post.find_by!(public_id: params[:id])
+        likers = PostServices::LikesService.new(post).call
+        render json: likers, each_serializer: UserSerializer, scope: current_api_v1_user
+      end
+
+      def reposts
+        post = Post.find_by!(public_id: params[:id])
+        reposters = PostServices::RepostsService.new(post).call
+        render json: reposters, each_serializer: UserSerializer, scope:  current_api_v1_user
+      end
+
+      def quote_reposts
+        post = Post.find_by!(public_id: params[:id])
+        quote_reposters = PostServices::QuoteRepostsService.new(post).call
+        render json: quote_reposters, each_serializer: QuoteRepostSerializer, scope: current_api_v1_user
+      end
+
       def show
         render json: @post, each_serializer: PostSerializer, scope: current_api_v1_user
       end

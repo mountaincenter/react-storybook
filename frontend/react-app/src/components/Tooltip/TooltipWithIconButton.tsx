@@ -1,6 +1,7 @@
 import { IconButton } from '@mui/material';
 import IconWithIsActive from '../Icon/IconWithIsActive';
 import Tooltip from './Tooltip';
+import React from 'react';
 
 interface TooltipWithIconButtonProps {
   title: '返信' | 'リツイート' | 'いいね' | 'ブックマーク';
@@ -26,6 +27,11 @@ const TooltipWithIconButton: React.FC<TooltipWithIconButtonProps> = ({
     return title;
   };
 
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    onClick(e);
+  };
+
   return (
     <Tooltip title={getTooltipTitle()}>
       <IconButton
@@ -35,7 +41,7 @@ const TooltipWithIconButton: React.FC<TooltipWithIconButtonProps> = ({
             color: color,
           },
         }}
-        onClick={onClick}
+        onClick={handleClick}
       >
         <IconWithIsActive
           ActiveIcon={ActiveIcon}

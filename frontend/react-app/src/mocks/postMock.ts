@@ -32,7 +32,7 @@ export const posts: Post[] = [
     user: users[1],
     likes: [],
     liked: false,
-    likesCount: 4,
+    likesCount: 0,
     postType: 'reply',
     reposted: false,
     bookmarked: false,

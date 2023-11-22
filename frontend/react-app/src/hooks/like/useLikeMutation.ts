@@ -6,7 +6,6 @@ import { useCreateLike, useDeleteLike } from './useLike';
 const useLikeMutation = (publicId: string, initialState: boolean) => {
   const [isLiked, setIsLiked] = useState<boolean>(initialState);
   const [error, setError] = useState<string | null>(null);
-  // Recoil state for likes count
   const [, setLikesCount] = useRecoilState(
     likesCountByPostIdSelector(publicId)
   );

@@ -4,6 +4,8 @@ import { postByIdSelector } from '../../selectors/postByIdSelector';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import InteractionButton from '../Button/InteractionButton';
+import CountText from './CountText';
+import TooltipWithIconButton from '../Tooltip/TooltipWithIconButton';
 import useLikeMutation from '../../hooks/like/useLikeMutation';
 
 interface LikeProps {
@@ -18,9 +20,11 @@ const Like: React.FC<LikeProps> = ({ publicId, showCountType }) => {
     post?.liked || false
   );
 
+  console.log('Component post', { publicId, showCountType, isLiked });
+
   if (!post) return null;
-  if (showCountType === 'onlyIcon' && post.likesCount === 0) return null;
-  if (showCountType !== 'onlyIcon') {
+
+  const renderLikeButton = () => {
     return (
       <InteractionButton
         isActive={isLiked}
@@ -29,12 +33,47 @@ const Like: React.FC<LikeProps> = ({ publicId, showCountType }) => {
         title="いいね"
         ActiveIcon={FavoriteIcon}
         InactiveIcon={FavoriteBorderIcon}
-        hoverColor="error"
+        hoverColor="#f91880"
       />
     );
-  }
+  };
 
-  return null;
+  const renderCountText = () => {
+    return (
+      <CountText
+        count={post.likesCount}
+        text="いいね"
+        hoverColor="#f91880"
+        showCountType={showCountType}
+      />
+    );
+  };
+
+  const renderIconOnly = () => {
+    return (
+      <TooltipWithIconButton
+        title="いいね"
+        onClick={() => {
+          toggleLike().catch((error) => {
+            console.error('Error toggling like:', error);
+          });
+        }}
+        isActive={isLiked}
+        ActiveIcon={FavoriteIcon}
+        InactiveIcon={FavoriteBorderIcon}
+        color="#f91880"
+      />
+    );
+  };
+
+  switch (showCountType) {
+    case 'onlyCount':
+      return renderCountText();
+    case 'onlyIcon':
+      return renderIconOnly();
+    default:
+      return renderLikeButton();
+  }
 };
 
 export default Like;

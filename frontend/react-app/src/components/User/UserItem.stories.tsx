@@ -3,19 +3,23 @@ import UserItem from './UserItem';
 import { BrowserRouter } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { users } from '../../mocks/userMock';
-import { useCurrentUserMock } from '../../mocks/currentUserMock';
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      queryFn: async ({ queryKey }) => {
+        if (queryKey[0] === 'currentUser') {
+          return { currentUser: users[0] };
+        }
+        throw new Error('Unknown query key');
+      },
+    },
+  },
+});
 
 const meta: Meta = {
   component: UserItem,
   tags: ['autodocs'],
-  parameters: {
-    moduleMock: {
-      // モックするモジュールパスとモックデータを指定
-      '../../hooks/currentUser/useCurrentUser': useCurrentUserMock,
-    },
-  },
   decorators: [
     (Story) => (
       <QueryClientProvider client={queryClient}>
@@ -31,7 +35,21 @@ export default meta;
 
 type Story = StoryObj<typeof UserItem>;
 
-export const Default: Story = (args) => <UserItem {...args} />;
-Default.args = {
-  user: users[0],
+export const Default: Story = {
+  args: {
+    user: users[1],
+  },
+  play: async ({ args, canvasElement }) => {
+    const { user } = args;
+    // `canvasElement`を使用して、ストーリー内のDOM要素にアクセスし、
+    // `FollowButton`が存在するかどうかを確認できます
+    const followButton = canvasElement.querySelector(
+      '[data-testid="follow-button"]'
+    );
+    if (user.id !== users[0].id && followButton) {
+      console.log('FollowButton is displayed for a different user');
+    } else {
+      console.error('FollowButton is not displayed correctly');
+    }
+  },
 };
