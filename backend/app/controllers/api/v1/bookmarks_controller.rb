@@ -9,7 +9,9 @@ module Api
       before_action :set_bookmark, only: :destroy
 
       def create
-        bookmark = current_api_v1_user.bookmarks.build(post_id: params[:post_id])
+        Rails.logger.info "Recieved params[:id]: #{params[:id]}"
+        post = Post.find_by!(public_id: params[:post_id])
+        bookmark = current_api_v1_user.bookmarks.build(post_id: post.id)
         if bookmark.save
           render json: bookmark, status: :created
         else
@@ -25,7 +27,8 @@ module Api
       private
 
       def set_bookmark
-        @bookmark = Bookmark.find_by!(post_id: params[:post_id], user_id: current_api_v1_user.id)
+        post = Post.find_by!(public_id: params[:post_id])
+        @bookmark = Bookmark.find_by!(post_id: post.id, user_id: current_api_v1_user.id)
         head :not_found unless @bookmark
       end
     end

@@ -14,6 +14,12 @@ module Api
         render json: users, each_serializer: UserSerializer, scope: current_api_v1_user, status: 200
       end
 
+      def bookmarking
+        bookmarked_posts = current_api_v1_user.bookmarks.includes(:post).map(&:post)
+        render json: bookmarked_posts, each_serializer: PostSerializer
+      end
+
+
       def show
         render json: @user, each_serializer: UserSerializer, scope: current_api_v1_user, status: 200
       end
