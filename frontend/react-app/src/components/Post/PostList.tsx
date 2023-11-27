@@ -23,6 +23,8 @@ const PostList = ({ posts, user }: PostListProps) => {
   if (!displayPosts) {
     return <Typography>投稿がありません</Typography>;
   }
+
+  console.log('PostList', displayPosts);
   return (
     <>
       {displayPosts.map((post: Post) => {

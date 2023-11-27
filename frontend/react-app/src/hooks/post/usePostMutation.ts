@@ -1,13 +1,13 @@
 import { useMutation, useQueryClient } from 'react-query';
-import { createPost } from '../../api/post';
+import { createPost, deletePost } from '../../api/post';
 import { useSetRecoilState } from 'recoil';
 import { alertState } from '../../atoms/alertAtom';
 
-export const useCreatePost = () => {
+export const usePostMutation = () => {
   const queryClient = useQueryClient();
   const setAlertState = useSetRecoilState(alertState);
 
-  const postMutation = useMutation((data: FormData) => createPost(data), {
+  const createPostMutation = useMutation((data: FormData) => createPost(data), {
     onSuccess: () => {
       setAlertState({
         open: true,
@@ -26,5 +26,17 @@ export const useCreatePost = () => {
     },
   });
 
-  return { postMutation };
+  const deletePostMutation = useMutation(
+    (publicId: string) => deletePost(publicId),
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries('posts');
+      },
+      onError: (error) => {
+        console.log(error);
+      },
+    }
+  );
+
+  return { createPostMutation, deletePostMutation };
 };

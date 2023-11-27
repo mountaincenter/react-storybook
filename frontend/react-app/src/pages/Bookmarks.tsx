@@ -1,18 +1,25 @@
-import { useRecoilValue } from 'recoil';
 import PostList from '../components/Post/PostList';
 import BookmarkHeader from '../components/Header/BookmarkHeader';
-import { Typography } from '@mui/material';
-import { postsByBookmarkedSelector } from '../selectors/postsByBookmarkedSelector';
+import { useBookmarks } from '../hooks/bookmark/useBookmarks';
+import { Grid } from '@mui/material';
+import LoadingComponent from '../components/Loading/LoadingComponent';
 
 const Bookmarks = () => {
-  const bookmarkedPosts = useRecoilValue(postsByBookmarkedSelector);
-  if (!bookmarkedPosts || bookmarkedPosts.length === 0) {
-    return <Typography>ブックマークがありません</Typography>;
+  const { bookmarks, isLoading } = useBookmarks();
+  // console.log(bookmarks);
+  if (isLoading) {
+    return <LoadingComponent />;
   }
   return (
     <>
-      <BookmarkHeader />
-      <PostList posts={bookmarkedPosts} />;
+      <Grid container spacing={0}>
+        <Grid item xs={12}>
+          <Grid item>
+            <BookmarkHeader />
+          </Grid>
+          <Grid item>{bookmarks && <PostList posts={bookmarks} />}</Grid>
+        </Grid>
+      </Grid>
     </>
   );
 };

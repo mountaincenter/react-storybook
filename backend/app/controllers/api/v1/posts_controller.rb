@@ -46,8 +46,13 @@ module Api
       end
 
       def destroy
-        @post.destroy
-        render json: @post
+        service_class = service_mapping[@post.post_type] || PostServices::PostService
+        post_service = service_class.new(current_api_v1_user, {}, @post.id)
+        if post_service.delete_post(@post.id)
+          head :no_content
+        else
+          render json: { error: "削除できませんでした" }, status: :unprocessable_entity
+        end
       end
 
       private
@@ -61,9 +66,10 @@ module Api
       end
 
       def select_service
-        service_args = [current_api_v1_user, post_params, post_based_on_type]
-        service_args << post_based_on_type unless params[:post_type] == "original"
+        service_args = [current_api_v1_user, post_params]
         service_class = service_mapping[params[:post_type]] || PostServices::PostService
+        service_args << params[:parent_id] if params[:post_type] == "reply"
+        service_args << params[:original_id] if ["repost", "quote_repost"].include?(params[:post_type])
         service_class.new(*service_args)
       end
 

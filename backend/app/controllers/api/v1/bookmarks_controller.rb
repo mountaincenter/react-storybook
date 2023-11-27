@@ -9,7 +9,6 @@ module Api
       before_action :set_bookmark, only: :destroy
 
       def create
-        Rails.logger.info "Recieved params[:id]: #{params[:id]}"
         post = Post.find_by!(public_id: params[:post_id])
         bookmark = current_api_v1_user.bookmarks.build(post_id: post.id)
         if bookmark.save

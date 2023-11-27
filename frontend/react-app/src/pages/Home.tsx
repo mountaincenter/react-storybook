@@ -1,4 +1,4 @@
-import { Typography, Button, Grid, Box, CircularProgress } from '@mui/material';
+import { Typography, Button, Grid, Box } from '@mui/material';
 import { Link } from 'react-router-dom';
 
 import { usePosts } from '../hooks/post/usePosts';
@@ -8,6 +8,7 @@ import Footer from '../components/Footer/Footer';
 import PostList from '../components/Post/PostList';
 import PostComposer from '../components/Post/PostComposer';
 import HomeHeader from '../components/Header/HomeHeader';
+import LoadingComponent from '../components/Loading/LoadingComponent';
 
 const Home = () => {
   const { currentUser } = useCurrentUser();
@@ -15,16 +16,7 @@ const Home = () => {
   // console.log('Home', posts);
 
   if (isLoading) {
-    return (
-      <Box
-        display="flex"
-        justifyContent="center"
-        alignItems="center"
-        height="100vh"
-      >
-        <CircularProgress />
-      </Box>
-    );
+    return <LoadingComponent />;
   }
   return (
     <>

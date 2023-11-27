@@ -33,6 +33,9 @@ const DialogPostComposer: React.FC<PostBoxProps> = ({
     resetUploaderKey,
     handlePost,
   } = usePostComposerLogic({ postType, post, associatedId });
+
+  console.log('postType', postType);
+  console.log('associatedId', associatedId);
   return (
     <Box
       sx={{

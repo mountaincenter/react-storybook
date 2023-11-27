@@ -14,7 +14,8 @@ export const Default = (args) => <CountText {...args} />;
 Default.args = {
   count: 10,
   text: 'いいね',
-  hoverColor: '#e0245e',
+  isActive: true,
+  color: 'rgb(249, 24, 128)',
 };
 
 export const OnlyCount = (args) => <CountText {...args} />;
@@ -22,6 +23,6 @@ export const OnlyCount = (args) => <CountText {...args} />;
 OnlyCount.args = {
   count: 10,
   text: 'いいね',
-  hoverColor: '#e0245e',
+  isActive: false,
   showCountType: 'onlyCount',
 };

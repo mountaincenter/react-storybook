@@ -110,16 +110,20 @@ export interface Post {
   likesCount: number;
   liked: boolean;
   postType: PostType;
+  reposts: Post[];
+  repostsCount: number;
+  quoteRepostsCount: number;
+  totalRepostsCount: number;
   reposted: boolean;
+  currentUserRepostPublicId: string;
   bookmarked: boolean;
   bookmarksCount: number;
+  replies: Post[];
   repliesCount: number;
+  replied: boolean;
   publicId: string;
   parent: Post | null;
   original: Post | null;
-  replies: Post[];
-  reposts: Post[];
-  repostsCount: number;
   createdAt: Date;
   updatedAt: Date;
 }

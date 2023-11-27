@@ -3,7 +3,7 @@ import { postByIdSelector } from '../../selectors/postByIdSelector';
 import InteractionButton from '../Button/InteractionButton';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
-import { useBookmark } from '../../hooks/bookmark/useBookmark';
+import { useBookmarkMutation } from '../../hooks/bookmark/useBookmarkMutation';
 import CountText from './CountText';
 import TooltipWithIconButton from '../../components/Tooltip/TooltipWithIconButton';
 interface BookmarkProps {
@@ -13,8 +13,7 @@ interface BookmarkProps {
 
 const Bookmark: React.FC<BookmarkProps> = ({ publicId, showCountType }) => {
   const post = useRecoilValue(postByIdSelector(publicId));
-  const { isBookmark, toggleBookmark } = useBookmark(
-    post?.id || 0,
+  const { isBookmark, toggleBookmark } = useBookmarkMutation(
     publicId,
     post?.bookmarked || false
   );
@@ -29,7 +28,8 @@ const Bookmark: React.FC<BookmarkProps> = ({ publicId, showCountType }) => {
         title="ブックマーク"
         ActiveIcon={BookmarkIcon}
         InactiveIcon={BookmarkBorderIcon}
-        hoverColor="#1d9bf0"
+        color="rgb(29, 155, 240)"
+        backgroundColor="rgb(29, 155, 240, 0.1)"
       />
     );
   };
@@ -39,8 +39,9 @@ const Bookmark: React.FC<BookmarkProps> = ({ publicId, showCountType }) => {
       <CountText
         count={post.bookmarksCount}
         text="ブックマーク"
-        hoverColor="#1d9bf0"
+        color="#1d9bf0"
         showCountType={showCountType}
+        isActive={isBookmark}
       />
     );
   };
@@ -53,7 +54,8 @@ const Bookmark: React.FC<BookmarkProps> = ({ publicId, showCountType }) => {
         isActive={isBookmark}
         ActiveIcon={BookmarkIcon}
         InactiveIcon={BookmarkBorderIcon}
-        color="#1d9bf0"
+        color="rgb(29, 155, 240)"
+        backgroundColor="rgb(29, 155, 240, 0.1)"
       />
     );
   };

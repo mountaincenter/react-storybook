@@ -17,6 +17,12 @@ module PostServices
       post
     end
 
+    def delete_post(post_id)
+      post = @user.posts.find_by(id: post_id, post_type: "repost")
+      return unless post
+      post.destroy
+    end
+
     private
 
     def create_notification_for_post(post)

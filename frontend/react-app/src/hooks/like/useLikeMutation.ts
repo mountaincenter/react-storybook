@@ -1,36 +1,37 @@
-import { useState } from 'react';
-import { useRecoilState } from 'recoil';
-import { likesCountByPostIdSelector } from '../../selectors/likesCountByPostIdSelector';
-import { useCreateLike, useDeleteLike } from './useLike';
+import { useMutation, useQueryClient } from 'react-query';
+import { createLike, deleteLike } from '../../api/like';
 
-const useLikeMutation = (publicId: string, initialState: boolean) => {
-  const [isLiked, setIsLiked] = useState<boolean>(initialState);
-  const [error, setError] = useState<string | null>(null);
-  const [, setLikesCount] = useRecoilState(
-    likesCountByPostIdSelector(publicId)
-  );
+export const useLikeMutation = (publicId: string, isLiked: boolean) => {
+  const queryClient = useQueryClient();
 
-  const createLikeMutation = useCreateLike({ publicId, setLikesCount });
-  const deleteLikeMutation = useDeleteLike({ publicId, setLikesCount });
+  const create = useMutation(() => createLike(publicId), {
+    onSuccess: () => {
+      queryClient.invalidateQueries(['post', publicId]);
+    },
+    onError: (error) => {
+      console.error('Error creating like', error);
+    },
+  });
 
-  const toggleLike = async () => {
-    setError(null); // Clear any existing errors
+  const remove = useMutation(() => deleteLike(publicId), {
+    onSuccess: () => {
+      queryClient.invalidateQueries(['post', publicId]);
+    },
+    onError: (error) => {
+      console.error('Error deleting like', error);
+    },
+  });
 
-    try {
-      if (isLiked) {
-        await deleteLikeMutation.mutateAsync();
-      } else {
-        await createLikeMutation.mutateAsync();
-      }
-      setIsLiked(!isLiked);
-    } catch (error) {
-      // Log the error and set an error state for the UI to display
-      console.error('Error toggling like:', error);
-      setError('An error occurred while toggling the like. Please try again.');
+  const toggleLike = () => {
+    if (isLiked) {
+      remove.mutate();
+    } else {
+      create.mutate();
     }
   };
 
-  return { isLiked, toggleLike, error };
+  return {
+    toggleLike,
+    isLike: isLiked,
+  };
 };
-
-export default useLikeMutation;

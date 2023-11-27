@@ -1,29 +1,38 @@
 import { Popover } from '@mui/material';
 import useModalRoute from '../../hooks/useModalRoute';
-import { useCreatePost } from '../../hooks/post/useCreatePost';
+import { usePostMutation } from '../../hooks/post/usePostMutation';
 import Button from '../Button/Button';
 
 interface RepostDialogProps {
   originalId: number;
+  currentUserRepostPublicId: string | null;
   onClose: () => void;
   anchorEl: HTMLButtonElement | null;
+  isReposted: boolean;
 }
 
 const RepostPopover = ({
   originalId,
   onClose,
+  currentUserRepostPublicId,
   anchorEl,
+  isReposted,
 }: RepostDialogProps) => {
   // console.log(originalId);
   const { startModalPath } = useModalRoute();
-  const { postMutation } = useCreatePost();
+  const { createPostMutation, deletePostMutation } = usePostMutation();
 
   const handleRepost = () => {
     const formData = new FormData();
     formData.append('content', '');
     formData.append('postType', 'repost');
     formData.append('originalId', originalId.toString());
-    postMutation.mutate(formData);
+    createPostMutation.mutate(formData);
+    onClose();
+  };
+
+  const handleDelete = () => {
+    deletePostMutation.mutate(currentUserRepostPublicId as string);
     onClose();
   };
 
@@ -43,12 +52,21 @@ const RepostPopover = ({
           horizontal: 'left',
         }}
       >
-        <Button
-          variant="text"
-          label="リツイート"
-          onClick={handleRepost}
-          fullWidth
-        />
+        {isReposted ? (
+          <Button
+            variant="text"
+            label="リツイートを削除する"
+            onClick={handleDelete}
+            fullWidth
+          />
+        ) : (
+          <Button
+            variant="text"
+            label="リツイートする"
+            onClick={handleRepost}
+            fullWidth
+          />
+        )}
         <Button
           variant="text"
           label="引用リツイート"

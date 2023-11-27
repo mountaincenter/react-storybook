@@ -3,20 +3,22 @@ import { Typography } from '@mui/material';
 interface CountTextProps {
   count: number;
   text: string;
-  hoverColor: string;
+  isActive: boolean;
+  color: string;
   showCountType?: 'onlyCount' | 'onlyIcon';
 }
 
 const CountText = ({
   count,
   text,
-  hoverColor,
+  isActive,
+  color,
   showCountType,
 }: CountTextProps): JSX.Element | null => {
   if (count <= 0 || showCountType === 'onlyIcon') return null;
 
   let content;
-  let colorStyle = 'text.secondary';
+  let textStyle; // スタイルオブジェクトを定義する
 
   if (showCountType === 'onlyCount') {
     content = (
@@ -24,21 +26,29 @@ const CountText = ({
         <strong>{count}</strong> 件の{text}
       </>
     );
+    // isActive にかかわらず text.secondary を使用
+    textStyle = {
+      color: 'text.secondary',
+      '&:hover': {
+        color: 'text.secondary',
+      },
+    };
   } else {
     content = count;
-    colorStyle = hoverColor;
+    // isActive が true の場合は color を使用し、そうでない場合は text.secondary
+    textStyle = {
+      color: isActive ? color : 'text.secondary',
+      '&:hover': {
+        color: color,
+      },
+    };
   }
 
   return (
     <Typography
       variant="body2"
       component="span"
-      sx={{
-        color: 'text.secondary',
-        '&:hover': {
-          color: colorStyle,
-        },
-      }}
+      sx={textStyle} // ここで textStyle を適用
     >
       {content}
     </Typography>

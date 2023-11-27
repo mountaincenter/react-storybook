@@ -8,6 +8,7 @@ interface TooltipWithIconButtonProps {
   onClick: (e: React.MouseEvent<HTMLButtonElement>) => void | (() => void);
   isActive: boolean;
   color: string;
+  backgroundColor: string;
   ActiveIcon: React.ElementType;
   InactiveIcon: React.ElementType;
 }
@@ -17,6 +18,7 @@ const TooltipWithIconButton: React.FC<TooltipWithIconButtonProps> = ({
   onClick,
   isActive,
   color,
+  backgroundColor,
   ActiveIcon,
   InactiveIcon,
 }: TooltipWithIconButtonProps) => {
@@ -39,6 +41,7 @@ const TooltipWithIconButton: React.FC<TooltipWithIconButtonProps> = ({
           color: isActive ? color : 'textSecondary',
           '&:hover': {
             color: color,
+            backgroundColor: backgroundColor,
           },
         }}
         onClick={handleClick}

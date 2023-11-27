@@ -4,7 +4,6 @@ import { postByIdSelector } from '../../selectors/postByIdSelector';
 import InteractionButton from '../Button/InteractionButton';
 import useModalRoute from '../../hooks/useModalRoute';
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
-import { useCurrentUser } from '../../hooks/currentUser/useCurrentUser';
 import CountText from './CountText';
 import TooltipWithIconButton from '../Tooltip/TooltipWithIconButton';
 
@@ -15,13 +14,9 @@ interface ReplyProps {
 
 const Reply: React.FC<ReplyProps> = ({ publicId, showCountType }) => {
   const post = useRecoilValue(postByIdSelector(publicId));
-  const { currentUser } = useCurrentUser();
   const { startModalPath } = useModalRoute();
 
   if (!post) return null;
-
-  const isCurrentUserReplies =
-    post?.replies.some((reply) => reply.user.id === currentUser?.id) || false;
 
   const handleReply = () => {
     startModalPath(`/post/reply/${post.publicId}`);
@@ -30,13 +25,14 @@ const Reply: React.FC<ReplyProps> = ({ publicId, showCountType }) => {
   const renderReplyButton = () => {
     return (
       <InteractionButton
-        isActive={isCurrentUserReplies}
+        isActive={post.replied}
         count={post.repliesCount}
         onInteractionClick={handleReply}
         title="返信"
         ActiveIcon={ChatBubbleOutlineIcon}
         InactiveIcon={ChatBubbleOutlineIcon}
-        hoverColor="#1d9bf0"
+        color="rgb(29, 155, 240)"
+        backgroundColor="rgb(29, 155, 240, 0.1)"
       />
     );
   };
@@ -46,8 +42,9 @@ const Reply: React.FC<ReplyProps> = ({ publicId, showCountType }) => {
       <CountText
         count={post.repliesCount}
         text="返信"
-        hoverColor="#1d9bf0"
+        color="rgb(29, 155, 240)"
         showCountType={showCountType}
+        isActive={post.replied}
       />
     );
   };
@@ -57,10 +54,11 @@ const Reply: React.FC<ReplyProps> = ({ publicId, showCountType }) => {
       <TooltipWithIconButton
         title="返信"
         onClick={handleReply}
-        isActive={isCurrentUserReplies}
+        isActive={post.replied}
         ActiveIcon={ChatBubbleOutlineIcon}
         InactiveIcon={ChatBubbleOutlineIcon}
-        color="#1d9bf0"
+        color="rgb(29, 155, 240)"
+        backgroundColor="rgb(29, 155, 240, 0.1)"
       />
     );
   };

@@ -9,7 +9,8 @@ interface InteractionButtonProps {
   title: '返信' | 'リツイート' | 'いいね' | 'ブックマーク';
   ActiveIcon: React.ComponentType;
   InactiveIcon: React.ComponentType;
-  hoverColor: string;
+  color: string;
+  backgroundColor: string;
 }
 
 const InteractionButton: React.FC<InteractionButtonProps> = ({
@@ -19,7 +20,8 @@ const InteractionButton: React.FC<InteractionButtonProps> = ({
   title,
   ActiveIcon,
   InactiveIcon,
-  hoverColor,
+  color,
+  backgroundColor,
 }) => {
   return (
     <>
@@ -29,9 +31,10 @@ const InteractionButton: React.FC<InteractionButtonProps> = ({
         isActive={isActive}
         ActiveIcon={ActiveIcon}
         InactiveIcon={InactiveIcon}
-        color={hoverColor}
+        color={color}
+        backgroundColor={backgroundColor}
       />
-      <CountText count={count} text={title} hoverColor={hoverColor} />
+      <CountText count={count} text={title} color={color} isActive={isActive} />
     </>
   );
 };

@@ -6,10 +6,14 @@ export const getBookmarks = async (): Promise<AxiosResponse> => {
   return await client.get('/users/bookmarking', getAuth());
 };
 
-export const createBookmark = async (id: number): Promise<AxiosResponse> => {
-  return client.post(`posts/${id}/bookmarks`, {}, getAuth());
+export const createBookmark = async (
+  publicId: string
+): Promise<AxiosResponse> => {
+  return client.post(`posts/${publicId}/bookmarks`, {}, getAuth());
 };
 
-export const deleteBookmark = async (id: number): Promise<AxiosResponse> => {
-  return client.delete(`posts/${id}/bookmarks`, getAuth());
+export const deleteBookmark = async (
+  publicId: string
+): Promise<AxiosResponse> => {
+  return client.delete(`posts/${publicId}/bookmarks`, getAuth());
 };
