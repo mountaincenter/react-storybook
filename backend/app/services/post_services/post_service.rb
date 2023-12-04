@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-# frozen_stirng_literal: true
-
 module PostServices
   #
   # post service
@@ -15,7 +13,9 @@ module PostServices
 
     def create_post
       post = @user.posts.new(@post_params)
-      post.save
+      if post.save
+        create_mention_if_needed(post)
+      end
       post
     end
 
@@ -28,10 +28,6 @@ module PostServices
     end
 
     private
-
-    def build_post
-      @user.posts.new(@post_params).tap(&:save)
-    end
 
     def create_mention_if_needed(post)
       return unless post.persisted? && post.content.include?("@")
