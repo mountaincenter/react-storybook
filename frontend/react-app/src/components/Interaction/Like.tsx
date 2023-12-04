@@ -3,14 +3,15 @@ import { useRecoilValue } from 'recoil';
 import { postByIdSelector } from '../../selectors/postByIdSelector';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import InteractionButton from '../Button/InteractionButton';
+import InteractionButton from '../Icon/InteractionIcon';
 import CountText from './CountText';
 import TooltipWithIconButton from '../Tooltip/TooltipWithIconButton';
 import { useLikeMutation } from '../../hooks/like/useLikeMutation';
+import { type ShowCountType } from '../../interfaces';
 
 interface LikeProps {
   publicId: string;
-  showCountType?: 'onlyCount' | 'onlyIcon';
+  showCountType?: ShowCountType;
 }
 
 const Like: React.FC<LikeProps> = ({ publicId, showCountType }) => {
@@ -28,8 +29,7 @@ const Like: React.FC<LikeProps> = ({ publicId, showCountType }) => {
         title="いいね"
         ActiveIcon={FavoriteIcon}
         InactiveIcon={FavoriteBorderIcon}
-        color="rgb(249, 24, 128)"
-        backgroundColor="rgb(249, 24, 128, 0.1)"
+        interactionColorType="like"
       />
     );
   };
@@ -40,8 +40,8 @@ const Like: React.FC<LikeProps> = ({ publicId, showCountType }) => {
         count={post.likesCount}
         text="いいね"
         isActive={post.liked}
-        color="rgb(249, 24, 128)"
         showCountType={showCountType}
+        interactionColorType="like"
       />
     );
   };
@@ -54,8 +54,7 @@ const Like: React.FC<LikeProps> = ({ publicId, showCountType }) => {
         isActive={post.liked}
         ActiveIcon={FavoriteIcon}
         InactiveIcon={FavoriteBorderIcon}
-        color="rgb(249, 24, 128)"
-        backgroundColor="rgb(249, 24, 128, 0.1)"
+        interactionColorType="like"
       />
     );
   };

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module PostServices
   #
   # Repost Service
@@ -8,7 +10,7 @@ module PostServices
     end
 
     def call
-      @post.reposts.where(post_type: 'repost').includes(:user).map(&:user)
+      @post.reposts.where(post_type: "repost").includes(:user).map(&:user)
     end
   end
 end

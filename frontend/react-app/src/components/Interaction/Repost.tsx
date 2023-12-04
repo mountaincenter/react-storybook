@@ -2,15 +2,16 @@ import React, { useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import { postByIdSelector } from '../../selectors/postByIdSelector';
 import RepostPopover from '../Popover/RepostPopover';
-import InteractionButton from '../Button/InteractionButton';
+import InteractionButton from '../Icon/InteractionIcon';
 import RepeatIcon from '@mui/icons-material/Repeat';
 import RepeatOutlinedIcon from '@mui/icons-material/RepeatOutlined';
 import CountText from './CountText';
 import TooltipWithIconButton from '../Tooltip/TooltipWithIconButton';
+import { type ShowCountType } from '../../interfaces';
 
 interface RepostProps {
   publicId: string;
-  showCountType?: 'onlyIcon' | 'onlyCount';
+  showCountType?: ShowCountType;
 }
 
 const Repost: React.FC<RepostProps> = ({ publicId, showCountType }) => {
@@ -28,18 +29,19 @@ const Repost: React.FC<RepostProps> = ({ publicId, showCountType }) => {
 
   if (!post) return null;
 
+  const isRepoted = post.reposted || post.quoteReposted;
+
   const renderRepostButton = () => {
     return (
       <>
         <InteractionButton
-          isActive={post.reposted}
+          isActive={isRepoted}
           count={post.totalRepostsCount}
           onInteractionClick={showRepostPopover}
           title="リツイート"
           ActiveIcon={RepeatIcon}
           InactiveIcon={RepeatOutlinedIcon}
-          color="rgb(23, 191, 99)"
-          backgroundColor="rgb(23, 191, 99, 0.1)"
+          interactionColorType="repost"
         />
         <RepostPopover
           originalId={post.id}
@@ -58,16 +60,16 @@ const Repost: React.FC<RepostProps> = ({ publicId, showCountType }) => {
         <CountText
           count={post.repostsCount}
           text="リポスト"
-          color="rgb(23, 191, 99)"
           showCountType={showCountType}
           isActive={post.reposted}
+          interactionColorType="repost"
         />
         <CountText
           count={post.quoteRepostsCount}
           text="引用リポスト"
-          color="rgb(23, 191, 99)"
           showCountType={showCountType}
-          isActive={post.reposted}
+          isActive={post.quoteReposted}
+          interactionColorType="repost"
         />
         <RepostPopover
           originalId={post.id}
@@ -89,8 +91,7 @@ const Repost: React.FC<RepostProps> = ({ publicId, showCountType }) => {
           isActive={post.reposted}
           ActiveIcon={RepeatIcon}
           InactiveIcon={RepeatOutlinedIcon}
-          color="rgb(23, 191, 99)"
-          backgroundColor="rgb(23, 191, 99, 0.1)"
+          interactionColorType="repost"
         />
         <RepostPopover
           originalId={post.id}

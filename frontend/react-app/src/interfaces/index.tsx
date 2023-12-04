@@ -115,6 +115,7 @@ export interface Post {
   quoteRepostsCount: number;
   totalRepostsCount: number;
   reposted: boolean;
+  quoteReposted: boolean;
   currentUserRepostPublicId: string;
   bookmarked: boolean;
   bookmarksCount: number;
@@ -159,7 +160,7 @@ export interface ApiResponse<T> extends AxiosResponse {
   data: T;
 }
 
-export type CustomColor = 'like' | 'follow' | 'repost' | 'other';
+export type CustomColor = 'default' | 'like' | 'repost';
 
 export type MUIColor =
   | 'inherit'
@@ -170,6 +171,9 @@ export type MUIColor =
   | 'success'
   | 'warning';
 
+export type Title = '返信' | 'リツイート' | 'いいね' | 'ブックマーク';
+
+export type ShowCountType = 'onlyIcon' | 'onlyCount' | 'both';
 export interface BaseIconType {
   Icon: React.ElementType;
 }
@@ -186,7 +190,12 @@ export interface SidebarIconType {
 export interface InteractionIconType {
   Icon: React.ElementType;
   OutlinedIcon: React.ElementType;
-  color: MUIColor | CustomColor;
+  isActive: boolean;
+  count: number;
+  onInteractionClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  title: Title;
+  interactionColorType?: CustomColor;
+  showCountType?: ShowCountType;
 }
 
 export interface NotificationIconType {

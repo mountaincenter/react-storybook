@@ -1,4 +1,5 @@
 import { Box } from '@mui/material';
+import { type ShowCountType } from '../../interfaces';
 
 import Like from './Like';
 import Repost from './Repost';
@@ -7,10 +8,13 @@ import Reply from './Reply';
 
 interface InteractionListProps {
   publicId: string;
-  showCountType?: 'onlyCount' | 'onlyIcon';
+  showCountType?: ShowCountType;
 }
 
-const InteractionList = ({ publicId, showCountType }: InteractionListProps) => {
+const InteractionList = ({
+  publicId,
+  showCountType = 'both',
+}: InteractionListProps) => {
   return (
     <>
       <Box display="flex">

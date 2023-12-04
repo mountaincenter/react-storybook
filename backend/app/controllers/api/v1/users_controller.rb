@@ -19,7 +19,6 @@ module Api
         render json: bookmarked_posts, each_serializer: PostSerializer
       end
 
-
       def show
         render json: @user, each_serializer: UserSerializer, scope: current_api_v1_user, status: 200
       end

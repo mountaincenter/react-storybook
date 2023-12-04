@@ -4,7 +4,9 @@
 # post serializer
 #
 class PostSerializer < ActiveModel::Serializer
-  attributes :id, :content, :images, :post_type, :replied?, :replies_count, :liked?, :likes_count, :reposted?, :current_user_repost_public_id, :reposts_count, :quote_reposts_count, :total_reposts_count,
+  attributes :id, :content, :images, :post_type, :replied?, :replies_count, :liked?,
+             :likes_count, :reposted?, :quote_reposted?, :current_user_repost_public_id,
+             :reposts_count, :quote_reposts_count, :total_reposts_count,
              :bookmarked?, :bookmarks_count, :public_id, :created_at, :updated_at
   belongs_to :user
   belongs_to :parent, class_name: "Post", serializer: ParentSerializer
@@ -47,6 +49,12 @@ class PostSerializer < ActiveModel::Serializer
     object.reposts.where(post_type: "repost").count
   end
 
+  def quote_reposted?
+    return unless scope.present?
+
+    object.reposts.where(user_id: scope.id, post_type: "quote_repost").exists?
+  end
+
   def quote_reposts_count
     object.reposts.where(post_type: "quote_repost").count
   end
@@ -71,8 +79,8 @@ class PostSerializer < ActiveModel::Serializer
 
   def current_user_repost_public_id
     return unless scope.present?
+
     current_user_repost = object.reposts.find_by(user_id: scope.id, post_type: "repost")
     current_user_repost&.public_id
   end
-
 end

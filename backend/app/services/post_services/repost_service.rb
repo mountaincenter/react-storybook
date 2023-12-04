@@ -20,6 +20,7 @@ module PostServices
     def delete_post(post_id)
       post = @user.posts.find_by(id: post_id, post_type: "repost")
       return unless post
+
       post.destroy
     end
 

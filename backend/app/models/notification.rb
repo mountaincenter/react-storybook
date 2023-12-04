@@ -52,9 +52,11 @@ class Notification < ApplicationRecord
 
   def message_for_repost
     return unless notifiable.is_a?(Post)
+
     post = notifiable
     user = User.find_by(id: post.user_id)
     return unless user
+
     build_message(user, "#{user.name}さんがあなたの投稿をリツイートしました", post.content)
   end
 

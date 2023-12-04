@@ -22,7 +22,7 @@ module Api
       def reposts
         post = Post.find_by!(public_id: params[:id])
         reposters = PostServices::RepostsService.new(post).call
-        render json: reposters, each_serializer: UserSerializer, scope:  current_api_v1_user
+        render json: reposters, each_serializer: UserSerializer, scope: current_api_v1_user
       end
 
       def quote_reposts
@@ -69,7 +69,7 @@ module Api
         service_args = [current_api_v1_user, post_params]
         service_class = service_mapping[params[:post_type]] || PostServices::PostService
         service_args << params[:parent_id] if params[:post_type] == "reply"
-        service_args << params[:original_id] if ["repost", "quote_repost"].include?(params[:post_type])
+        service_args << params[:original_id] if %w[repost quote_repost].include?(params[:post_type])
         service_class.new(*service_args)
       end
 

@@ -14,7 +14,9 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import RepeatIcon from '@mui/icons-material/Repeat';
 import ModeCommentOutlinedIcon from '@mui/icons-material/ModeCommentOutlined';
 import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
+// import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 import ReplyIcon from '@mui/icons-material/Reply';
+
 import AddIcon from '@mui/icons-material/Add';
 import CancelIcon from '@mui/icons-material/Cancel';
 import InsertPhotoOutlinedIcon from '@mui/icons-material/InsertPhotoOutlined';
@@ -23,8 +25,8 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import {
   BaseIconsMappingType,
   SidebarIconsMappingType,
-  InteractionIconsMappingType,
   NotificationIconsMappingType,
+  NotificationIconType,
 } from '../../interfaces';
 
 export const BaseIcons: BaseIconsMappingType = {
@@ -78,26 +80,17 @@ export const SidebarIconCombinations: SidebarIconsMappingType = {
   },
 };
 
-export const InteractionIconCombinations: InteractionIconsMappingType = {
-  Like: { Icon: FavoriteIcon, OutlinedIcon: FavoriteBorderIcon, color: 'like' },
-  Repost: { Icon: RepeatIcon, OutlinedIcon: RepeatIcon, color: 'repost' },
-  Reply: {
-    Icon: ModeCommentOutlinedIcon,
-    OutlinedIcon: ModeCommentOutlinedIcon,
-    color: 'other',
-  },
-  Bookmark: {
-    Icon: BookmarkIcon,
-    OutlinedIcon: BookmarkBorderIcon,
-    color: 'other',
-  },
+const commonRepostConfig: NotificationIconType = {
+  Icon: RepeatIcon,
+  color: 'repost',
 };
 
 export const NotificationIconCombinations: NotificationIconsMappingType = {
-  Message: { Icon: MessageIcon, color: 'other' },
-  Follow: { Icon: PersonIcon, color: 'info' },
-  Like: { Icon: FavoriteIcon, color: 'like' },
-  Mention: { Icon: AlternateEmailIcon, color: 'other' },
-  Replay: { Icon: ReplyIcon, color: 'other' },
-  Repost: { Icon: RepeatIcon, color: 'repost' },
+  message: { Icon: MessageIcon, color: 'default' },
+  follow: { Icon: PersonIcon, color: 'default' },
+  like: { Icon: FavoriteIcon, color: 'like' },
+  mention: { Icon: AlternateEmailIcon, color: 'default' },
+  reply: { Icon: ReplyIcon, color: 'default' },
+  repost: { ...commonRepostConfig },
+  quote_repost: { ...commonRepostConfig },
 };

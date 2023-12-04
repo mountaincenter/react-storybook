@@ -1,15 +1,16 @@
 import React from 'react';
 import { useRecoilValue } from 'recoil';
 import { postByIdSelector } from '../../selectors/postByIdSelector';
-import InteractionButton from '../Button/InteractionButton';
+import InteractionButton from '../Icon/InteractionIcon';
 import useModalRoute from '../../hooks/useModalRoute';
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 import CountText from './CountText';
 import TooltipWithIconButton from '../Tooltip/TooltipWithIconButton';
+import { type ShowCountType } from '../../interfaces';
 
 interface ReplyProps {
   publicId: string;
-  showCountType?: 'onlyIcon' | 'onlyCount';
+  showCountType?: ShowCountType;
 }
 
 const Reply: React.FC<ReplyProps> = ({ publicId, showCountType }) => {
@@ -31,8 +32,6 @@ const Reply: React.FC<ReplyProps> = ({ publicId, showCountType }) => {
         title="返信"
         ActiveIcon={ChatBubbleOutlineIcon}
         InactiveIcon={ChatBubbleOutlineIcon}
-        color="rgb(29, 155, 240)"
-        backgroundColor="rgb(29, 155, 240, 0.1)"
       />
     );
   };
@@ -42,7 +41,6 @@ const Reply: React.FC<ReplyProps> = ({ publicId, showCountType }) => {
       <CountText
         count={post.repliesCount}
         text="返信"
-        color="rgb(29, 155, 240)"
         showCountType={showCountType}
         isActive={post.replied}
       />
@@ -57,8 +55,6 @@ const Reply: React.FC<ReplyProps> = ({ publicId, showCountType }) => {
         isActive={post.replied}
         ActiveIcon={ChatBubbleOutlineIcon}
         InactiveIcon={ChatBubbleOutlineIcon}
-        color="rgb(29, 155, 240)"
-        backgroundColor="rgb(29, 155, 240, 0.1)"
       />
     );
   };

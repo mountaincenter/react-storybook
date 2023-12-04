@@ -42,8 +42,8 @@ const PostContent = ({ publicId, user, children }: PostContentProps) => {
     return null;
   }
 
-  // console.log(post);
-  // console.log('PostUser', postUser.username);
+  console.log('post', post);
+  console.log('PostUser', postUser);
 
   return (
     <>

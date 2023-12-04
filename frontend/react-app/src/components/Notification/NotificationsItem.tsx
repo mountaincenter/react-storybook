@@ -19,9 +19,10 @@ interface NotificationsItemProps {
 }
 
 const NotificationsItem = ({ notification }: NotificationsItemProps) => {
-  const { notifiableType } = notification;
-  const iconConfig = NotificationIconCombinations[notifiableType];
+  const { notificationType, message } = notification;
+  const iconConfig = NotificationIconCombinations[notificationType];
 
+  if (!message) return null;
   return (
     <>
       <ListItem alignItems="flex-start">
@@ -34,7 +35,7 @@ const NotificationsItem = ({ notification }: NotificationsItemProps) => {
           <Box display="flex">
             <ListItemAvatar>
               <Avatar
-                src={notification.message.avatar.url}
+                src={notification.message.avatar?.url}
                 name={notification.message.title}
               />
             </ListItemAvatar>

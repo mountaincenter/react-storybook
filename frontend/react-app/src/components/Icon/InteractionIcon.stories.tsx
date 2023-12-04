@@ -1,17 +1,17 @@
 import { Meta } from '@storybook/react';
-import InteractionButton from './InteractionButton';
+import InteractionIcon from '../Icon/InteractionIcon';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
-const meta: Meta<typeof InteractionButton> = {
-  component: InteractionButton,
+const meta: Meta<typeof InteractionIcon> = {
+  component: InteractionIcon,
   parameters: { layout: 'centered' },
   tags: ['autodocs'],
 };
 
 export default meta;
 
-export const LikeActive = (args) => <InteractionButton {...args} />;
+export const LikeActive = (args) => <InteractionIcon {...args} />;
 LikeActive.args = {
   title: 'いいね',
   isActive: true,
@@ -22,7 +22,7 @@ LikeActive.args = {
   hoverColor: 'red',
 };
 
-export const LikeInactive = (args) => <InteractionButton {...args} />;
+export const LikeInactive = (args) => <InteractionIcon {...args} />;
 LikeInactive.args = {
   ...LikeActive.args,
   isActive: false,

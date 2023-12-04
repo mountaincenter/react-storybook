@@ -1,20 +1,24 @@
-import { Typography } from '@mui/material';
+import { Typography, useTheme } from '@mui/material';
+import { type CustomColor, type ShowCountType } from '../../interfaces';
 
 interface CountTextProps {
   count: number;
   text: string;
   isActive: boolean;
-  color: string;
-  showCountType?: 'onlyCount' | 'onlyIcon';
+  interactionColorType?: CustomColor;
+  showCountType?: ShowCountType;
 }
 
 const CountText = ({
   count,
   text,
   isActive,
-  color,
+  interactionColorType = 'default',
   showCountType,
 }: CountTextProps): JSX.Element | null => {
+  const theme = useTheme();
+  const color = theme.palette[interactionColorType]?.main || 'text.secondary';
+
   if (count <= 0 || showCountType === 'onlyIcon') return null;
 
   let content;
@@ -26,7 +30,6 @@ const CountText = ({
         <strong>{count}</strong> 件の{text}
       </>
     );
-    // isActive にかかわらず text.secondary を使用
     textStyle = {
       color: 'text.secondary',
       '&:hover': {
@@ -35,7 +38,6 @@ const CountText = ({
     };
   } else {
     content = count;
-    // isActive が true の場合は color を使用し、そうでない場合は text.secondary
     textStyle = {
       color: isActive ? color : 'text.secondary',
       '&:hover': {
@@ -45,11 +47,7 @@ const CountText = ({
   }
 
   return (
-    <Typography
-      variant="body2"
-      component="span"
-      sx={textStyle} // ここで textStyle を適用
-    >
+    <Typography variant="body2" component="span" sx={textStyle}>
       {content}
     </Typography>
   );

@@ -22,6 +22,7 @@ module PostServices
     def delete_post(post_id)
       post = @user.posts.find_by(id: post_id)
       return false unless post && post.user == @user
+
       post.destroy
       true
     end

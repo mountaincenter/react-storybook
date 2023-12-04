@@ -1,19 +1,24 @@
 import { useParams } from 'react-router-dom';
-// import { usePost } from '../hooks/post/usePost';
+import { usePost } from '../hooks/post/usePost';
 import PostContent from '../components/Post/PostContent';
 import PostComposer from '../components/Post/PostComposer';
 import CommonHeader from '../components/Header/CommonHeader';
-import { useRecoilValue } from 'recoil';
-import { postByIdSelector } from '../selectors/postByIdSelector';
+import LoadingComponent from '../components/Loading/LoadingComponent';
+import { Typography } from '@mui/material';
 
 const PostDetail = () => {
   const { publicId } = useParams<{ publicId: string }>();
-  const post = useRecoilValue(postByIdSelector(publicId as string));
-
-  console.log('publicId', publicId);
+  const { post, isLoading } = usePost(publicId as string);
 
   const displayPost = publicId ? post : undefined;
-  console.log('displayPost', displayPost);
+
+  if (isLoading) {
+    return <LoadingComponent />;
+  }
+
+  if (!post) {
+    return <Typography>投稿がありません</Typography>;
+  }
   return (
     <>
       {displayPost && (

@@ -2,32 +2,39 @@ import { createTheme } from '@mui/material';
 
 declare module '@mui/material/styles' {
   interface Palette {
-    like?: Palette['primary'];
-    follow?: Palette['primary'];
-    repost?: Palette['primary'];
-    other?: Palette['primary'];
+    default?: CustomColor;
+    like?: CustomColor;
+    repost?: CustomColor;
   }
   interface PaletteOptions {
-    like?: PaletteOptions['primary'];
-    follow?: PaletteOptions['primary'];
-    repost?: PaletteOptions['primary'];
-    other?: PaletteOptions['primary'];
+    default?: CustomColorOptions;
+    like?: CustomColorOptions;
+    repost?: CustomColorOptions;
   }
+}
+
+interface CustomColor {
+  main: string;
+  background: string;
+}
+interface CustomColorOptions {
+  main: string;
+  background: string;
 }
 
 const customTheme = createTheme({
   palette: {
-    like: {
-      main: '#f9187f',
+    default: {
+      main: 'rgb(29, 155, 240)',
+      background: 'rgb(29, 155, 240, 0.1)',
     },
-    follow: {
-      main: '#1f9bef',
+    like: {
+      main: 'rgb(249, 24, 128)',
+      background: 'rgb(249, 24, 128, 0.1)',
     },
     repost: {
-      main: '#04b97c',
-    },
-    other: {
-      main: '#1d9bf0',
+      main: 'rgb(23, 191, 99)',
+      background: 'rgb(23, 191, 99, 0.1)',
     },
   },
 });
